@@ -121,11 +121,88 @@ if (campaignPanels.length) {
   campaignPanels.forEach((panel) => campaignObserver.observe(panel));
 }
 
+const recommendationRotator = document.querySelector("[data-testimonial-rotator]");
+
+if (recommendationRotator) {
+  const recommendations = [
+    {
+      quote: "Rafiq helped me with various things connected to SEO and writing content for my blog. I am grateful for his help.",
+      name: "Vova Even",
+      role: "Client",
+    },
+    {
+      quote: "The best thing about Rafiq; he is a super humble person. He is one of the best writers I have ever worked with, but his humility and attitude are amazing.",
+      name: "Sahar Arshad",
+      role: "Business Development",
+    },
+    {
+      quote: "Rafiq was one of the very dependable and intelligent content writers I have worked with. He took the most challenging technical projects and worked his way beautifully through them.",
+      name: "Iffa Anwar",
+      role: "Chief Accountability Manager",
+    },
+    {
+      quote: "Rafiq is one of the most disciplined and dedicated people that I have worked with. Always there to help and available for guidance.",
+      name: "Afrah Farrukh",
+      role: "Creative Team Member",
+    },
+    {
+      quote: "Rafiq is, hands down, one of the best writers I have worked with so far. He is full of creativity and innovative ideas, always thinking outside the box to give his all to his work.",
+      name: "Arsh Khan",
+      role: "Writer | Editor | Digital Marketer",
+    },
+    {
+      quote: "Rafiq is an incredible content writer with a knack for writing creative content. His willingness to go above and beyond has always made him stand out.",
+      name: "Fatima Ejaz",
+      role: "Talent Acquisition Specialist",
+    },
+    {
+      quote: "I have known Mr. Rafiq Azad Mangi for the past 07 years and have found him one of the most dynamic professionals in my network.",
+      name: "Sanjay Mathrani",
+      role: "Assistant Director",
+    },
+    {
+      quote: "Rafiq has the knack for converting even the most mundane piece of writing into a masterpiece. His ingenuity, meticulousness, and communication skills are commendable.",
+      name: "Shefa Idrees",
+      role: "Creative Director, Copywriter",
+    },
+  ];
+
+  const quoteElement = recommendationRotator.querySelector("[data-testimonial-quote]");
+  const nameElement = recommendationRotator.querySelector("[data-testimonial-name]");
+  const roleElement = recommendationRotator.querySelector("[data-testimonial-role]");
+  let recommendationIndex = 0;
+  let recommendationTimer = 0;
+
+  const showRecommendation = (index) => {
+    const safeIndex = (index + recommendations.length) % recommendations.length;
+    const recommendation = recommendations[safeIndex];
+    recommendationIndex = safeIndex;
+    recommendationRotator.classList.add("is-changing");
+
+    window.setTimeout(() => {
+      quoteElement.textContent = recommendation.quote;
+      nameElement.textContent = recommendation.name;
+      roleElement.textContent = recommendation.role;
+      recommendationRotator.classList.remove("is-changing");
+    }, 520);
+  };
+
+  const restartRecommendationTimer = () => {
+    window.clearInterval(recommendationTimer);
+    recommendationTimer = window.setInterval(() => {
+      showRecommendation(recommendationIndex + 1);
+    }, 7000);
+  };
+
+  restartRecommendationTimer();
+}
+
 const heroTestimonials = [
-  "Rafiq turns creative direction into clear campaigns that feel sharp, strategic, and easy to execute.",
-  "His work brings together design taste, marketing thinking, and a strong sense of what the audience needs.",
-  "Rafiq can take a rough idea and shape it into content, visuals, and messaging that actually performs.",
-  "A rare creative who understands both the story and the numbers behind a campaign.",
+  "Rafiq helped me with SEO and writing content for my blog. I am grateful for his help.",
+  "He is one of the best writers I have ever worked with, but his humility and attitude are amazing.",
+  "He took the most challenging technical projects and worked his way beautifully through them.",
+  "His willingness to go above and beyond has always made him stand out.",
+  "He can turn even mundane writing into a masterpiece.",
 ];
 
 const testimonialText = document.querySelector("#hero-testimonial-text");
@@ -153,81 +230,81 @@ const pitchDecks = [
     description:
       "A clean, high-contrast deck system using bold messaging, structured visual hierarchy, and slide-by-slide narrative flow.",
     slides: [
-      "media/054-artboard-1.webp",
-      "media/055-artboard-2.webp",
-      "media/056-artboard-3.webp",
-      "media/057-artboard-4.webp",
-      "media/054-artboard-1.webp",
-      "media/054-artboard-1.webp",
-      "media/054-artboard-1.webp",
-      "media/054-artboard-1.webp",
+      "media/084-artboard-1.webp",
+      "media/085-artboard-2.webp",
+      "media/086-artboard-3.webp",
+      "media/087-artboard-4.webp",
+      "media/088-artboard-4-copy.webp",
+      "media/089-artboard-4-copy-2.webp",
+      "media/090-artboard-5.webp",
+      "media/091-artboard-6.webp",
     ],
   },
   {
     id: "colonial-filings",
     company: "Colonial Filings",
     title: "Colonial Filings Deck",
-    logo: "media/007-colonial-stock-logo-new.png",
+    logo: "media/007-colonial-stock-logo-new.webp",
     glow: "rgba(24, 89, 164, 0.26)",
     type: "Compliance services",
     description:
       "A polished service deck built around investor clarity, filing support, market confidence, and simple explanations for complex compliance work.",
     slides: [
-      "media/058-cover.webp",
-      "media/059-about.webp",
-      "media/060-challenges.webp",
-      "media/061-capabilities.webp",
-      "media/058-cover.webp",
-      "media/058-cover.webp",
-      "media/058-cover.webp",
-      "media/058-cover.webp",
-      "media/058-cover.webp",
-      "media/058-cover.webp",
+      "media/092-cover.webp",
+      "media/093-about.webp",
+      "media/094-challenges.webp",
+      "media/095-capabilities.webp",
+      "media/096-why-choose-colonial-filings.webp",
+      "media/097-testimonials.webp",
+      "media/098-artboard-1.webp",
+      "media/099-artboard-2.webp",
+      "media/100-conclusion.webp",
+      "media/101-conclusion-copy-2.webp",
     ],
   },
   {
     id: "mixeal",
     company: "Mixeal Studios",
     title: "VR Game Marketing Deck",
-    logo: "media/003-mixeal-logo.png",
+    logo: "media/003-mixeal-logo.webp",
     glow: "rgba(124, 86, 255, 0.28)",
     type: "Game marketing",
     description:
       "A service pitch for VR game studios, designed with clear pain points, creator-friendly positioning, and playful visual storytelling.",
     slides: [
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/063-vr-game-marketing-service-pitch-deck-pages-to-jpg-0002.webp",
-      "media/064-vr-game-marketing-service-pitch-deck-pages-to-jpg-0003.webp",
-      "media/065-vr-game-marketing-service-pitch-deck-pages-to-jpg-0004.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
-      "media/062-vr-game-marketing-service-pitch-deck-pages-to-jpg-0001.webp",
+      "media/016-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/102-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/103-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/104-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/105-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/106-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/107-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/108-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/109-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/110-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/111-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/112-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/113-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/114-vr-game-marketing-service-pitch-deck-pages.webp",
+      "media/115-vr-game-marketing-service-pitch-deck-pages.webp",
     ],
   },
   {
     id: "grasp-xr",
     company: "GraspXR",
     title: "GraspXR Schools Deck",
-    logo: "media/066-grasp-xr-logo.webp",
+    logo: "media/116-grasp-xr-logo.webp",
     glow: "rgba(77, 212, 255, 0.25)",
     type: "EdTech VR",
     description:
       "A compact institutional deck presenting immersive learning, classroom value, and VR adoption for schools in a direct visual format.",
     slides: [
-      "media/067-graspxr-schools-pitch-deck-page-0001.webp",
-      "media/068-graspxr-schools-pitch-deck-page-0002.webp",
-      "media/069-graspxr-schools-pitch-deck-page-0003.webp",
-      "media/070-graspxr-schools-pitch-deck-page-0004.webp",
-      "media/067-graspxr-schools-pitch-deck-page-0001.webp",
-      "media/067-graspxr-schools-pitch-deck-page-0001.webp",
+      "media/117-graspxr-schools-pitch-deck-page-0001.webp",
+      "media/118-graspxr-schools-pitch-deck-page-0002.webp",
+      "media/119-graspxr-schools-pitch-deck-page-0003.webp",
+      "media/120-graspxr-schools-pitch-deck-page-0004.webp",
+      "media/121-graspxr-schools-pitch-deck-page-0005.webp",
+      "media/122-graspxr-schools-pitch-deck-page-0006.webp",
     ],
   },
   {
@@ -240,60 +317,60 @@ const pitchDecks = [
     description:
       "A healthcare-focused VR deck with clinical clarity, product storytelling, and an accessible structure for explaining immersive medical training.",
     slides: [
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
-      "media/072-medic-vr-pitch-deck-page-0002.webp",
-      "media/073-medic-vr-pitch-deck-page-0003.webp",
-      "media/074-medic-vr-pitch-deck-page-0004.webp",
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
-      "media/071-medic-vr-pitch-deck-page-0001.webp",
+      "media/123-medic-vr-pitch-deck-page-0001.webp",
+      "media/124-medic-vr-pitch-deck-page-0002.webp",
+      "media/125-medic-vr-pitch-deck-page-0003.webp",
+      "media/126-medic-vr-pitch-deck-page-0004.webp",
+      "media/127-medic-vr-pitch-deck-page-0005.webp",
+      "media/128-medic-vr-pitch-deck-page-0006.webp",
+      "media/129-medic-vr-pitch-deck-page-0007.webp",
+      "media/130-medic-vr-pitch-deck-page-0008.webp",
+      "media/131-medic-vr-pitch-deck-page-0009.webp",
     ],
   },
   {
     id: "form345",
     company: "Form345",
     title: "Form345 Pitch Deck",
-    logo: "media/075-form345-logo-large.png",
+    logo: "media/132-form345-logo-large.webp",
     glow: "rgba(255, 114, 35, 0.24)",
     type: "SEC reporting",
     description:
       "A direct B2B deck for simplifying insider filing workflows, using practical messaging and structured visuals for compliance-heavy audiences.",
     slides: [
-      "media/076-artboard-1.webp",
-      "media/077-artboard-2.webp",
-      "media/078-artboard-2-copy.webp",
-      "media/079-artboard-2-copy-2.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
-      "media/076-artboard-1.webp",
+      "media/133-artboard-1.webp",
+      "media/134-artboard-2.webp",
+      "media/135-artboard-2-copy.webp",
+      "media/136-artboard-2-copy-2.webp",
+      "media/137-artboard-2-copy-3.webp",
+      "media/138-artboard-2-copy-4.webp",
+      "media/139-artboard-2-copy-5.webp",
+      "media/140-artboard-2-copy-6.webp",
+      "media/141-artboard-2-copy-7.webp",
+      "media/142-artboard-2-copy-8.webp",
+      "media/143-artboard-3.webp",
     ],
   },
   {
     id: "southridge",
     company: "Southridge",
     title: "Southridge Services Deck",
-    logo: "media/080-southridge-services-logo-3.png",
+    logo: "media/144-southridge-services-logo-3.webp",
     glow: "rgba(58, 158, 112, 0.25)",
     type: "Financial services",
     description:
       "A service-led financial deck with a familiar narrative system: challenge, capability, trust signals, and a clean closing argument.",
     slides: [
-      "media/081-cover.webp",
-      "media/082-about.webp",
-      "media/083-challenges.webp",
-      "media/084-capabilities.webp",
-      "media/081-cover.webp",
-      "media/081-cover.webp",
-      "media/081-cover.webp",
-      "media/081-cover.webp",
-      "media/081-cover.webp",
-      "media/081-cover.webp",
+      "media/145-cover.webp",
+      "media/146-about.webp",
+      "media/147-challenges.webp",
+      "media/148-capabilities.webp",
+      "media/149-why-choose-colonial-filings.webp",
+      "media/150-testimonials.webp",
+      "media/151-artboard-1.webp",
+      "media/152-artboard-2.webp",
+      "media/153-conclusion.webp",
+      "media/154-conclusion-copy-2.webp",
     ],
   },
 ];
@@ -313,6 +390,9 @@ if (pitchDeckSection) {
   let activeDeckIndex = 0;
   let deckExpanded = false;
   let deckTimer;
+  let deckSwipeStartX = 0;
+  let deckSwipeStartY = 0;
+  let deckSwipeTracking = false;
 
   const slideButton = (src, label, className) => {
     const button = document.createElement("button");
@@ -422,6 +502,39 @@ if (pitchDeckSection) {
   pitchDeckSection.addEventListener("pointerenter", () => window.clearInterval(deckTimer));
   pitchDeckSection.addEventListener("pointerleave", restartDeckTimer);
 
+  const startDeckSwipe = (event) => {
+    if (event.target.closest("button, a")) {
+      return;
+    }
+    deckSwipeTracking = true;
+    deckSwipeStartX = event.clientX;
+    deckSwipeStartY = event.clientY;
+    window.clearInterval(deckTimer);
+  };
+
+  const finishDeckSwipe = (event) => {
+    if (!deckSwipeTracking) {
+      return;
+    }
+    deckSwipeTracking = false;
+    const deltaX = event.clientX - deckSwipeStartX;
+    const deltaY = event.clientY - deckSwipeStartY;
+    if (Math.abs(deltaX) > 70 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
+      deckExpanded = false;
+      showDeck(deltaX < 0 ? activeDeckIndex + 1 : activeDeckIndex - 1);
+    }
+    restartDeckTimer();
+  };
+
+  [pitchDeckSection, deckRail].forEach((swipeArea) => {
+    swipeArea.addEventListener("pointerdown", startDeckSwipe);
+    swipeArea.addEventListener("pointerup", finishDeckSwipe);
+    swipeArea.addEventListener("pointercancel", () => {
+      deckSwipeTracking = false;
+      restartDeckTimer();
+    });
+  });
+
   showDeck(0, false);
   restartDeckTimer();
 }
@@ -433,16 +546,16 @@ const uiProjects = [
     title: "VR game interface system",
     glow: "rgba(255, 114, 35, 0.24)",
     screens: [
-      "media/085-main-menu.webp",
-      "media/086-select-teams.webp",
-      "media/087-leaderboard.webp",
-      "media/088-match-settings-qm.webp",
-      "media/085-main-menu.webp",
-      "media/085-main-menu.webp",
-      "media/085-main-menu.webp",
-      "media/085-main-menu.webp",
-      "media/085-main-menu.webp",
-      "media/085-main-menu.webp",
+      "media/155-main-menu.webp",
+      "media/156-select-teams.webp",
+      "media/157-leaderboard.webp",
+      "media/158-match-settings-qm.webp",
+      "media/159-select-stadium.webp",
+      "media/160-batting-scorecard.webp",
+      "media/161-over-completed.webp",
+      "media/162-scorecard-10.webp",
+      "media/163-match-won-2.webp",
+      "media/164-match-lost.webp",
     ],
   },
   {
@@ -451,13 +564,13 @@ const uiProjects = [
     title: "Product screen studies",
     glow: "rgba(87, 137, 255, 0.25)",
     screens: [
-      "media/089-home-page-1.webp",
-      "media/090-quick-match.png",
-      "media/091-vv-ui-1.webp",
-      "media/092-vv-ui-2.webp",
-      "media/093-vv-ui-3.webp",
-      "media/094-vv-ui-4.webp",
-      "media/089-home-page-1.webp",
+      "media/165-home-page-1.webp",
+      "media/166-quick-match.webp",
+      "media/167-vv-ui-1.webp",
+      "media/168-vv-ui-2.webp",
+      "media/169-vv-ui-3.webp",
+      "media/170-vv-ui-4.webp",
+      "media/171-vv-ui-5.webp",
     ],
   },
   {
@@ -466,18 +579,18 @@ const uiProjects = [
     title: "Flow and structure",
     glow: "rgba(92, 194, 154, 0.23)",
     screens: [
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
-      "media/089-home-page-1.webp",
+      "media/172-home-page.webp",
+      "media/173-game-mode.webp",
+      "media/174-quick-match.webp",
+      "media/175-match-starting-screen.webp",
+      "media/176-batting-scorecard.webp",
+      "media/177-leaderboards.webp",
+      "media/178-profile.webp",
+      "media/179-profiles.webp",
+      "media/180-practice.webp",
+      "media/181-join-beta.webp",
+      "media/182-match-completed-screen.webp",
+      "media/183-next-over-screen.webp",
     ],
   },
 ];
