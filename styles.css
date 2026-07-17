@@ -1101,7 +1101,7 @@ blockquote {
   transform: scale(1.08);
 }
 
-.evidence-website {
+.colonial-website-center {
   z-index: 3;
   left: 24%;
   top: 30%;
@@ -1111,36 +1111,37 @@ blockquote {
   box-shadow: 0 28px 62px rgba(0, 0, 0, 0.48);
 }
 
-.evidence-website img {
+.colonial-website-center img {
   object-fit: cover;
   object-position: top center;
 }
 
-.evidence-calendar {
+.colonial-calendar-corner {
   left: 4%;
   top: 5%;
   width: 40%;
   height: 30%;
 }
 
-.evidence-calendar img {
+.colonial-calendar-corner img {
+  object-fit: cover;
   object-position: 58% center;
 }
 
-.evidence-email {
+.colonial-email-corner {
   right: 4%;
   top: 5%;
   width: 40%;
   height: 30%;
-  background: #ffffff;
+  background: #17191c;
 }
 
-.evidence-email img {
-  object-fit: contain;
-  object-position: center;
+.colonial-email-corner img {
+  object-fit: cover;
+  object-position: center 42%;
 }
 
-.evidence-deck {
+.colonial-deck-corner {
   left: 4%;
   bottom: 5%;
   width: 40%;
@@ -1148,21 +1149,21 @@ blockquote {
   background: #ffffff;
 }
 
-.evidence-deck img {
+.colonial-deck-corner img {
   object-fit: contain;
   object-position: center;
 }
 
-.evidence-email-analytics {
+.colonial-analytics-corner {
   right: 4%;
   bottom: 5%;
   width: 40%;
   height: 30%;
-  background: #ffffff;
+  background: #17191c;
 }
 
-.evidence-email-analytics img {
-  object-fit: contain;
+.colonial-analytics-corner img {
+  object-fit: cover;
   object-position: center;
 }
 
