@@ -1132,6 +1132,7 @@ blockquote {
 }
 
 .evidence-email img {
+  object-fit: contain;
   object-position: center;
 }
 
