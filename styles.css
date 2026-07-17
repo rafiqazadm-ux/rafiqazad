@@ -1102,21 +1102,25 @@ blockquote {
 }
 
 .evidence-website {
-  top: 8%;
-  right: 7%;
-  width: 72%;
-  height: 42%;
+  z-index: 3;
+  left: 24%;
+  top: 30%;
+  width: 52%;
+  height: 40%;
+  border-color: rgba(255, 247, 239, 0.34);
+  box-shadow: 0 28px 62px rgba(0, 0, 0, 0.48);
 }
 
 .evidence-website img {
+  object-fit: cover;
   object-position: top center;
 }
 
 .evidence-calendar {
-  left: 6%;
-  bottom: 8%;
-  width: 57%;
-  height: 35%;
+  left: 4%;
+  top: 5%;
+  width: 40%;
+  height: 30%;
 }
 
 .evidence-calendar img {
@@ -1124,11 +1128,11 @@ blockquote {
 }
 
 .evidence-email {
-  right: 5%;
-  bottom: 10%;
-  width: 47%;
-  height: 39%;
-  background: rgba(255, 255, 255, 0.9);
+  right: 4%;
+  top: 5%;
+  width: 40%;
+  height: 30%;
+  background: #ffffff;
 }
 
 .evidence-email img {
@@ -1136,38 +1140,29 @@ blockquote {
   object-position: center;
 }
 
-.evidence-poster {
-  left: 7%;
-  top: 12%;
-  width: 29%;
-  height: 39%;
-  transform: rotate(-5deg);
-  background: rgba(10, 10, 10, 0.7);
-}
-
-.evidence-poster:hover,
-.evidence-poster:focus-visible {
-  transform: rotate(-5deg) scale(1.08);
-}
-
-.evidence-poster img {
-  object-fit: contain;
-}
-
 .evidence-deck {
-  right: 24%;
-  top: 43%;
-  width: 34%;
-  height: 22%;
-  transform: rotate(4deg);
-}
-
-.evidence-deck:hover,
-.evidence-deck:focus-visible {
-  transform: rotate(4deg) scale(1.08);
+  left: 4%;
+  bottom: 5%;
+  width: 40%;
+  height: 30%;
+  background: #ffffff;
 }
 
 .evidence-deck img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.evidence-email-analytics {
+  right: 4%;
+  bottom: 5%;
+  width: 40%;
+  height: 30%;
+  background: #ffffff;
+}
+
+.evidence-email-analytics img {
+  object-fit: contain;
   object-position: center;
 }
 
