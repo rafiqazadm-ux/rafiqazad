@@ -1335,12 +1335,12 @@ const mixealCarousel = document.querySelector("[data-mixeal-carousel]");
 
 if (mixealCarousel) {
   const reels = [
-    { src: "media/201-mixeal-reel-meta-quest-2.mp4", title: "Meta Quest 2 Is Now the Cheapest VR Headset", shortTitle: "Meta Quest 2", subtitle: "VR news made quick, timely, and audience-friendly." },
-    { src: "media/202-mixeal-reel-meta-quest-3.mp4", title: "Inside Mixeal Through the Lens of Meta Quest 3", shortTitle: "Meta Quest 3 Tour", subtitle: "An immersive studio tour built for social discovery." },
-    { src: "media/203-mixeal-reel-cornfield-chase.mp4", title: "The Cornfield Chase Through Mixeal Studios", shortTitle: "Cornfield Chase", subtitle: "Studio culture translated into a cinematic social moment." },
-    { src: "media/204-mixeal-reel-vr-development-skills.mp4", title: "Five Skills Every VR Developer Needs", shortTitle: "VR Development Skills", subtitle: "Technical expertise simplified into a fast educational format." },
-    { src: "media/205-mixeal-reel-final-overs-development.mp4", title: "How We Develop VR Games Like The Final Overs", shortTitle: "Building VR Games", subtitle: "A behind-the-scenes process story from ideation to execution." },
-    { src: "media/206-mixeal-reel-vr-programming.mp4", title: "Our Team Takes On the VR Programming Challenge", shortTitle: "VR Programming", subtitle: "Complex development work presented with personality and confidence." },
+    { src: "media/201-mixeal-reel-meta-quest-2.mp4", thumb: "media/207-mixeal-thumb-meta-quest-2.webp?v=20260718-mobile", title: "Meta Quest 2 Is Now the Cheapest VR Headset", shortTitle: "Meta Quest 2", subtitle: "VR news made quick, timely, and audience-friendly." },
+    { src: "media/202-mixeal-reel-meta-quest-3.mp4", thumb: "media/208-mixeal-thumb-meta-quest-3.webp?v=20260718-mobile", title: "Inside Mixeal Through the Lens of Meta Quest 3", shortTitle: "Meta Quest 3 Tour", subtitle: "An immersive studio tour built for social discovery." },
+    { src: "media/203-mixeal-reel-cornfield-chase.mp4", thumb: "media/209-mixeal-thumb-cornfield-chase.webp?v=20260718-mobile", title: "The Cornfield Chase Through Mixeal Studios", shortTitle: "Cornfield Chase", subtitle: "Studio culture translated into a cinematic social moment." },
+    { src: "media/204-mixeal-reel-vr-development-skills.mp4", thumb: "media/210-mixeal-thumb-vr-development-skills.webp?v=20260718-mobile", title: "Five Skills Every VR Developer Needs", shortTitle: "VR Development Skills", subtitle: "Technical expertise simplified into a fast educational format." },
+    { src: "media/205-mixeal-reel-final-overs-development.mp4", thumb: "media/211-mixeal-thumb-final-overs-development.webp?v=20260718-mobile", title: "How We Develop VR Games Like The Final Overs", shortTitle: "Building VR Games", subtitle: "A behind-the-scenes process story from ideation to execution." },
+    { src: "media/206-mixeal-reel-vr-programming.mp4", thumb: "media/212-mixeal-thumb-vr-programming.webp?v=20260718-mobile", title: "Our Team Takes On the VR Programming Challenge", shortTitle: "VR Programming", subtitle: "Complex development work presented with personality and confidence." },
   ];
 
   const video = mixealCarousel.querySelector("[data-reel-video]");
@@ -1381,6 +1381,7 @@ if (mixealCarousel) {
       activeReel = safeIndex;
       video.pause();
       video.preload = "auto";
+      video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title);
       video.load();
