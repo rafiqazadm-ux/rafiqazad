@@ -38,7 +38,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.16 }
+  { threshold: 0.04, rootMargin: "0px 0px -6% 0px" }
 );
 
 document.querySelectorAll(".reveal").forEach((element, index) => {
@@ -1051,6 +1051,8 @@ if (newtonsCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
+      video.preload = "auto";
+      video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title + " Newton's Playground reel");
       video.load();
@@ -1222,6 +1224,8 @@ if (finaloversCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
+      video.preload = "auto";
+      video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title + " Final Overs reel");
       video.load();
@@ -1376,6 +1380,7 @@ if (mixealCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
+      video.preload = "auto";
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title);
       video.load();
@@ -1454,6 +1459,38 @@ if (mixealCarousel) {
 
   showReel(0, false);
   syncToggle();
+}
+
+const campaignVideos = Array.from(
+  document.querySelectorAll(
+    "[data-reel-video], [data-finalovers-video], [data-newtons-video], [data-vr-marketing-trailer]"
+  )
+);
+
+if (campaignVideos.length) {
+  const warmCampaignVideo = (video) => {
+    if (video.dataset.warmed === "true") return;
+    video.dataset.warmed = "true";
+    video.preload = "auto";
+    video.load();
+  };
+
+  if ("IntersectionObserver" in window) {
+    const campaignVideoWarmupObserver = new IntersectionObserver(
+      (entries, warmupObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          warmCampaignVideo(entry.target);
+          warmupObserver.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "1200px 0px", threshold: 0.01 }
+    );
+
+    campaignVideos.forEach((video) => campaignVideoWarmupObserver.observe(video));
+  } else {
+    campaignVideos.forEach(warmCampaignVideo);
+  }
 }
 
 const lightbox = document.querySelector("#image-lightbox");
