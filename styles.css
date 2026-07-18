@@ -3952,17 +3952,30 @@ cite span {
 }
 
 .colonial-single-slide button {
+  display: grid;
   width: 100%;
   height: 100%;
+  place-items: center;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .colonial-single-slide img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.96);
-  transition: transform 500ms ease, filter 500ms ease;
+  border-radius: 11px;
+  background: transparent;
+  box-shadow:
+    0 26px 64px rgba(0, 0, 0, 0.52),
+    0 0 34px rgba(255, 114, 35, 0.16),
+    0 0 54px rgba(24, 89, 164, 0.12);
+  transition: transform 500ms ease, filter 500ms ease, box-shadow 500ms ease;
 }
 
 .colonial-single-slide button:hover img,
@@ -4117,5 +4130,102 @@ cite span {
   .colonial-poster-slide button,
   .colonial-single-slide img {
     transition: none;
+  }
+}
+
+
+/* VR game marketing slider, matched to the Colonial showcase */
+.vr-marketing-showcase {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(124, 86, 255, 0.3), transparent 32%),
+    radial-gradient(circle at 82% 72%, rgba(255, 114, 35, 0.22), transparent 34%),
+    linear-gradient(145deg, #090b12, #171823 58%, #090a0e);
+}
+
+.vr-trailer-slide {
+  place-items: center;
+  padding: 7% 5% 21%;
+}
+
+.vr-trailer-slide video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border: 1px solid rgba(255, 247, 239, 0.2);
+  border-radius: 11px;
+  background: #040507;
+  box-shadow:
+    0 28px 66px rgba(0, 0, 0, 0.56),
+    0 0 40px rgba(124, 86, 255, 0.22),
+    0 0 58px rgba(255, 114, 35, 0.1);
+}
+
+.vr-logo-slide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  align-items: center;
+  padding: 10% 6% 21%;
+}
+
+.vr-logo-slide figure {
+  position: relative;
+  display: grid;
+  aspect-ratio: 1;
+  min-width: 0;
+  place-items: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 247, 239, 0.18);
+  border-radius: 12px;
+  background: rgba(5, 7, 11, 0.78);
+  box-shadow:
+    0 24px 54px rgba(0, 0, 0, 0.48),
+    0 0 30px rgba(124, 86, 255, 0.14);
+  transform: translateY(5px) rotate(-2deg);
+}
+
+.vr-logo-slide figure:nth-child(2) {
+  z-index: 2;
+  transform: translateY(-5px) scale(1.04);
+}
+
+.vr-logo-slide figure:nth-child(3) {
+  transform: translateY(5px) rotate(2deg);
+}
+
+.vr-logo-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.vr-logo-slide .is-newtons {
+  background: #000;
+}
+
+.vr-deck-slide img {
+  box-shadow:
+    0 28px 66px rgba(0, 0, 0, 0.56),
+    0 0 42px rgba(124, 86, 255, 0.22),
+    0 0 58px rgba(255, 114, 35, 0.1);
+}
+
+@media (max-width: 680px) {
+  .vr-trailer-slide,
+  .vr-logo-slide {
+    padding-bottom: 24%;
+  }
+
+  .vr-logo-slide {
+    gap: 6px;
+  }
+
+  .vr-logo-slide figure {
+    padding: 6px;
+    border-radius: 9px;
   }
 }

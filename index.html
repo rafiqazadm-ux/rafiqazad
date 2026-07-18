@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260718-colonial-slider" />
+    <link rel="stylesheet" href="styles.css?v=20260718-campaign-sliders-v2" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -400,36 +400,45 @@
                   </div>
                 </div>
               </div>
-              <div class="campaign-visual vr-game-proof" aria-label="VR game marketing campaign proof: strategy deck, three clients secured, and Newton's Playground trailer">
-                <button class="vr-proof-deck" type="button" data-full="media/016-vr-game-marketing-service-pitch-deck-pages.webp" aria-label="Open the VR Game Marketing pitch deck cover">
-                  <img src="media/016-vr-game-marketing-service-pitch-deck-pages.webp" alt="VR Game Marketing service pitch deck cover" />
-                  <span class="vr-proof-caption"><small>Campaign strategy</small><strong>VR Game Marketing Pitch Deck</strong></span>
-                </button>
+              <div class="campaign-visual colonial-showcase vr-marketing-showcase" data-vr-marketing-carousel tabindex="0" aria-label="Automatic VR game marketing visual showcase">
+                <div class="colonial-slide-stage" aria-live="polite">
+                  <div class="colonial-slide vr-game-slide vr-trailer-slide is-active" data-vr-marketing-slide data-title="Newton's Playground Trailer" aria-hidden="false">
+                    <video data-vr-marketing-trailer src="media/210-newtons-playground-early-access-trailer.mp4" muted loop playsinline preload="metadata" aria-label="Newton's Playground Early Access trailer"></video>
+                  </div>
 
-                <div class="vr-client-stack" aria-label="Three games secured through the campaign">
-                  <article class="vr-client-card is-newtons">
-                    <img src="media/207-newtons-playground-logo.webp" alt="Newton's Playground" />
-                    <span><strong>Newton's Playground</strong><small>Client secured</small></span>
-                  </article>
-                  <article class="vr-client-card is-ember">
-                    <img src="media/208-ember-souls-logo.webp" alt="Ember Souls" />
-                    <span><strong>Ember Souls</strong><small>Client secured</small></span>
-                  </article>
-                  <article class="vr-client-card is-summer">
-                    <img src="media/209-all-in-one-summer-sports-logo.webp" alt="All-In-One Summer Sports" />
-                    <span><strong>All-In-One Summer Sports</strong><small>Client secured</small></span>
-                  </article>
+                  <div class="colonial-slide vr-game-slide vr-logo-slide" data-vr-marketing-slide data-title="Game Clients" aria-hidden="true">
+                    <figure class="is-newtons">
+                      <img src="media/207-newtons-playground-logo.webp" alt="Newton's Playground" />
+                    </figure>
+                    <figure class="is-ember">
+                      <img src="media/208-ember-souls-logo.webp" alt="Ember Souls" />
+                    </figure>
+                    <figure class="is-summer">
+                      <img src="media/209-all-in-one-summer-sports-logo.webp" alt="All-In-One Summer Sports" />
+                    </figure>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide vr-game-slide vr-deck-slide" data-vr-marketing-slide data-title="VR Game Marketing Pitch Deck" aria-hidden="true">
+                    <button type="button" data-full="media/016-vr-game-marketing-service-pitch-deck-pages.webp" aria-label="Open VR Game Marketing pitch deck">
+                      <img src="media/016-vr-game-marketing-service-pitch-deck-pages.webp" alt="VR Game Marketing service pitch deck cover" />
+                    </button>
+                  </div>
                 </div>
 
-                <figure class="vr-trailer-feature">
-                  <video controls playsinline preload="metadata" src="media/210-newtons-playground-early-access-trailer.mp4" aria-label="Newton's Playground VR Physics Sandbox Game Early Access trailer"></video>
-                  <figcaption>
-                    <span><small>Featured execution</small><strong>Newton's Playground</strong></span>
-                    <em>Early Access Trailer</em>
-                  </figcaption>
-                </figure>
+                <button class="colonial-slider-arrow is-prev" type="button" data-vr-marketing-prev aria-label="Show previous VR game marketing visual"><span aria-hidden="true">←</span></button>
+                <button class="colonial-slider-arrow is-next" type="button" data-vr-marketing-next aria-label="Show next VR game marketing visual"><span aria-hidden="true">→</span></button>
 
-                <p class="vr-client-impact"><strong>3</strong><span>VR game clients secured</span></p>
+                <div class="colonial-slider-meta">
+                  <strong data-vr-marketing-title>Newton's Playground Trailer</strong>
+                  <div class="colonial-slider-controls">
+                    <div class="colonial-slider-dots" role="tablist" aria-label="Choose a VR game marketing visual">
+                      <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="Show Newton's Playground trailer" data-vr-marketing-index="0"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show game client logos" data-vr-marketing-index="1"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show VR Game Marketing pitch deck" data-vr-marketing-index="2"></button>
+                    </div>
+                    <button class="colonial-slider-toggle" type="button" data-vr-marketing-toggle aria-label="Pause VR game marketing visual rotation"><span data-vr-marketing-toggle-label>Pause</span></button>
+                  </div>
+                </div>
               </div>
             </div>
           </article>

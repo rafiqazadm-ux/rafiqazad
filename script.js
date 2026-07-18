@@ -708,7 +708,7 @@ if (colonialCarousel) {
   const startColonialRotation = () => {
     stopColonialRotation();
     if (!carouselIsVisible || isPausedByVisitor || isHovered || document.hidden || prefersReducedMotion.matches) return;
-    rotationTimer = window.setInterval(() => showColonialSlide(activeSlide + 1, 1), 3000);
+    rotationTimer = window.setInterval(() => showColonialSlide(activeSlide + 1, 1), 2000);
   };
 
   const showColonialSlide = (index, direction = 1) => {
@@ -819,6 +819,168 @@ if (colonialCarousel) {
   prefersReducedMotion.addEventListener?.("change", startColonialRotation);
 
   syncColonialToggle();
+}
+
+
+
+const vrMarketingCarousel = document.querySelector("[data-vr-marketing-carousel]");
+
+if (vrMarketingCarousel) {
+  const slides = Array.from(vrMarketingCarousel.querySelectorAll("[data-vr-marketing-slide]"));
+  const title = vrMarketingCarousel.querySelector("[data-vr-marketing-title]");
+  const dots = Array.from(vrMarketingCarousel.querySelectorAll("[data-vr-marketing-index]"));
+  const toggle = vrMarketingCarousel.querySelector("[data-vr-marketing-toggle]");
+  const toggleLabel = vrMarketingCarousel.querySelector("[data-vr-marketing-toggle-label]");
+  const trailer = vrMarketingCarousel.querySelector("[data-vr-marketing-trailer]");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let activeSlide = 0;
+  let rotationTimer = 0;
+  let carouselIsVisible = false;
+  let isPausedByVisitor = false;
+  let isHovered = false;
+  let pointerStartX = null;
+  let cleanupTimer = 0;
+
+  const syncVrMarketingToggle = () => {
+    toggleLabel.textContent = isPausedByVisitor ? "Play" : "Pause";
+    toggle.setAttribute("aria-label", isPausedByVisitor ? "Resume VR game marketing visual rotation" : "Pause VR game marketing visual rotation");
+  };
+
+  const syncVrMarketingTrailer = () => {
+    const shouldPlay = carouselIsVisible && activeSlide === 0 && !document.hidden && !prefersReducedMotion.matches;
+    if (shouldPlay) trailer.play().catch(() => {});
+    else trailer.pause();
+  };
+
+  const stopVrMarketingRotation = () => {
+    window.clearInterval(rotationTimer);
+    rotationTimer = 0;
+  };
+
+  const startVrMarketingRotation = () => {
+    stopVrMarketingRotation();
+    if (!carouselIsVisible || isPausedByVisitor || isHovered || document.hidden || prefersReducedMotion.matches) return;
+    rotationTimer = window.setInterval(() => showVrMarketingSlide(activeSlide + 1, 1), 2000);
+  };
+
+  const showVrMarketingSlide = (index, direction = 1) => {
+    const safeIndex = (index + slides.length) % slides.length;
+    if (safeIndex === activeSlide) return;
+
+    const previous = slides[activeSlide];
+    const selected = slides[safeIndex];
+
+    window.clearTimeout(cleanupTimer);
+    previous.classList.remove("is-active", "is-entering-back");
+    previous.classList.add(direction < 0 ? "is-leaving-back" : "is-leaving");
+    previous.setAttribute("aria-hidden", "true");
+
+    selected.classList.remove("is-active", "is-leaving", "is-leaving-back");
+    if (direction < 0) selected.classList.add("is-entering-back");
+
+    void selected.offsetWidth;
+    selected.classList.add("is-active");
+    selected.classList.remove("is-entering-back");
+    selected.setAttribute("aria-hidden", "false");
+
+    activeSlide = safeIndex;
+    title.textContent = selected.dataset.title;
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === safeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+
+    syncVrMarketingTrailer();
+
+    cleanupTimer = window.setTimeout(() => {
+      previous.classList.remove("is-leaving", "is-leaving-back");
+    }, 780);
+  };
+
+  vrMarketingCarousel.querySelector("[data-vr-marketing-prev]").addEventListener("click", () => {
+    showVrMarketingSlide(activeSlide - 1, -1);
+    startVrMarketingRotation();
+  });
+
+  vrMarketingCarousel.querySelector("[data-vr-marketing-next]").addEventListener("click", () => {
+    showVrMarketingSlide(activeSlide + 1, 1);
+    startVrMarketingRotation();
+  });
+
+  dots.forEach((dot) => dot.addEventListener("click", () => {
+    const targetIndex = Number(dot.dataset.vrMarketingIndex);
+    showVrMarketingSlide(targetIndex, targetIndex < activeSlide ? -1 : 1);
+    startVrMarketingRotation();
+  }));
+
+  toggle.addEventListener("click", () => {
+    isPausedByVisitor = !isPausedByVisitor;
+    syncVrMarketingToggle();
+    startVrMarketingRotation();
+  });
+
+  vrMarketingCarousel.addEventListener("mouseenter", () => {
+    isHovered = true;
+    stopVrMarketingRotation();
+  });
+
+  vrMarketingCarousel.addEventListener("mouseleave", () => {
+    isHovered = false;
+    startVrMarketingRotation();
+  });
+
+  vrMarketingCarousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showVrMarketingSlide(activeSlide - 1, -1);
+      startVrMarketingRotation();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showVrMarketingSlide(activeSlide + 1, 1);
+      startVrMarketingRotation();
+    }
+  });
+
+  vrMarketingCarousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+
+  vrMarketingCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) >= 42) {
+      const direction = distance < 0 ? 1 : -1;
+      showVrMarketingSlide(activeSlide + direction, direction);
+      startVrMarketingRotation();
+    }
+  });
+
+  const vrMarketingObserver = new IntersectionObserver(
+    ([entry]) => {
+      carouselIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.3;
+      syncVrMarketingTrailer();
+      startVrMarketingRotation();
+    },
+    { threshold: [0, 0.3, 0.65] }
+  );
+
+  vrMarketingObserver.observe(vrMarketingCarousel);
+
+  document.addEventListener("visibilitychange", () => {
+    syncVrMarketingTrailer();
+    startVrMarketingRotation();
+  });
+
+  prefersReducedMotion.addEventListener?.("change", () => {
+    syncVrMarketingTrailer();
+    startVrMarketingRotation();
+  });
+
+  syncVrMarketingToggle();
 }
 
 const mixealCarousel = document.querySelector("[data-mixeal-carousel]");
