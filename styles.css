@@ -4229,3 +4229,72 @@ cite span {
     border-radius: 9px;
   }
 }
+
+
+/* Final Overs teams feature reels: active video with thumbnail side phones */
+.finalovers-reel-showcase {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(242, 209, 56, 0.2), transparent 34%),
+    radial-gradient(circle at 20% 84%, rgba(113, 188, 48, 0.2), transparent 30%),
+    linear-gradient(145deg, #090c0b, #172018 54%, #100e0c);
+}
+
+.finalovers-peek-phone {
+  padding: 6px;
+  background: linear-gradient(145deg, #252a28, #050706 68%);
+}
+
+.finalovers-peek-phone img {
+  position: absolute;
+  inset: 6px;
+  z-index: 0;
+  display: block;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  object-fit: cover;
+  border-radius: 16px;
+  filter: saturate(0.86) brightness(0.76);
+  transition: filter 260ms ease, transform 320ms ease;
+}
+
+.finalovers-peek-phone::before {
+  z-index: 2;
+}
+
+.finalovers-peek-phone::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  z-index: 1;
+  border-radius: 16px;
+  background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.88));
+  pointer-events: none;
+}
+
+.finalovers-peek-phone:hover img,
+.finalovers-peek-phone:focus-visible img {
+  filter: saturate(1.05) brightness(0.94);
+  transform: scale(1.035);
+}
+
+.finalovers-peek-phone span,
+.finalovers-peek-phone strong {
+  z-index: 3;
+  padding-inline: 3px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.campaign-card:hover .finalovers-reel-showcase img {
+  transform: none;
+}
+
+.campaign-card:hover .finalovers-reel-showcase .finalovers-peek-phone:hover img,
+.campaign-card:hover .finalovers-reel-showcase .finalovers-peek-phone:focus-visible img {
+  transform: scale(1.035);
+}
+
+@media (max-width: 680px) {
+  .finalovers-reel-showcase .mixeal-active-phone {
+    max-height: 360px;
+  }
+}

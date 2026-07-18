@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260718-campaign-sliders-v2" />
+    <link rel="stylesheet" href="styles.css?v=20260718-finalovers-reels" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -483,8 +483,49 @@
                   </div>
                 </div>
               </div>
-              <div class="campaign-visual">
-                <img src="media/021-final-overs-new-stadium-ad.webp" alt="Teams Feature Launch campaign visual" />
+              <div class="campaign-visual mixeal-reel-showcase finalovers-reel-showcase" data-finalovers-carousel aria-label="Interactive Final Overs teams feature reel showcase">
+                <div class="mixeal-reel-topline">
+                  <p>Teams Feature Reel Showcase</p>
+                  <strong data-finalovers-count>01 / 03</strong>
+                </div>
+
+                <button class="mixeal-reel-arrow is-prev" type="button" data-finalovers-prev aria-label="Show previous Final Overs reel"><span aria-hidden="true">←</span></button>
+
+                <div class="mixeal-phone-stage">
+                  <button class="mixeal-peek-phone finalovers-peek-phone is-prev" type="button" data-finalovers-prev aria-label="Show previous Final Overs reel">
+                    <img data-finalovers-prev-thumb src="media/216-finalovers-thumb-starc.webp?v=20260718-finalovers" alt="" aria-hidden="true" />
+                    <span>Previous reel</span>
+                    <strong data-finalovers-prev-title>Facing Mitchell Starc</strong>
+                  </button>
+
+                  <div class="mixeal-active-phone">
+                    <div class="mixeal-phone-speaker" aria-hidden="true"></div>
+                    <div class="mixeal-phone-screen">
+                      <video data-finalovers-video src="media/211-finalovers-reel-afridi.mp4?v=20260718-finalovers" muted loop playsinline preload="metadata" aria-label="Facing Shaheen Afridi Final Overs reel"></video>
+                      <div class="mixeal-video-shade" aria-hidden="true"></div>
+                      <button class="mixeal-video-toggle" type="button" data-finalovers-toggle aria-label="Pause active Final Overs reel"><span data-finalovers-toggle-label>Pause</span></button>
+                    </div>
+                  </div>
+
+                  <button class="mixeal-peek-phone finalovers-peek-phone is-next" type="button" data-finalovers-next aria-label="Show next Final Overs reel">
+                    <img data-finalovers-next-thumb src="media/215-finalovers-thumb-wood.webp?v=20260718-finalovers" alt="" aria-hidden="true" />
+                    <span>Next reel</span>
+                    <strong data-finalovers-next-title>Facing Mark Wood</strong>
+                  </button>
+                </div>
+
+                <button class="mixeal-reel-arrow is-next" type="button" data-finalovers-next aria-label="Show next Final Overs reel"><span aria-hidden="true">→</span></button>
+
+                <div class="mixeal-reel-meta" aria-live="polite">
+                  <strong data-finalovers-title>Facing Shaheen Afridi</strong>
+                  <p data-finalovers-subtitle>Teams feature launch reel</p>
+                  <div class="mixeal-reel-dots" role="tablist" aria-label="Choose a Final Overs reel">
+                    <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="Play Shaheen Afridi reel" data-finalovers-index="0"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play Mark Wood reel" data-finalovers-index="1"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play Mitchell Starc reel" data-finalovers-index="2"></button>
+                  </div>
+                  <small>Swipe the phone or use the arrows</small>
+                </div>
               </div>
             </div>
           </article>
@@ -959,6 +1000,6 @@
       <img src="" alt="" />
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260718-finalovers-reels"></script>
   </body>
 </html>

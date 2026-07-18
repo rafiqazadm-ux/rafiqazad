@@ -983,6 +983,179 @@ if (vrMarketingCarousel) {
   syncVrMarketingToggle();
 }
 
+
+
+const finaloversCarousel = document.querySelector("[data-finalovers-carousel]");
+
+if (finaloversCarousel) {
+  const reels = [
+    {
+      src: "media/211-finalovers-reel-afridi.mp4?v=20260718-finalovers",
+      thumb: "media/214-finalovers-thumb-afridi.webp?v=20260718-finalovers",
+      title: "Facing Shaheen Afridi",
+      shortTitle: "Shaheen Afridi",
+      subtitle: "Teams feature launch reel",
+    },
+    {
+      src: "media/212-finalovers-reel-wood.mp4?v=20260718-finalovers",
+      thumb: "media/215-finalovers-thumb-wood.webp?v=20260718-finalovers",
+      title: "Facing Mark Wood",
+      shortTitle: "Mark Wood",
+      subtitle: "Teams feature launch reel",
+    },
+    {
+      src: "media/213-finalovers-reel-starc.mp4?v=20260718-finalovers",
+      thumb: "media/216-finalovers-thumb-starc.webp?v=20260718-finalovers",
+      title: "Facing Mitchell Starc",
+      shortTitle: "Mitchell Starc",
+      subtitle: "Teams feature launch reel",
+    },
+  ];
+
+  const video = finaloversCarousel.querySelector("[data-finalovers-video]");
+  const title = finaloversCarousel.querySelector("[data-finalovers-title]");
+  const subtitle = finaloversCarousel.querySelector("[data-finalovers-subtitle]");
+  const count = finaloversCarousel.querySelector("[data-finalovers-count]");
+  const previousTitle = finaloversCarousel.querySelector("[data-finalovers-prev-title]");
+  const nextTitle = finaloversCarousel.querySelector("[data-finalovers-next-title]");
+  const previousThumb = finaloversCarousel.querySelector("[data-finalovers-prev-thumb]");
+  const nextThumb = finaloversCarousel.querySelector("[data-finalovers-next-thumb]");
+  const toggle = finaloversCarousel.querySelector("[data-finalovers-toggle]");
+  const toggleLabel = finaloversCarousel.querySelector("[data-finalovers-toggle-label]");
+  const dots = Array.from(finaloversCarousel.querySelectorAll("[data-finalovers-index]"));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let activeReel = 0;
+  let carouselIsVisible = false;
+  let pointerStartX = null;
+  let changeTimer = 0;
+
+  const syncFinaloversToggle = () => {
+    const paused = video.paused;
+    toggleLabel.textContent = paused ? "Play" : "Pause";
+    toggle.setAttribute("aria-label", paused ? "Play active Final Overs reel" : "Pause active Final Overs reel");
+  };
+
+  const playFinaloversReel = () => {
+    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    video.play().then(syncFinaloversToggle).catch(syncFinaloversToggle);
+  };
+
+  const showFinaloversReel = (index, animate = true) => {
+    const safeIndex = (index + reels.length) % reels.length;
+    const previousIndex = (safeIndex - 1 + reels.length) % reels.length;
+    const nextIndex = (safeIndex + 1) % reels.length;
+    const selected = reels[safeIndex];
+
+    window.clearTimeout(changeTimer);
+
+    const render = () => {
+      activeReel = safeIndex;
+      video.pause();
+      video.src = selected.src;
+      video.setAttribute("aria-label", selected.title + " Final Overs reel");
+      video.load();
+
+      title.textContent = selected.title;
+      subtitle.textContent = selected.subtitle;
+      count.textContent = `${String(safeIndex + 1).padStart(2, "0")} / ${String(reels.length).padStart(2, "0")}`;
+      previousTitle.textContent = reels[previousIndex].shortTitle;
+      nextTitle.textContent = reels[nextIndex].shortTitle;
+      previousThumb.src = reels[previousIndex].thumb;
+      previousThumb.alt = reels[previousIndex].title + " thumbnail";
+      nextThumb.src = reels[nextIndex].thumb;
+      nextThumb.alt = reels[nextIndex].title + " thumbnail";
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === safeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", String(isActive));
+      });
+
+      video.addEventListener("canplay", playFinaloversReel, { once: true });
+      window.requestAnimationFrame(() => finaloversCarousel.classList.remove("is-changing"));
+    };
+
+    if (animate) {
+      finaloversCarousel.classList.add("is-changing");
+      changeTimer = window.setTimeout(render, 220);
+    } else {
+      render();
+    }
+  };
+
+  finaloversCarousel.querySelectorAll("[data-finalovers-prev]").forEach((button) => {
+    button.addEventListener("click", () => showFinaloversReel(activeReel - 1));
+  });
+
+  finaloversCarousel.querySelectorAll("[data-finalovers-next]").forEach((button) => {
+    button.addEventListener("click", () => showFinaloversReel(activeReel + 1));
+  });
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => showFinaloversReel(Number(dot.dataset.finaloversIndex)));
+  });
+
+  toggle.addEventListener("click", () => {
+    if (video.paused) video.play().then(syncFinaloversToggle).catch(syncFinaloversToggle);
+    else {
+      video.pause();
+      syncFinaloversToggle();
+    }
+  });
+
+  video.addEventListener("play", syncFinaloversToggle);
+  video.addEventListener("pause", syncFinaloversToggle);
+
+  finaloversCarousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showFinaloversReel(activeReel - 1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showFinaloversReel(activeReel + 1);
+    }
+  });
+
+  finaloversCarousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+
+  finaloversCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) >= 42) showFinaloversReel(activeReel + (distance < 0 ? 1 : -1));
+  });
+
+  const finaloversObserver = new IntersectionObserver(
+    ([entry]) => {
+      carouselIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.32;
+      if (carouselIsVisible) playFinaloversReel();
+      else video.pause();
+      syncFinaloversToggle();
+    },
+    { threshold: [0, 0.32, 0.65] }
+  );
+
+  finaloversObserver.observe(finaloversCarousel);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) video.pause();
+    else playFinaloversReel();
+    syncFinaloversToggle();
+  });
+
+  prefersReducedMotion.addEventListener?.("change", () => {
+    if (prefersReducedMotion.matches) video.pause();
+    else playFinaloversReel();
+    syncFinaloversToggle();
+  });
+
+  showFinaloversReel(0, false);
+  syncFinaloversToggle();
+}
+
 const mixealCarousel = document.querySelector("[data-mixeal-carousel]");
 
 if (mixealCarousel) {
