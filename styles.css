@@ -4298,3 +4298,319 @@ cite span {
     max-height: 360px;
   }
 }
+
+
+/* Responsive hardening pass: phones and tablets */
+[id] {
+  scroll-margin-top: 92px;
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px 28px;
+    padding-bottom: 48px;
+  }
+
+  .hero-intro,
+  .hero-stage {
+    grid-column: 1 / -1;
+  }
+
+  .hero-stage {
+    min-height: 420px;
+  }
+
+  .hero-testimonial {
+    grid-column: 1;
+    align-self: start;
+    justify-self: stretch;
+    max-width: none;
+    text-align: left;
+  }
+
+  .hero-testimonial p {
+    min-height: 0;
+  }
+
+  .hero-proof {
+    grid-column: 2;
+    align-self: start;
+    justify-self: stretch;
+    padding-bottom: 0;
+    text-align: right;
+  }
+
+  .campaign-visual {
+    width: min(100%, 560px);
+    justify-self: center;
+  }
+
+  .work-panel {
+    padding-inline: 30px;
+  }
+}
+
+@media (max-width: 680px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  [id] {
+    scroll-margin-top: 78px;
+  }
+
+  section {
+    padding-block: 62px;
+  }
+
+  .section-heading,
+  .section-kicker {
+    margin-bottom: 26px;
+  }
+
+  .section-description {
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .site-header {
+    max-width: calc(100vw - 18px);
+    overflow: hidden;
+  }
+
+  .site-header nav {
+    min-width: 0;
+  }
+
+  .site-header nav a {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+
+  .hero-stage {
+    width: 100%;
+    max-width: 320px;
+    overflow: hidden;
+  }
+
+  .hero-stage img {
+    max-width: 100%;
+  }
+
+  .orange-sun {
+    max-width: 118%;
+  }
+
+  .about-face {
+    width: min(260px, 100%);
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .face-orbit {
+    inset: 0;
+  }
+
+  .work-panel {
+    padding: 26px 18px 30px;
+  }
+
+  .timeline,
+  .timeline-item,
+  .timeline-company,
+  .timeline-role {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .timeline-item {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 0 12px;
+  }
+
+  .timeline::before {
+    left: 17px;
+  }
+
+  .timeline-dot {
+    width: 22px;
+    height: 22px;
+  }
+
+  .campaign-card {
+    gap: 24px;
+    padding: 18px;
+  }
+
+  .campaign-card::before {
+    inset: 10px;
+  }
+
+  .campaign-copy,
+  .campaign-process,
+  .campaign-impact {
+    min-width: 0;
+  }
+
+  .campaign-copy h3,
+  .social-case-copy h3,
+  .deck-brand h3,
+  .ui-identity h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .campaign-visual {
+    width: 100%;
+    max-width: 480px;
+    justify-self: center;
+  }
+
+  .mixeal-reel-showcase {
+    min-height: 350px;
+    padding: 48px 24px 82px;
+  }
+
+  .mixeal-reel-topline {
+    top: 14px;
+    right: 16px;
+    left: 16px;
+  }
+
+  .mixeal-reel-topline p,
+  .mixeal-reel-topline strong {
+    font-size: 8px;
+  }
+
+  .mixeal-active-phone {
+    max-height: none;
+  }
+
+  .mixeal-reel-meta {
+    right: 34px;
+    bottom: 12px;
+    left: 34px;
+    gap: 5px;
+  }
+
+  .mixeal-reel-meta small {
+    font-size: 7px;
+  }
+
+  .deck-view,
+  .deck-strip-wrap,
+  .deck-actions,
+  .ui-view,
+  .ui-screen-rail-wrap {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .deck-strip,
+  .deck-switcher,
+  .ui-screen-rail {
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+  }
+
+  .deck-actions {
+    gap: 12px;
+  }
+
+  .social-case,
+  .about-card,
+  .work-panel,
+  .campaign-card,
+  .deck-showcase,
+  .ui-showcase {
+    max-width: 100%;
+  }
+
+  .contact-card,
+  .button,
+  .deck-nav,
+  .ui-nav,
+  .mixeal-reel-arrow,
+  .colonial-slider-arrow {
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 420px) {
+  .mixeal-reel-showcase {
+    aspect-ratio: 4 / 5;
+    min-height: 340px;
+  }
+
+  .hero {
+    padding-inline: 14px;
+  }
+
+  .hero-stage {
+    min-height: 330px;
+  }
+
+  .hero-actions-floating {
+    max-width: calc(100vw - 34px);
+  }
+
+  .campaign-copy h3 {
+    font-size: clamp(27px, 9.6vw, 38px);
+  }
+
+  .campaign-metrics strong {
+    font-size: clamp(30px, 11vw, 44px);
+  }
+
+  .colonial-slider-meta > strong {
+    max-width: 82%;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header {
+    padding-inline: 6px;
+  }
+
+  .site-header .brand-mark {
+    display: none;
+  }
+
+  .site-header nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 2px;
+  }
+
+  .site-header nav a {
+    padding: 9px 4px;
+    font-size: 10.5px;
+  }
+
+  .site-header nav a.nav-contact {
+    min-width: 68px;
+  }
+
+  .hero-intro h1 {
+    font-size: clamp(34px, 10.2vw, 42px);
+  }
+
+  .about-card,
+  .social-case,
+  .campaign-card {
+    padding-inline: 16px;
+  }
+
+  .deck-showcase,
+  .ui-showcase {
+    padding-inline: 14px;
+  }
+
+  .mixeal-reel-showcase {
+    min-height: 330px;
+    padding-inline: 18px;
+  }
+}
