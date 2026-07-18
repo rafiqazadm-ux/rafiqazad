@@ -3824,3 +3824,298 @@ cite span {
     transition: none;
   }
 }
+
+
+/* Colonial campaign automatic visual slider */
+.colonial-showcase {
+  isolation: isolate;
+  display: block;
+  padding: 0;
+  color: #fff7ef;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 114, 35, 0.22), transparent 30%),
+    radial-gradient(circle at 82% 70%, rgba(24, 89, 164, 0.3), transparent 34%),
+    linear-gradient(145deg, #0d0f12, #1b1d22 58%, #0a0b0d);
+}
+
+.colonial-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+  pointer-events: none;
+}
+
+.colonial-showcase span {
+  position: static;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+}
+
+.colonial-slide-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.colonial-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(14%) scale(0.985);
+  transition: opacity 660ms ease, transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.colonial-slide.is-active {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+
+.colonial-slide.is-leaving {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(-16%) scale(0.975);
+}
+
+.colonial-slide.is-entering-back {
+  transform: translateX(-14%) scale(0.985);
+}
+
+.colonial-slide.is-leaving-back {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(16%) scale(0.975);
+}
+
+.colonial-poster-slide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  align-items: center;
+  padding: 10% 6% 21%;
+}
+
+.colonial-poster-slide button,
+.colonial-single-slide button {
+  appearance: none;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(255, 247, 239, 0.2);
+  border-radius: 8px;
+  background: rgba(5, 7, 10, 0.7);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.42);
+  cursor: zoom-in;
+}
+
+.colonial-poster-slide button {
+  aspect-ratio: 4 / 5;
+  transform: translateY(5px) rotate(-2deg);
+  transition: transform 260ms ease, border-color 260ms ease;
+}
+
+.colonial-poster-slide button:nth-child(2) {
+  z-index: 2;
+  transform: translateY(-5px) scale(1.04);
+}
+
+.colonial-poster-slide button:nth-child(3) {
+  transform: translateY(5px) rotate(2deg);
+}
+
+.colonial-poster-slide button:hover,
+.colonial-poster-slide button:focus-visible {
+  z-index: 3;
+  border-color: rgba(255, 114, 35, 0.75);
+  transform: translateY(-7px) scale(1.055);
+}
+
+.colonial-poster-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.colonial-single-slide {
+  place-items: center;
+  padding: 7% 5% 21%;
+}
+
+.colonial-single-slide button {
+  width: 100%;
+  height: 100%;
+}
+
+.colonial-single-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.96);
+  transition: transform 500ms ease, filter 500ms ease;
+}
+
+.colonial-single-slide button:hover img,
+.colonial-single-slide button:focus-visible img {
+  transform: scale(1.025);
+  filter: saturate(1.05);
+}
+
+.campaign-card:hover .colonial-showcase img {
+  transform: none;
+}
+
+.campaign-card:hover .colonial-showcase .colonial-poster-slide button:hover img,
+.campaign-card:hover .colonial-showcase .colonial-single-slide button:hover img {
+  transform: scale(1.025);
+}
+
+.colonial-slider-arrow {
+  position: absolute;
+  top: 45%;
+  z-index: 6;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 247, 239, 0.25);
+  border-radius: 50%;
+  color: #fff7ef;
+  background: rgba(4, 5, 8, 0.7);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: border-color 220ms ease, background 220ms ease, transform 220ms ease;
+}
+
+.colonial-slider-arrow.is-prev {
+  left: 12px;
+}
+
+.colonial-slider-arrow.is-next {
+  right: 12px;
+}
+
+.colonial-slider-arrow:hover,
+.colonial-slider-arrow:focus-visible {
+  border-color: var(--orange);
+  background: rgba(255, 114, 35, 0.22);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.colonial-slider-meta {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  left: 20px;
+  z-index: 7;
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.colonial-slider-meta > strong {
+  overflow: hidden;
+  max-width: 92%;
+  color: #fff7ef;
+  font-size: clamp(12px, 1.3vw, 17px);
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colonial-slider-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.colonial-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.colonial-slider-dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 247, 239, 0.3);
+  cursor: pointer;
+  transition: width 220ms ease, background 220ms ease;
+}
+
+.colonial-slider-dots button.is-active {
+  width: 22px;
+  background: var(--orange);
+}
+
+.colonial-slider-toggle {
+  min-width: 54px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 247, 239, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 247, 239, 0.9);
+  background: rgba(4, 5, 8, 0.72);
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+@media (max-width: 680px) {
+  .colonial-poster-slide {
+    gap: 6px;
+    padding: 11% 5% 24%;
+  }
+
+  .colonial-single-slide {
+    padding: 8% 5% 24%;
+  }
+
+  .colonial-slider-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .colonial-slider-arrow.is-prev {
+    left: 7px;
+  }
+
+  .colonial-slider-arrow.is-next {
+    right: 7px;
+  }
+
+  .colonial-slider-meta {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .colonial-slide,
+  .colonial-poster-slide button,
+  .colonial-single-slide img {
+    transition: none;
+  }
+}

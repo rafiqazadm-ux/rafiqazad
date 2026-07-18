@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260718-vr-game-proof" />
+    <link rel="stylesheet" href="styles.css?v=20260718-colonial-slider" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -214,22 +214,68 @@
                   </div>
                 </div>
               </div>
-              <div class="campaign-visual campaign-evidence-board" aria-label="Colonial campaign evidence board">
-                <button class="evidence-card colonial-website-center" type="button" data-full="media/012-colonial-publer-calendar.webp" aria-label="Open Colonial website screenshot">
-                  <img src="media/012-colonial-publer-calendar.webp" alt="Colonial Stock Transfer website screenshot" />
-                </button>
-                <button class="evidence-card colonial-calendar-corner" type="button" data-full="media/011-colonial-website.webp" aria-label="Open Colonial content calendar screenshot">
-                  <img src="media/011-colonial-website.webp" alt="Colonial content calendar screenshot" />
-                </button>
-                <button class="evidence-card colonial-email-corner" type="button" data-full="media/155-colonial-email-message-preview-v2.webp" aria-label="Open Colonial email message preview">
-                  <img src="media/155-colonial-email-message-preview-v2.webp" alt="Colonial outbound email message preview" />
-                </button>
-                <button class="evidence-card colonial-deck-corner" type="button" data-full="media/015-colonial-stock-deck-page-0001.webp" aria-label="Open Colonial Stock deck opening slide">
-                  <img src="media/015-colonial-stock-deck-page-0001.webp" alt="Colonial Stock pitch deck opening slide" />
-                </button>
-                <button class="evidence-card colonial-analytics-corner" type="button" data-full="media/156-colonial-email-analytics-v2.webp" aria-label="Open Colonial email campaign analytics">
-                  <img src="media/156-colonial-email-analytics-v2.webp" alt="Colonial email campaign analytics showing sequence activity, open rate, and opportunities" />
-                </button>
+              <div class="campaign-visual colonial-showcase" data-colonial-carousel tabindex="0" aria-label="Automatic Colonial campaign visual showcase">
+                <div class="colonial-slide-stage" aria-live="polite">
+                  <div class="colonial-slide colonial-poster-slide is-active" data-colonial-slide data-title="Social Media Content" aria-hidden="false">
+                    <button type="button" data-full="media/022-cloudraise-cp-edited.webp" aria-label="Open Colonial CloudRaise social media poster">
+                      <img src="media/022-cloudraise-cp-edited.webp" alt="Colonial CloudRaise social media poster" />
+                    </button>
+                    <button type="button" data-full="media/023-cap-table-management-cp.webp" aria-label="Open Colonial cap table management social media poster">
+                      <img src="media/023-cap-table-management-cp.webp" alt="Colonial cap table management social media poster" />
+                    </button>
+                    <button type="button" data-full="media/024-form345-cp.webp" aria-label="Open Colonial Form345 social media poster">
+                      <img src="media/024-form345-cp.webp" alt="Colonial Form345 social media poster" />
+                    </button>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide" data-colonial-slide data-title="Email Campaign" aria-hidden="true">
+                    <button type="button" data-full="media/155-colonial-email-message-preview-v2.webp" aria-label="Open Colonial outbound email campaign">
+                      <img src="media/155-colonial-email-message-preview-v2.webp" alt="Colonial outbound email campaign screenshot" />
+                    </button>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide" data-colonial-slide data-title="Email Performance" aria-hidden="true">
+                    <button type="button" data-full="media/156-colonial-email-analytics-v2.webp" aria-label="Open Colonial email campaign performance">
+                      <img src="media/156-colonial-email-analytics-v2.webp" alt="Colonial email campaign performance screenshot" />
+                    </button>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide" data-colonial-slide data-title="Content Calendar" aria-hidden="true">
+                    <button type="button" data-full="media/011-colonial-website.webp" aria-label="Open Colonial content calendar">
+                      <img src="media/011-colonial-website.webp" alt="Colonial social media content calendar screenshot" />
+                    </button>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide" data-colonial-slide data-title="Website Experience" aria-hidden="true">
+                    <button type="button" data-full="media/012-colonial-publer-calendar.webp" aria-label="Open Colonial website">
+                      <img src="media/012-colonial-publer-calendar.webp" alt="Colonial Stock Transfer website screenshot" />
+                    </button>
+                  </div>
+
+                  <div class="colonial-slide colonial-single-slide" data-colonial-slide data-title="Pitch Deck" aria-hidden="true">
+                    <button type="button" data-full="media/015-colonial-stock-deck-page-0001.webp" aria-label="Open Colonial Stock pitch deck">
+                      <img src="media/015-colonial-stock-deck-page-0001.webp" alt="Colonial Stock pitch deck opening slide" />
+                    </button>
+                  </div>
+                </div>
+
+                <button class="colonial-slider-arrow is-prev" type="button" data-colonial-prev aria-label="Show previous Colonial visual"><span aria-hidden="true">←</span></button>
+                <button class="colonial-slider-arrow is-next" type="button" data-colonial-next aria-label="Show next Colonial visual"><span aria-hidden="true">→</span></button>
+
+                <div class="colonial-slider-meta">
+                  <strong data-colonial-title>Social Media Content</strong>
+                  <div class="colonial-slider-controls">
+                    <div class="colonial-slider-dots" role="tablist" aria-label="Choose a Colonial campaign visual">
+                      <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="Show social media content" data-colonial-index="0"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show email campaign" data-colonial-index="1"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show email performance" data-colonial-index="2"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show content calendar" data-colonial-index="3"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show website experience" data-colonial-index="4"></button>
+                      <button type="button" role="tab" aria-selected="false" aria-label="Show pitch deck" data-colonial-index="5"></button>
+                    </div>
+                    <button class="colonial-slider-toggle" type="button" data-colonial-toggle aria-label="Pause Colonial visual rotation"><span data-colonial-toggle-label>Pause</span></button>
+                  </div>
+                </div>
               </div>
             </div>
           </article>

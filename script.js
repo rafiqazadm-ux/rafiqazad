@@ -676,6 +676,151 @@ if (uiShowcase) {
 }
 
 
+
+
+const colonialCarousel = document.querySelector("[data-colonial-carousel]");
+
+if (colonialCarousel) {
+  const slides = Array.from(colonialCarousel.querySelectorAll("[data-colonial-slide]"));
+  const title = colonialCarousel.querySelector("[data-colonial-title]");
+  const dots = Array.from(colonialCarousel.querySelectorAll("[data-colonial-index]"));
+  const toggle = colonialCarousel.querySelector("[data-colonial-toggle]");
+  const toggleLabel = colonialCarousel.querySelector("[data-colonial-toggle-label]");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let activeSlide = 0;
+  let rotationTimer = 0;
+  let carouselIsVisible = false;
+  let isPausedByVisitor = false;
+  let isHovered = false;
+  let pointerStartX = null;
+  let cleanupTimer = 0;
+
+  const syncColonialToggle = () => {
+    toggleLabel.textContent = isPausedByVisitor ? "Play" : "Pause";
+    toggle.setAttribute("aria-label", isPausedByVisitor ? "Resume Colonial visual rotation" : "Pause Colonial visual rotation");
+  };
+
+  const stopColonialRotation = () => {
+    window.clearInterval(rotationTimer);
+    rotationTimer = 0;
+  };
+
+  const startColonialRotation = () => {
+    stopColonialRotation();
+    if (!carouselIsVisible || isPausedByVisitor || isHovered || document.hidden || prefersReducedMotion.matches) return;
+    rotationTimer = window.setInterval(() => showColonialSlide(activeSlide + 1, 1), 3000);
+  };
+
+  const showColonialSlide = (index, direction = 1) => {
+    const safeIndex = (index + slides.length) % slides.length;
+    if (safeIndex === activeSlide) return;
+
+    const previous = slides[activeSlide];
+    const selected = slides[safeIndex];
+
+    window.clearTimeout(cleanupTimer);
+    previous.classList.remove("is-active", "is-entering-back");
+    previous.classList.add(direction < 0 ? "is-leaving-back" : "is-leaving");
+    previous.setAttribute("aria-hidden", "true");
+
+    selected.classList.remove("is-active", "is-leaving", "is-leaving-back");
+    if (direction < 0) selected.classList.add("is-entering-back");
+
+    void selected.offsetWidth;
+    selected.classList.add("is-active");
+    selected.classList.remove("is-entering-back");
+    selected.setAttribute("aria-hidden", "false");
+
+    activeSlide = safeIndex;
+    title.textContent = selected.dataset.title;
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === safeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+
+    cleanupTimer = window.setTimeout(() => {
+      previous.classList.remove("is-leaving", "is-leaving-back");
+    }, 780);
+  };
+
+  colonialCarousel.querySelector("[data-colonial-prev]").addEventListener("click", () => {
+    showColonialSlide(activeSlide - 1, -1);
+    startColonialRotation();
+  });
+
+  colonialCarousel.querySelector("[data-colonial-next]").addEventListener("click", () => {
+    showColonialSlide(activeSlide + 1, 1);
+    startColonialRotation();
+  });
+
+  dots.forEach((dot) => dot.addEventListener("click", () => {
+    const targetIndex = Number(dot.dataset.colonialIndex);
+    showColonialSlide(targetIndex, targetIndex < activeSlide ? -1 : 1);
+    startColonialRotation();
+  }));
+
+  toggle.addEventListener("click", () => {
+    isPausedByVisitor = !isPausedByVisitor;
+    syncColonialToggle();
+    startColonialRotation();
+  });
+
+  colonialCarousel.addEventListener("mouseenter", () => {
+    isHovered = true;
+    stopColonialRotation();
+  });
+
+  colonialCarousel.addEventListener("mouseleave", () => {
+    isHovered = false;
+    startColonialRotation();
+  });
+
+  colonialCarousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showColonialSlide(activeSlide - 1, -1);
+      startColonialRotation();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showColonialSlide(activeSlide + 1, 1);
+      startColonialRotation();
+    }
+  });
+
+  colonialCarousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+
+  colonialCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) >= 42) {
+      const direction = distance < 0 ? 1 : -1;
+      showColonialSlide(activeSlide + direction, direction);
+      startColonialRotation();
+    }
+  });
+
+  const colonialObserver = new IntersectionObserver(
+    ([entry]) => {
+      carouselIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.3;
+      startColonialRotation();
+    },
+    { threshold: [0, 0.3, 0.65] }
+  );
+
+  colonialObserver.observe(colonialCarousel);
+
+  document.addEventListener("visibilitychange", startColonialRotation);
+  prefersReducedMotion.addEventListener?.("change", startColonialRotation);
+
+  syncColonialToggle();
+}
+
 const mixealCarousel = document.querySelector("[data-mixeal-carousel]");
 
 if (mixealCarousel) {
