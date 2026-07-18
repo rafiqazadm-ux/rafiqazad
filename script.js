@@ -985,6 +985,177 @@ if (vrMarketingCarousel) {
 
 
 
+const newtonsCarousel = document.querySelector("[data-newtons-carousel]");
+
+if (newtonsCarousel) {
+  const reels = [
+    {
+      src: "media/217-newtons-reel-weapons.mp4?v=20260718-newtons-reels",
+      thumb: "media/220-newtons-thumb-weapons.webp?v=20260718-newtons-reels",
+      title: "Weapons to Create Chaos",
+      shortTitle: "Weapons to Create Chaos",
+      subtitle: "Newton's Playground social reel",
+    },
+    {
+      src: "media/218-newtons-reel-crazy-things.mp4?v=20260718-newtons-reels",
+      thumb: "media/221-newtons-thumb-crazy-things.webp?v=20260718-newtons-reels",
+      title: "Crazy Things You Can Do",
+      shortTitle: "Crazy Things You Can Do",
+      subtitle: "Newton's Playground social reel",
+    },
+    {
+      src: "media/219-newtons-reel-insane-details.mp4?v=20260718-newtons-reels",
+      thumb: "media/222-newtons-thumb-insane-details.webp?v=20260718-newtons-reels",
+      title: "Three Insane Details",
+      shortTitle: "Three Insane Details",
+      subtitle: "Newton's Playground social reel",
+    },
+  ];
+
+  const video = newtonsCarousel.querySelector("[data-newtons-video]");
+  const title = newtonsCarousel.querySelector("[data-newtons-title]");
+  const subtitle = newtonsCarousel.querySelector("[data-newtons-subtitle]");
+  const count = newtonsCarousel.querySelector("[data-newtons-count]");
+  const previousTitle = newtonsCarousel.querySelector("[data-newtons-prev-title]");
+  const nextTitle = newtonsCarousel.querySelector("[data-newtons-next-title]");
+  const previousThumb = newtonsCarousel.querySelector("[data-newtons-prev-thumb]");
+  const nextThumb = newtonsCarousel.querySelector("[data-newtons-next-thumb]");
+  const toggle = newtonsCarousel.querySelector("[data-newtons-toggle]");
+  const toggleLabel = newtonsCarousel.querySelector("[data-newtons-toggle-label]");
+  const dots = Array.from(newtonsCarousel.querySelectorAll("[data-newtons-index]"));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let activeReel = 0;
+  let carouselIsVisible = false;
+  let pointerStartX = null;
+  let changeTimer = 0;
+
+  const syncNewtonsToggle = () => {
+    const paused = video.paused;
+    toggleLabel.textContent = paused ? "Play" : "Pause";
+    toggle.setAttribute("aria-label", paused ? "Play active Newton's Playground reel" : "Pause active Newton's Playground reel");
+  };
+
+  const playNewtonsReel = () => {
+    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    video.play().then(syncNewtonsToggle).catch(syncNewtonsToggle);
+  };
+
+  const showNewtonsReel = (index, animate = true) => {
+    const safeIndex = (index + reels.length) % reels.length;
+    const previousIndex = (safeIndex - 1 + reels.length) % reels.length;
+    const nextIndex = (safeIndex + 1) % reels.length;
+    const selected = reels[safeIndex];
+
+    window.clearTimeout(changeTimer);
+
+    const render = () => {
+      activeReel = safeIndex;
+      video.pause();
+      video.src = selected.src;
+      video.setAttribute("aria-label", selected.title + " Newton's Playground reel");
+      video.load();
+
+      title.textContent = selected.title;
+      subtitle.textContent = selected.subtitle;
+      count.textContent = `${String(safeIndex + 1).padStart(2, "0")} / ${String(reels.length).padStart(2, "0")}`;
+      previousTitle.textContent = reels[previousIndex].shortTitle;
+      nextTitle.textContent = reels[nextIndex].shortTitle;
+      previousThumb.src = reels[previousIndex].thumb;
+      previousThumb.alt = reels[previousIndex].title + " thumbnail";
+      nextThumb.src = reels[nextIndex].thumb;
+      nextThumb.alt = reels[nextIndex].title + " thumbnail";
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === safeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", String(isActive));
+      });
+
+      video.addEventListener("canplay", playNewtonsReel, { once: true });
+      window.requestAnimationFrame(() => newtonsCarousel.classList.remove("is-changing"));
+    };
+
+    if (animate) {
+      newtonsCarousel.classList.add("is-changing");
+      changeTimer = window.setTimeout(render, 220);
+    } else {
+      render();
+    }
+  };
+
+  newtonsCarousel.querySelectorAll("[data-newtons-prev]").forEach((button) => {
+    button.addEventListener("click", () => showNewtonsReel(activeReel - 1));
+  });
+
+  newtonsCarousel.querySelectorAll("[data-newtons-next]").forEach((button) => {
+    button.addEventListener("click", () => showNewtonsReel(activeReel + 1));
+  });
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => showNewtonsReel(Number(dot.dataset.newtonsIndex)));
+  });
+
+  toggle.addEventListener("click", () => {
+    if (video.paused) video.play().then(syncNewtonsToggle).catch(syncNewtonsToggle);
+    else {
+      video.pause();
+      syncNewtonsToggle();
+    }
+  });
+
+  video.addEventListener("play", syncNewtonsToggle);
+  video.addEventListener("pause", syncNewtonsToggle);
+
+  newtonsCarousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showNewtonsReel(activeReel - 1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showNewtonsReel(activeReel + 1);
+    }
+  });
+
+  newtonsCarousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+
+  newtonsCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) >= 42) showNewtonsReel(activeReel + (distance < 0 ? 1 : -1));
+  });
+
+  const newtonsObserver = new IntersectionObserver(
+    ([entry]) => {
+      carouselIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.32;
+      if (carouselIsVisible) playNewtonsReel();
+      else video.pause();
+      syncNewtonsToggle();
+    },
+    { threshold: [0, 0.32, 0.65] }
+  );
+
+  newtonsObserver.observe(newtonsCarousel);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) video.pause();
+    else playNewtonsReel();
+    syncNewtonsToggle();
+  });
+
+  prefersReducedMotion.addEventListener?.("change", () => {
+    if (prefersReducedMotion.matches) video.pause();
+    else playNewtonsReel();
+    syncNewtonsToggle();
+  });
+
+  showNewtonsReel(0, false);
+  syncNewtonsToggle();
+}
+
 const finaloversCarousel = document.querySelector("[data-finalovers-carousel]");
 
 if (finaloversCarousel) {
