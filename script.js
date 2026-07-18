@@ -675,6 +675,136 @@ if (uiShowcase) {
   showUiProject(0, false);
 }
 
+
+const mixealCarousel = document.querySelector("[data-mixeal-carousel]");
+
+if (mixealCarousel) {
+  const reels = [
+    { src: "media/201-mixeal-reel-meta-quest-2.mp4", title: "Meta Quest 2 Is Now the Cheapest VR Headset", shortTitle: "Meta Quest 2", subtitle: "VR news made quick, timely, and audience-friendly." },
+    { src: "media/202-mixeal-reel-meta-quest-3.mp4", title: "Inside Mixeal Through the Lens of Meta Quest 3", shortTitle: "Meta Quest 3 Tour", subtitle: "An immersive studio tour built for social discovery." },
+    { src: "media/203-mixeal-reel-cornfield-chase.mp4", title: "The Cornfield Chase Through Mixeal Studios", shortTitle: "Cornfield Chase", subtitle: "Studio culture translated into a cinematic social moment." },
+    { src: "media/204-mixeal-reel-vr-development-skills.mp4", title: "Five Skills Every VR Developer Needs", shortTitle: "VR Development Skills", subtitle: "Technical expertise simplified into a fast educational format." },
+    { src: "media/205-mixeal-reel-final-overs-development.mp4", title: "How We Develop VR Games Like The Final Overs", shortTitle: "Building VR Games", subtitle: "A behind-the-scenes process story from ideation to execution." },
+    { src: "media/206-mixeal-reel-vr-programming.mp4", title: "Our Team Takes On the VR Programming Challenge", shortTitle: "VR Programming", subtitle: "Complex development work presented with personality and confidence." },
+  ];
+
+  const video = mixealCarousel.querySelector("[data-reel-video]");
+  const title = mixealCarousel.querySelector("[data-reel-title]");
+  const subtitle = mixealCarousel.querySelector("[data-reel-subtitle]");
+  const count = mixealCarousel.querySelector("[data-reel-count]");
+  const previousTitle = mixealCarousel.querySelector("[data-reel-prev-title]");
+  const nextTitle = mixealCarousel.querySelector("[data-reel-next-title]");
+  const toggle = mixealCarousel.querySelector("[data-reel-toggle]");
+  const toggleLabel = mixealCarousel.querySelector("[data-reel-toggle-label]");
+  const dots = Array.from(mixealCarousel.querySelectorAll("[data-reel-index]"));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let activeReel = 0;
+  let carouselIsVisible = false;
+  let pointerStartX = null;
+  let changeTimer = 0;
+
+  const syncToggle = () => {
+    const paused = video.paused;
+    toggleLabel.textContent = paused ? "Play" : "Pause";
+    toggle.setAttribute("aria-label", paused ? "Play active Mixeal reel" : "Pause active Mixeal reel");
+  };
+
+  const playActiveReel = () => {
+    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    video.play().then(syncToggle).catch(syncToggle);
+  };
+
+  const showReel = (index, animate = true) => {
+    const safeIndex = (index + reels.length) % reels.length;
+    const previousIndex = (safeIndex - 1 + reels.length) % reels.length;
+    const nextIndex = (safeIndex + 1) % reels.length;
+    const selected = reels[safeIndex];
+
+    window.clearTimeout(changeTimer);
+
+    const render = () => {
+      activeReel = safeIndex;
+      video.pause();
+      video.src = selected.src;
+      video.setAttribute("aria-label", selected.title);
+      video.load();
+      title.textContent = selected.title;
+      subtitle.textContent = selected.subtitle;
+      count.textContent = `${String(safeIndex + 1).padStart(2, "0")} / ${String(reels.length).padStart(2, "0")}`;
+      previousTitle.textContent = reels[previousIndex].shortTitle;
+      nextTitle.textContent = reels[nextIndex].shortTitle;
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === safeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", String(isActive));
+      });
+
+      video.addEventListener("canplay", playActiveReel, { once: true });
+      window.requestAnimationFrame(() => mixealCarousel.classList.remove("is-changing"));
+    };
+
+    if (animate) {
+      mixealCarousel.classList.add("is-changing");
+      changeTimer = window.setTimeout(render, 220);
+    } else {
+      render();
+    }
+  };
+
+  mixealCarousel.querySelectorAll("[data-reel-prev]").forEach((button) => button.addEventListener("click", () => showReel(activeReel - 1)));
+  mixealCarousel.querySelectorAll("[data-reel-next]").forEach((button) => button.addEventListener("click", () => showReel(activeReel + 1)));
+  dots.forEach((dot) => dot.addEventListener("click", () => showReel(Number(dot.dataset.reelIndex))));
+
+  toggle.addEventListener("click", () => {
+    if (video.paused) video.play().then(syncToggle).catch(syncToggle);
+    else { video.pause(); syncToggle(); }
+  });
+
+  video.addEventListener("play", syncToggle);
+  video.addEventListener("pause", syncToggle);
+
+  mixealCarousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); showReel(activeReel - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); showReel(activeReel + 1); }
+  });
+
+  mixealCarousel.addEventListener("pointerdown", (event) => { pointerStartX = event.clientX; });
+  mixealCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStartX === null) return;
+    const distance = event.clientX - pointerStartX;
+    pointerStartX = null;
+    if (Math.abs(distance) >= 42) showReel(activeReel + (distance < 0 ? 1 : -1));
+  });
+
+  const reelObserver = new IntersectionObserver(
+    ([entry]) => {
+      carouselIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.32;
+      if (carouselIsVisible) playActiveReel();
+      else video.pause();
+      syncToggle();
+    },
+    { threshold: [0, 0.32, 0.65] }
+  );
+
+  reelObserver.observe(mixealCarousel);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) video.pause();
+    else playActiveReel();
+    syncToggle();
+  });
+
+  prefersReducedMotion.addEventListener?.("change", () => {
+    if (prefersReducedMotion.matches) video.pause();
+    else playActiveReel();
+    syncToggle();
+  });
+
+  showReel(0, false);
+  syncToggle();
+}
+
 const lightbox = document.querySelector("#image-lightbox");
 
 if (lightbox) {

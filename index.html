@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260717-colonial-board-v3" />
+    <link rel="stylesheet" href="styles.css?v=20260718-mixeal-reels" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -274,25 +274,43 @@
                   </div>
                 </div>
               </div>
-              <div class="campaign-visual campaign-evidence-board mixeal-evidence-board" aria-label="Mixeal brand awareness campaign evidence board">
-                <button class="evidence-card mixeal-deck-card" type="button" data-full="media/016-vr-game-marketing-service-pitch-deck-pages.webp" aria-label="Open VR marketing deck opening slide">
-                  <img src="media/016-vr-game-marketing-service-pitch-deck-pages.webp" alt="VR marketing deck opening slide" />
-                </button>
-                <button class="evidence-card mixeal-vr-photo" type="button" data-full="media/017-my-image.webp" aria-label="Open Rafiq wearing VR headset">
-                  <img src="media/017-my-image.webp" alt="Rafiq wearing a VR headset" />
-                </button>
-                <button class="evidence-card mixeal-service-poster" type="button" data-full="media/018-artificial-intelligence-ai-has-engulfed-th.webp" aria-label="Open Mixeal brand awareness poster">
-                  <img src="media/018-artificial-intelligence-ai-has-engulfed-th.webp" alt="Mixeal brand awareness poster" />
-                </button>
-                <button class="evidence-card mixeal-demo-photo" type="button" data-full="media/019-my-other-image-with-foreign-guest.webp" aria-label="Open Mixeal demo environment photo">
-                  <img src="media/019-my-other-image-with-foreign-guest.webp" alt="Mixeal in-person VR demo environment" />
-                </button>
-                <div class="mixeal-reel-strip" aria-label="Mixeal creative reel previews">
-                  <a href="https://www.instagram.com/p/C6VmYfqg4nj/" target="_blank" rel="noopener" aria-label="Open Mixeal creative reel 1 on Instagram"><span>Play</span><strong>Reel 01</strong></a>
-                  <a href="https://www.instagram.com/p/C0RI6ZJINQ3/" target="_blank" rel="noopener" aria-label="Open Mixeal creative reel 2 on Instagram"><span>Play</span><strong>Reel 02</strong></a>
-                  <a href="https://www.instagram.com/p/C0eHKscI0F4/" target="_blank" rel="noopener" aria-label="Open Mixeal creative reel 3 on Instagram"><span>Play</span><strong>Reel 03</strong></a>
+
+              <div class="campaign-visual mixeal-reel-showcase" data-mixeal-carousel aria-label="Interactive Mixeal creative reel showcase">
+                <div class="mixeal-reel-topline">
+                  <p>Creative Reel Showcase</p>
+                  <strong data-reel-count>01 / 06</strong>
                 </div>
-                <p class="evidence-chip">VR + Reels + Awareness</p>
+                <button class="mixeal-reel-arrow is-prev" type="button" data-reel-prev aria-label="Show previous Mixeal reel"><span aria-hidden="true">←</span></button>
+                <div class="mixeal-phone-stage">
+                  <button class="mixeal-peek-phone is-prev" type="button" data-reel-prev aria-label="Show previous Mixeal reel">
+                    <span>Previous reel</span><strong data-reel-prev-title>VR Programming</strong>
+                  </button>
+                  <div class="mixeal-active-phone">
+                    <div class="mixeal-phone-speaker" aria-hidden="true"></div>
+                    <div class="mixeal-phone-screen">
+                      <video data-reel-video src="media/201-mixeal-reel-meta-quest-2.mp4" muted loop playsinline preload="metadata" aria-label="Meta Quest 2 is now the cheapest VR headset"></video>
+                      <div class="mixeal-video-shade" aria-hidden="true"></div>
+                      <button class="mixeal-video-toggle" type="button" data-reel-toggle aria-label="Pause active Mixeal reel"><span data-reel-toggle-label>Pause</span></button>
+                    </div>
+                  </div>
+                  <button class="mixeal-peek-phone is-next" type="button" data-reel-next aria-label="Show next Mixeal reel">
+                    <span>Next reel</span><strong data-reel-next-title>Meta Quest 3 Tour</strong>
+                  </button>
+                </div>
+                <button class="mixeal-reel-arrow is-next" type="button" data-reel-next aria-label="Show next Mixeal reel"><span aria-hidden="true">→</span></button>
+                <div class="mixeal-reel-meta" aria-live="polite">
+                  <strong data-reel-title>Meta Quest 2 Is Now the Cheapest VR Headset</strong>
+                  <p data-reel-subtitle>VR news made quick, timely, and audience-friendly.</p>
+                  <div class="mixeal-reel-dots" role="tablist" aria-label="Choose a Mixeal reel">
+                    <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="Play Meta Quest 2 reel" data-reel-index="0"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play Meta Quest 3 studio tour reel" data-reel-index="1"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play Cornfield Chase studio reel" data-reel-index="2"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play VR development skills reel" data-reel-index="3"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play VR game development reel" data-reel-index="4"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Play VR programming reel" data-reel-index="5"></button>
+                  </div>
+                  <small>Swipe the phone or use the arrows</small>
+                </div>
               </div>
             </div>
           </article>
