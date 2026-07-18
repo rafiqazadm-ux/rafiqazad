@@ -4614,3 +4614,126 @@ cite span {
     padding-inline: 18px;
   }
 }
+
+/* Mobile visual polish: preserve artwork, simplify timelines, and keep media visible. */
+@media (max-width: 680px) {
+  .hero-stage {
+    overflow: visible;
+  }
+
+  .orange-sun {
+    bottom: -58px;
+    width: min(310px, 100%);
+    max-width: 100%;
+  }
+
+  .timeline {
+    gap: 30px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    bottom: 18px;
+    left: 17px;
+    display: block;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(
+      to bottom,
+      rgba(242, 106, 33, 0.9),
+      rgba(255, 247, 239, 0.22) 18%,
+      rgba(255, 247, 239, 0.22) 82%,
+      rgba(242, 106, 33, 0.9)
+    );
+    transform: translateX(-50%);
+  }
+
+  .timeline-dot {
+    margin-top: 3px;
+    border-width: 4px;
+    box-shadow:
+      0 0 0 1px rgba(255, 247, 239, 0.18),
+      0 0 14px rgba(242, 106, 33, 0.14);
+  }
+
+  .timeline-dot::before {
+    display: none;
+  }
+
+  .mixeal-reel-showcase {
+    padding-bottom: 96px;
+  }
+
+  .mixeal-phone-stage {
+    align-items: start;
+  }
+
+  .mixeal-active-phone,
+  .finalovers-reel-showcase .mixeal-active-phone {
+    height: calc(100% - 22px);
+    max-height: 338px;
+  }
+
+  .mixeal-reel-meta {
+    bottom: 14px;
+  }
+
+  .vertical {
+    overflow: hidden;
+  }
+
+  .vertical-story-stream,
+  .vertical-story-stream.reveal {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(78vw, 300px);
+    gap: 14px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 2px 18px;
+    opacity: 1;
+    transform: none;
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 2px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vertical-story-stream::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vertical-story-card,
+  .vertical-story-card.tall {
+    grid-column: auto;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin-top: 0;
+    aspect-ratio: 9 / 13.5;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@media (max-width: 420px) {
+  .orange-sun {
+    bottom: -46px;
+    width: min(286px, 96%);
+  }
+
+  .mixeal-reel-showcase {
+    min-height: 360px;
+  }
+
+  .mixeal-active-phone,
+  .finalovers-reel-showcase .mixeal-active-phone {
+    max-height: 316px;
+  }
+}
