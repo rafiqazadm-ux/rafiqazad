@@ -1035,21 +1035,7 @@ blockquote {
   padding: 13px;
   border: 1px solid rgba(255, 247, 239, 0.12);
   border-radius: 7px;
-  background: rg…14168 tokens truncated…: 13px;
-    height: 13px;
-    font-size: 8px;
-  }
-
-  .vr-trailer-feature figcaption {
-    padding-inline: 7px;
-  }
-
-  .vr-trailer-feature figcaption em {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
+  background: rg…14213 tokens truncated…edia (prefers-reduced-motion: reduce) {
   .vr-proof-deck img {
     transition: none;
   }
@@ -2126,6 +2112,19 @@ blockquote {
 }
 
 @media (max-width: 680px) {
+  .hero-intro,
+  .hero-intro h1,
+  .role-rotator {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero-intro {
+    justify-self: stretch;
+    overflow: hidden;
+  }
+
   .role-rotator {
     font-size: clamp(26px, 8vw, 34px);
   }
