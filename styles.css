@@ -4868,11 +4868,11 @@ cite span {
     z-index: 3;
     width: min(292px, 100%);
     aspect-ratio: 1;
-    background: #f5f4f0;
-    clip-path: inset(44% 0 0);
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 0 180px #f5f4f0;
+    clip-path: inset(44% -180px -180px -180px);
     transform: translateX(-50%);
-    -webkit-mask-image: radial-gradient(circle at center, transparent 0 49.2%, #000 50%);
-    mask-image: radial-gradient(circle at center, transparent 0 49.2%, #000 50%);
     pointer-events: none;
   }
 }
