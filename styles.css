@@ -4965,3 +4965,51 @@ cite span {
     animation: none !important;
   }
 }
+
+
+/* Fully isolated role transitions: no outgoing-title remnants. */
+.role-rotator {
+  position: relative;
+}
+
+.role-track {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  animation: none;
+}
+
+.role-track > span {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(110%);
+  animation: hero-role-item 7s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.role-track > span:nth-child(2) {
+  animation-delay: 3.5s;
+}
+
+@keyframes hero-role-item {
+  0%, 42% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50%, 100% {
+    opacity: 0;
+    transform: translateY(-110%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-track > span {
+    animation: none !important;
+    opacity: 0;
+    transform: none;
+  }
+  .role-track > span:first-child {
+    opacity: 1;
+  }
+}
