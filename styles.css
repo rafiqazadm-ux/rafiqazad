@@ -4988,12 +4988,13 @@ cite span {
   }
 
   .role-track > span {
+    transform: scaleX(0.9);
     transform-origin: center;
   }
 
   .role-track > span:first-child,
   .role-track > span:last-child {
-    transform: scaleX(0.82);
+    transform: scaleX(0.76);
   }
 
   .hero-punctuation {
