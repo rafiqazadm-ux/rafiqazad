@@ -4979,7 +4979,25 @@ cite span {
   }
 
   .role-rotator {
-    font-size: clamp(22px, 6.6vw, 28px);
+    height: 1.18em;
+    margin-top: 0.18em;
+    font-size: 1em;
+    line-height: 1;
+    contain: paint;
+    clip-path: inset(2px 0);
+  }
+
+  .role-track > span {
+    transform-origin: center;
+  }
+
+  .role-track > span:first-child,
+  .role-track > span:last-child {
+    transform: scaleX(0.82);
+  }
+
+  .hero-punctuation {
+    display: none;
   }
 }
 
