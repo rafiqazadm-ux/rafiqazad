@@ -4747,8 +4747,8 @@ cite span {
   }
 
   .hero-stage img {
-    width: min(248px, 84%);
-    max-height: 318px;
+    width: min(210px, 74%);
+    max-height: 244px;
   }
 
   .orange-sun {
@@ -4815,7 +4815,7 @@ cite span {
   }
 
   .hero-stage img {
-    width: min(238px, 84%);
+    width: min(208px, 74%);
   }
 
   .orange-sun {
