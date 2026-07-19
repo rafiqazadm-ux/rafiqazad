@@ -4994,7 +4994,7 @@ cite span {
 
   .role-track > span:first-child,
   .role-track > span:last-child {
-    transform: scaleX(0.76);
+    transform: scaleX(0.64);
   }
 
   .hero-punctuation {
