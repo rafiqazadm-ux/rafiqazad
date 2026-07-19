@@ -4747,8 +4747,24 @@ cite span {
   }
 
   .hero-stage img {
-    width: min(210px, 74%);
-    max-height: 244px;
+    width: min(250px, 90%);
+    max-height: 304px;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 76%,
+      rgba(0, 0, 0, 0.92) 84%,
+      rgba(0, 0, 0, 0.48) 93%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 76%,
+      rgba(0, 0, 0, 0.92) 84%,
+      rgba(0, 0, 0, 0.48) 93%,
+      transparent 100%
+    );
   }
 
   .orange-sun {
@@ -4768,13 +4784,14 @@ cite span {
 
   .about-copy {
     display: grid;
-    justify-items: end;
-    text-align: right;
+    justify-items: start;
+    text-align: left;
   }
 
   .about-copy h2,
   .about-copy p:not(.eyebrow) {
-    margin-left: auto;
+    margin-right: auto;
+    margin-left: 0;
   }
 
   .mixeal-reel-showcase,
@@ -4815,7 +4832,7 @@ cite span {
   }
 
   .hero-stage img {
-    width: min(208px, 74%);
+    width: min(246px, 90%);
   }
 
   .orange-sun {
