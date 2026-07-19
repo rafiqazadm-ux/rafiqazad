@@ -4882,3 +4882,40 @@ cite span {
     width: min(280px, 100%);
   }
 }
+
+
+/* Seamless mobile circle clipping without portrait shadow. */
+@media (max-width: 680px) {
+  .hero-stage img {
+    filter: none;
+  }
+
+  .hero-stage::before,
+  .hero-stage::after {
+    content: "";
+    position: absolute;
+    bottom: -38px;
+    left: auto;
+    right: auto;
+    z-index: 3;
+    width: 50%;
+    aspect-ratio: 1;
+    border-radius: 0;
+    box-shadow: none;
+    clip-path: none;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    pointer-events: none;
+  }
+
+  .hero-stage::before {
+    left: 0;
+    background: radial-gradient(circle farthest-side at 100% 0%, transparent calc(100% - 1px), #f5f4f0 100%);
+  }
+
+  .hero-stage::after {
+    right: 0;
+    background: radial-gradient(circle farthest-side at 0% 0%, transparent calc(100% - 1px), #f5f4f0 100%);
+  }
+}
