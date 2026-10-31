@@ -5387,3 +5387,8 @@ main [id] { scroll-margin-top: 100px; }
   vertical-align: .02em;
 }
 @media (min-width: 1000px) { .tools-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+/* Keep each company and its flag aligned even when a name wraps. */
+.timeline-company h3 { display: flex; align-items: center; gap: 9px; }
+.timeline-company h3 .company-name { display: block; margin: 0; color: inherit; font: inherit; min-width: 0; }
+.timeline-company h3 .company-flag { flex: 0 0 25px; margin: 0; }
