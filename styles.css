@@ -5374,3 +5374,16 @@ main [id] { scroll-margin-top: 100px; }
 @media (max-width: 767px), (pointer: coarse) {
   .hero::before { filter: none; }
 }
+
+/* Country flags sit quietly alongside company names. */
+.timeline-company .company-flag {
+  display: inline-block;
+  width: 25px;
+  height: 16px;
+  margin-left: 5px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 3px;
+  object-fit: cover;
+  vertical-align: .02em;
+}
+@media (min-width: 1000px) { .tools-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
