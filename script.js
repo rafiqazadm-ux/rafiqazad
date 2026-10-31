@@ -1,3 +1,5 @@
+const mobilePerformanceMode = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches || Boolean(navigator.connection?.saveData);
+
 const glow = document.querySelector(".cursor-glow");
 
 if (glow) {
@@ -401,6 +403,8 @@ if (pitchDeckSection) {
     button.dataset.full = src;
 
     const image = document.createElement("img");
+    image.loading = "lazy";
+    image.decoding = "async";
     image.src = src;
     image.alt = label;
     button.appendChild(image);
@@ -614,6 +618,8 @@ if (uiShowcase) {
     button.dataset.full = src;
 
     const image = document.createElement("img");
+    image.loading = "lazy";
+    image.decoding = "async";
     image.src = src;
     image.alt = label;
     button.appendChild(image);
@@ -708,7 +714,7 @@ if (colonialCarousel) {
   const startColonialRotation = () => {
     stopColonialRotation();
     if (!carouselIsVisible || isPausedByVisitor || isHovered || document.hidden || prefersReducedMotion.matches) return;
-    rotationTimer = window.setInterval(() => showColonialSlide(activeSlide + 1, 1), 2000);
+    rotationTimer = window.setInterval(() => showColonialSlide(activeSlide + 1, 1), 6000);
   };
 
   const showColonialSlide = (index, direction = 1) => {
@@ -860,7 +866,7 @@ if (vrMarketingCarousel) {
   const startVrMarketingRotation = () => {
     stopVrMarketingRotation();
     if (!carouselIsVisible || isPausedByVisitor || isHovered || document.hidden || prefersReducedMotion.matches) return;
-    rotationTimer = window.setInterval(() => showVrMarketingSlide(activeSlide + 1, 1), 2000);
+    rotationTimer = window.setInterval(() => showVrMarketingSlide(activeSlide + 1, 1), 6000);
   };
 
   const showVrMarketingSlide = (index, direction = 1) => {
@@ -1036,7 +1042,7 @@ if (newtonsCarousel) {
   };
 
   const playNewtonsReel = () => {
-    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    if (mobilePerformanceMode || !carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
     video.play().then(syncNewtonsToggle).catch(syncNewtonsToggle);
   };
 
@@ -1051,7 +1057,7 @@ if (newtonsCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
-      video.preload = "auto";
+      video.preload = mobilePerformanceMode ? "none" : "auto";
       video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title + " Newton's Playground reel");
@@ -1073,7 +1079,7 @@ if (newtonsCarousel) {
         dot.setAttribute("aria-selected", String(isActive));
       });
 
-      video.addEventListener("canplay", playNewtonsReel, { once: true });
+      if (!mobilePerformanceMode) video.addEventListener("canplay", playNewtonsReel, { once: true });
       window.requestAnimationFrame(() => newtonsCarousel.classList.remove("is-changing"));
     };
 
@@ -1209,7 +1215,7 @@ if (finaloversCarousel) {
   };
 
   const playFinaloversReel = () => {
-    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    if (mobilePerformanceMode || !carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
     video.play().then(syncFinaloversToggle).catch(syncFinaloversToggle);
   };
 
@@ -1224,7 +1230,7 @@ if (finaloversCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
-      video.preload = "auto";
+      video.preload = mobilePerformanceMode ? "none" : "auto";
       video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title + " Final Overs reel");
@@ -1246,7 +1252,7 @@ if (finaloversCarousel) {
         dot.setAttribute("aria-selected", String(isActive));
       });
 
-      video.addEventListener("canplay", playFinaloversReel, { once: true });
+      if (!mobilePerformanceMode) video.addEventListener("canplay", playFinaloversReel, { once: true });
       window.requestAnimationFrame(() => finaloversCarousel.classList.remove("is-changing"));
     };
 
@@ -1365,7 +1371,7 @@ if (mixealCarousel) {
   };
 
   const playActiveReel = () => {
-    if (!carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
+    if (mobilePerformanceMode || !carouselIsVisible || prefersReducedMotion.matches || document.hidden) return;
     video.play().then(syncToggle).catch(syncToggle);
   };
 
@@ -1380,7 +1386,7 @@ if (mixealCarousel) {
     const render = () => {
       activeReel = safeIndex;
       video.pause();
-      video.preload = "auto";
+      video.preload = mobilePerformanceMode ? "none" : "auto";
       video.poster = selected.thumb;
       video.src = selected.src;
       video.setAttribute("aria-label", selected.title);
@@ -1397,7 +1403,7 @@ if (mixealCarousel) {
         dot.setAttribute("aria-selected", String(isActive));
       });
 
-      video.addEventListener("canplay", playActiveReel, { once: true });
+      if (!mobilePerformanceMode) video.addEventListener("canplay", playActiveReel, { once: true });
       window.requestAnimationFrame(() => mixealCarousel.classList.remove("is-changing"));
     };
 
@@ -1468,11 +1474,11 @@ const campaignVideos = Array.from(
   )
 );
 
-if (campaignVideos.length) {
+if (campaignVideos.length && !mobilePerformanceMode) {
   const warmCampaignVideo = (video) => {
     if (video.dataset.warmed === "true") return;
     video.dataset.warmed = "true";
-    video.preload = "auto";
+    video.preload = mobilePerformanceMode ? "none" : "auto";
     video.load();
   };
 

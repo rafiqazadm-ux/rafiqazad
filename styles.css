@@ -5369,3 +5369,8 @@ main [id] { scroll-margin-top: 100px; }
 /* Keep enlarged portfolio images inside the padded viewer on narrow screens. */
 .lightbox { grid-template-columns: minmax(0, 1fr); }
 .lightbox img { max-width: min(100%, 1200px); justify-self: center; }
+
+/* Keep the Ajrak movement light on phones and touch devices. */
+@media (max-width: 767px), (pointer: coarse) {
+  .hero::before { filter: none; }
+}
