@@ -11,9 +11,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260720-role-roll-v14" />
+    <link rel="stylesheet" href="styles.css?v=20261031-mobile-updates" />
   </head>
   <body>
+    <svg class="ajrak-filters" aria-hidden="true" focusable="false" width="0" height="0">
+      <filter id="ajrak-wave" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.002" numOctaves="1" seed="6" result="ripples" />
+        <feOffset in="ripples" dx="0" dy="0" result="moving-ripples">
+          <animate attributeName="dx" values="-120;120;-120" dur="9s" repeatCount="indefinite" />
+        </feOffset>
+        <feDisplacementMap in="SourceGraphic" in2="moving-ripples" scale="34" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
     <div class="noise" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
 
@@ -174,23 +183,57 @@
         </div>
       </section>
 
+      <section class="tools-section" id="tools" aria-labelledby="tools-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Tools &amp; technology</p>
+          <h2 id="tools-title">Tools I use</h2>
+          <p class="section-description">The tools I use for design, video, scheduling, outreach, and sales.</p>
+        </div>
+        <div class="tools-groups">
+          <div class="tools-group reveal">
+            <ul class="tools-grid">
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/photoshop-3d.webp" alt="" /></span><span>Adobe Photoshop</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/illustrator-3d.webp" alt="" /></span><span>Adobe Illustrator</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/premiere-3d.webp" alt="" /></span><span>Premiere Pro</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/figma-3d.webp" alt="" /></span><span>Figma</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/instantly-3d.webp" alt="" /></span><span>Instantly</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/getsales-3d.webp" alt="" /></span><span>GetSales</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/salesblink-3d.webp" alt="" /></span><span>SalesBlink</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/navigator-3d.webp" alt="" /></span><span>Sales Navigator</span></li>
+              <li class="tool-card"><span class="tool-icon" aria-hidden="true"><img src="media/tool-icons/publer-3d.webp" alt="" /></span><span>Publer</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section class="projects campaign-section" id="projects">
         <div class="section-heading reveal">
           <p class="eyebrow">Projects / Campaigns</p>
           <h2>Campaign Work</h2>
           <p class="section-description">
-            From lead generation and outreach to content marketing and social campaigns, this work reflects how I approach marketing as a whole. I focus on understanding the audience, simplifying the message, and creating campaigns that support real business goals. Every project combines strategy, content, design, and execution to help brands communicate more clearly and grow more effectively.
+            Here are some of the campaigns I’ve worked on, from lead generation to VR games.
           </p>
         </div>
+
+        <nav class="work-index reveal" aria-label="Explore portfolio sections">
+          <span class="work-index-label">Explore my work</span>
+          <a href="#projects">Campaigns <span aria-hidden="true">↗</span></a>
+          <a href="#decks">Pitch decks <span aria-hidden="true">↗</span></a>
+          <a href="#social">Graphic design <span aria-hidden="true">↗</span></a>
+          <a href="#uiux">UI/UX <span aria-hidden="true">↗</span></a>
+          <a href="#writing">Writing <span aria-hidden="true">↗</span></a>
+          <a href="#vertical">Visual stories <span aria-hidden="true">↗</span></a>
+          <a href="#tools">Tools &amp; tech <span aria-hidden="true">↗</span></a>
+        </nav>
 
         <div class="campaign-scroll">
           <article class="campaign-panel reveal is-active">
             <div class="campaign-card">
               <div class="campaign-copy">
                 <p class="case-index">Campaign 01</p>
-                <h3>Colonial Stocks Lead Generation & LinkedIn Growth Campaign</h3>
+                <h3>Colonial: Leads &amp; LinkedIn Growth</h3>
                 <p class="campaign-description">
-                  A targeted B2B lead generation and LinkedIn growth campaign built around prospect segmentation, outbound email, content planning, and audience refinement.
+                  I built and segmented prospect lists, researched decision-makers, and worked on email outreach and LinkedIn content.
                 </p>
                 <div class="campaign-keywords" aria-label="Campaign keywords">
                   <span>B2B Leads</span>
@@ -216,13 +259,13 @@
                   </div>
                 </div>
                 <div class="campaign-impact">
-                  <p class="impact-title">Impact</p>
+                  <p class="impact-title">Impact during my time at Colonial</p>
                   <div class="campaign-metrics">
                     <div><strong>200K+</strong><span>Targeted leads</span></div>
-                    <div><strong>53%</strong><span>Email open rate</span></div>
-                    <div><strong>41%</strong><span>Reply rate</span></div>
+                    <div><strong>53%</strong><span>Overall email open rate</span></div>
+                    <div><strong>41%</strong><span>Overall email reply rate</span></div>
                     <div><strong>13</strong><span>Meetings booked</span></div>
-                    <div><strong>2K+</strong><span>LinkedIn followers</span></div>
+                    <div><strong>2K+</strong><span>LinkedIn followers gained</span></div>
                     <div><strong>100K+</strong><span>Content impressions</span></div>
                   </div>
                 </div>
@@ -297,10 +340,10 @@
             <div class="campaign-card">
               <div class="campaign-copy">
                 <p class="case-index">Campaign 02</p>
-                <h3>Mixeal Brand Awareness Social Media Campaign</h3>
+                <h3>Mixeal: Building Brand Awareness</h3>
 
                 <p class="campaign-description">
-                  A brand awareness campaign designed to showcase Mixeal's VR expertise while making virtual reality feel simple, relatable, and engaging for a wider audience.
+                  I created Reels about Mixeal’s VR work and studio life.
                 </p>
                 <div class="campaign-keywords" aria-label="Campaign keywords">
                   <span>Brand Awareness</span>
@@ -379,9 +422,9 @@
             <div class="campaign-card">
               <div class="campaign-copy">
                 <p class="case-index">Campaign 03</p>
-                <h3>VR Game Marketing Service Social Media Campaign</h3>
+                <h3>Launching a VR Marketing Service</h3>
                 <p class="campaign-description">
-                  A service launch campaign targeting VR developers who needed marketing support, positioning Mixeal as a partner for game promotion, content, and growth.
+                  I worked on the service pitch, email copy, and client-facing content for Mixeal’s VR marketing service.
                 </p>
                 <div class="campaign-keywords" aria-label="Campaign keywords">
                   <span>Service Launch</span>
@@ -461,9 +504,9 @@
             <div class="campaign-card">
               <div class="campaign-copy">
                 <p class="case-index">Campaign 04</p>
-                <h3>Teams Feature Launch Social Media Campaign</h3>
+                <h3>Final Overs: Teams Launch</h3>
                 <p class="campaign-description">
-                  A launch campaign for the teams feature in Final Overs, created to spread awareness, increase engagement, and support game sales.
+                  I planned, filmed, and edited Reels for the Teams feature in Final Overs.
                 </p>
                 <div class="campaign-keywords" aria-label="Campaign keywords">
                   <span>Feature Launch</span>
@@ -491,7 +534,7 @@
                 <div class="campaign-impact">
                   <p class="impact-title">Impact</p>
                   <div class="campaign-metrics">
-                    <div><strong>6M+</strong><span>Views</span></div>
+                    <div><strong>6M+</strong><span>Reel views in about 1–2 months</span></div>
                     <div><strong>1,200+</strong><span>Followers</span></div>
                     <div><strong>550+</strong><span>Game sales</span></div>
                   </div>
@@ -548,9 +591,9 @@
             <div class="campaign-card">
               <div class="campaign-copy">
                 <p class="case-index">Campaign 05</p>
-                <h3>Newton's Playground Social Media Campaign</h3>
+                <h3>Newton's Playground: Social Campaign</h3>
                 <p class="campaign-description">
-                  A YouTube and TikTok campaign for a VR sandbox game, focused on explaining mechanics, showing creative possibilities, and driving engagement.
+                  I wrote scripts and produced YouTube and TikTok videos for Newton’s Playground.
                 </p>
                 <div class="campaign-keywords" aria-label="Campaign keywords">
                   <span>TikTok</span>
@@ -639,7 +682,7 @@
           <p class="eyebrow">Pitch decks</p>
           <h2>Pitch decks</h2>
           <p class="section-description">
-            I create pitch decks that turn ideas into clear, structured stories. My goal is to make complex information easier to understand through strong messaging, thoughtful design, and a presentation flow that keeps people engaged from the first slide to the last.
+            I’ve worked on pitch decks for businesses, products, and services. Here are a few examples.
           </p>
         </div>
         <div class="deck-showcase reveal" data-pitch-deck>
@@ -670,7 +713,7 @@
           <p class="eyebrow">Graphic design work</p>
           <h2>Graphic Design</h2>
           <p class="section-description">
-            Design has been a major part of my work across marketing, branding, and content creation. These projects showcase visual work created for companies across different industries, with a focus on clarity, communication, and designs that support the message rather than distract from it.
+            Here are some of the social media posts and campaign designs I’ve created for different brands.
           </p>
         </div>
 
@@ -840,9 +883,9 @@
       <section class="ui-section" id="uiux">
         <div class="section-heading reveal">
           <p class="eyebrow">UI/UX design work</p>
-          <h2>UI systems</h2>
+          <h2>UI/UX Design</h2>
           <p class="section-description">
-            I design interface screens that make digital products easier to understand and use. This work focuses on clean structure, visual hierarchy, user flow, and interface details that help the experience feel clear, modern, and purposeful.
+            Here are some interface designs and wireframes I’ve worked on.
           </p>
         </div>
         <div class="ui-showcase reveal" data-ui-showcase>
@@ -866,17 +909,17 @@
             <div class="mini-heading">
               <div>
                 <p class="eyebrow">Writing projects</p>
-                <h2>Writing work</h2>
+                <h2>Writing</h2>
               </div>
               <p>
-                Writing is where my professional journey began. Since 2019, I have worked on blog articles, website content, email campaigns, social media content, marketing materials, and brand messaging. My approach is simple: make information easier to understand while keeping it engaging, useful, and aligned with business goals.
+                I started out as a content writer in 2019. Here are some of the articles, emails, and website content I’ve written.
               </p>
             </div>
             <a class="button writing-button" href="https://drive.google.com/drive/folders/1t4JWBqvAzOPCVdxQEkCY_nLgbKG4IuG4?usp=sharing" target="_blank" rel="noreferrer">View writing archive</a>
           </article>
           <article class="mini-section reveal" id="thumbnails">
             <p class="eyebrow">Thumbnails</p>
-            <h2>Thumbnail hooks</h2>
+            <h2>Thumbnails</h2>
             <div class="thumb-showcase">
               <figure class="thumb-frame">
                 <img src="media/052-maxresdefault-1.webp" alt="YouTube thumbnail design" />
@@ -905,12 +948,15 @@
       <section class="vertical" id="vertical">
         <div class="section-heading reveal">
           <p class="eyebrow">Vertical storytelling</p>
-          <h2>Vertical stories</h2>
+          <h2>Reels &amp; Photography</h2>
           <p class="section-description">
-            Short-form storytelling has helped me explore people, places, and everyday moments through a more personal visual lens. This section brings together reels, street photography, and vertical compositions focused on mood, detail, movement, and human observation.
+            A collection of my reels and photos of people, places, and everyday life.
           </p>
         </div>
         <div class="vertical-story-stream reveal">
+          <button class="vertical-story-card reel" type="button" data-reel-url="https://www.instagram.com/readsbyrafiq/reel/DcVdwLmAIKW/" data-full="media/223-hyderabad-heritage-reel.jpg" aria-label="Open Hyderabad heritage walk reel on Instagram">
+            <img src="media/223-hyderabad-heritage-reel.jpg" alt="Hyderabad heritage walk reel cover" />
+          </button>
           <button class="vertical-story-card reel" type="button" data-reel-url="https://www.instagram.com/readsbyrafiq/reel/DTBJwD5Dei0/" data-full="media/058-reel-1-cover.webp" aria-label="Open Instagram reel 1">
             <img src="media/058-reel-1-cover.webp" alt="Instagram reel cover" />
           </button>

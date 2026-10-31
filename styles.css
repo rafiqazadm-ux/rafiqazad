@@ -2918,6 +2918,157 @@ cite span {
   transform: scale(1) translateY(0);
 }
 
+/* Keep work readable as it enters the viewport while retaining gentle depth. */
+.scroll-scene,
+.campaign-panel.reveal,
+.campaign-panel.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.tools-section {
+  padding: clamp(70px, 9vw, 140px) 0;
+  scroll-margin-top: 90px;
+}
+
+.tools-groups { display: block; }
+
+.tools-group {
+  padding: clamp(22px, 3vw, 38px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: radial-gradient(circle at 90% 0%, rgba(242, 106, 33, .12), transparent 45%), rgba(255, 255, 255, .035);
+}
+
+.tools-group-heading span {
+  color: var(--orange-2);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.tools-group-heading h3 {
+  font-family: var(--sans);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  margin: 10px 0 24px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tool-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  min-height: 88px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  background: rgba(0,0,0,.2);
+  font-size: .85rem;
+  font-weight: 600;
+  transition: border-color 250ms ease, transform 250ms ease;
+}
+
+.tool-card:hover { transform: translateY(-4px); border-color: rgba(242,106,33,.5); }
+.tool-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255,255,255,.26);
+  border-radius: 14px;
+  color: white;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.35), inset 0 -5px 10px rgba(0,0,0,.25), 0 7px 0 rgba(0,0,0,.26), 0 14px 20px rgba(0,0,0,.2);
+  transform: rotate(-4deg);
+  transition: transform 250ms ease;
+}
+.tool-card:hover .tool-icon { transform: rotate(3deg) translateY(-3px); }
+.tool-icon-blue { background: linear-gradient(145deg, #337acc, #183a77); }
+.tool-icon-orange { background: linear-gradient(145deg, #f98939, #9f3b16); }
+.tool-icon-purple { background: linear-gradient(145deg, #8e70cf, #443379); }
+.tool-icon-pink { background: linear-gradient(145deg, #dc748d, #863d63); }
+@media (max-width: 680px) {
+  .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tool-card { gap: 10px; padding: 10px; font-size: .76rem; }
+  .tool-icon { flex-basis: 42px; width: 42px; height: 42px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-card:hover { transform: none; }
+  .tool-card:hover .tool-icon { transform: rotate(-4deg); }
+}
+
+.work-index {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 32px;
+}
+
+.work-index-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.work-index a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.78rem;
+  transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.work-index a:hover,
+.work-index a:focus-visible {
+  background: rgba(242, 106, 33, 0.16);
+  border-color: var(--orange);
+  transform: translateY(-3px);
+}
+
+.work-index a:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.work-index a span {
+  color: var(--orange-2);
+  transition: transform 220ms ease;
+}
+
+.work-index a:hover span,
+.work-index a:focus-visible span {
+  transform: translate(3px, -3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-index a:hover,
+  .work-index a:focus-visible,
+  .work-index a:hover span,
+  .work-index a:focus-visible span {
+    transform: none;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -4992,3 +5143,229 @@ cite span {
   }
 }
 
+
+/* Keep the navigation legible and section headings clear of the fixed header. */
+.site-header.is-glass,
+.site-header.is-glass:not(:hover):not(:focus-within) {
+  background: rgba(18, 18, 18, .88);
+  opacity: 1;
+}
+.site-header.is-glass:not(:hover):not(:focus-within) .brand-mark,
+.site-header.is-glass:not(:hover):not(:focus-within) nav {
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+main [id] { scroll-margin-top: 100px; }
+.campaign-section .section-heading h2,
+.decks .section-heading h2,
+.gallery-section .section-heading h2,
+.ui-section .section-heading h2,
+.vertical .section-heading h2,
+.tools-section .section-heading h2 {
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  line-height: 1.05;
+}
+.campaign-copy h3 { font-size: clamp(1.45rem, 2.6vw, 2.6rem); line-height: 1.12; }
+.site-header a:focus-visible {
+  outline: 2px solid var(--orange-2);
+  outline-offset: 2px;
+}
+
+/* Authentic app marks on dimensional cards. */
+.tool-icon { background: #f5f4f0; padding: 5px; overflow: hidden; }
+.tool-icon img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+
+/* A restrained Ajrak-inspired outline drifts like a light piece of cloth. */
+.hero { isolation: isolate; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -7%;
+  z-index: 0;
+  pointer-events: none;
+  background: url("media/ajrak-outline.svg") repeat;
+  background-size: 175px 175px;
+  opacity: .10;
+  mask-image: radial-gradient(ellipse at center, transparent 5%, rgba(0,0,0,.38) 50%, #000 100%);
+  transform-origin: center;
+  animation: ajrak-breeze 12s ease-in-out infinite alternate;
+  filter: url(#ajrak-wave);
+}
+@keyframes ajrak-breeze {
+  0% { transform: translate3d(-8px, 0, 0) skewY(-.4deg) scale(1.01); }
+  50% { transform: translate3d(0, 3px, 0) skewY(.35deg) scale(1.015); }
+  100% { transform: translate3d(8px, 0, 0) skewY(-.4deg) scale(1.01); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; transform: none; filter: none; }
+}
+
+/* Editorial campaign process: clear numbered rows. */
+.campaign-process .strategy-timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.campaign-process .strategy-timeline::before { display: none; }
+.campaign-process .strategy-step {
+  display: grid;
+  grid-template-columns: clamp(58px, 7vw, 92px) minmax(0, 1fr);
+  align-items: center;
+  align-content: center;
+  gap: clamp(14px, 2vw, 24px);
+  min-height: 90px;
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255,247,239,.14);
+  border-radius: 0;
+  background: transparent;
+}
+.campaign-process .step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  height: 100%;
+  min-height: 58px;
+  margin: 0;
+  padding-right: 14px;
+  border: 0;
+  border-right: 1px solid rgba(255,247,239,.16);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--orange-2);
+  font-size: clamp(2rem, 3.1vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+.campaign-process .strategy-step p {
+  margin: 0;
+  font-size: clamp(.82rem, 1vw, .95rem);
+  line-height: 1.5;
+  color: rgba(255,247,239,.78);
+}
+.campaign-process .strategy-step strong {
+  margin-bottom: 7px;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.15;
+}
+@media (max-width: 680px) {
+  .campaign-process .strategy-step { grid-template-columns: 64px minmax(0, 1fr); min-height: 78px; gap: 14px; padding: 13px 0; }
+  .campaign-process .step-icon { min-height: 48px; font-size: 1.7rem; }
+  .campaign-process .strategy-step p { font-size: .82rem; }
+}
+
+/* Keep the number and divider separate at every width. */
+.campaign-process .strategy-step { grid-template-columns: max-content minmax(0, 1fr); }
+.campaign-process .step-icon { width: 2.45em; box-sizing: border-box; }
+@media (max-width: 680px) {
+  .campaign-process .strategy-step { grid-template-columns: max-content minmax(0, 1fr); }
+}
+
+/* Dimensional tool blocks with the real marks as their face. */
+.tools-grid { gap: 18px; padding: 4px 4px 12px; }
+.tool-card {
+  position: relative;
+  overflow: visible;
+  background: linear-gradient(145deg, #3a3533 0%, #272422 48%, #1e1d1c 100%);
+  border: 1px solid rgba(255,247,239,.15);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 5px 0 #161514, 0 8px 0 #11100f, 0 15px 20px rgba(0,0,0,.32);
+  transform: translateY(0);
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,122,47,.65);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 8px 0 #161514, 0 12px 0 #11100f, 0 22px 26px rgba(0,0,0,.32);
+}
+.tool-card .tool-icon, .tool-card:hover .tool-icon {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2px;
+  transform: none;
+}
+.tool-card .tool-icon img { filter: drop-shadow(0 3px 3px rgba(0,0,0,.25)); }
+@media (prefers-reduced-motion: reduce) {
+  .tool-card:hover { transform: none; }
+}
+
+/* The logos themselves are dimensional; the surrounding cards stay flat. */
+.tools-grid { gap: 24px 16px; padding: 0; }
+.tool-card, .tool-card:hover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  text-align: center;
+}
+.tool-card .tool-icon, .tool-card:hover .tool-icon {
+  display: block;
+  width: clamp(90px, 9vw, 124px);
+  height: clamp(90px, 9vw, 124px);
+  flex: 0 0 auto;
+  padding: 0;
+  overflow: visible;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+}
+.tool-card .tool-icon img { width: 100%; height: 100%; object-fit: contain; border-radius: 0; filter: none; transition: transform 250ms ease; }
+.tool-card:hover .tool-icon img { transform: translateY(-4px); }
+@media (max-width: 680px) {
+  .tool-card .tool-icon, .tool-card:hover .tool-icon { width: 96px; height: 96px; }
+  .tool-card { font-size: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) { .tool-card:hover .tool-icon img { transform: none; } }
+
+/* Compact campaign results on mobile. */
+@media (max-width: 680px) {
+  .campaign-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .campaign-metrics div { min-height: 78px; padding: 12px; }
+  .campaign-metrics strong { font-size: clamp(1.45rem, 7vw, 1.9rem); }
+  .campaign-metrics span { font-size: .66rem; line-height: 1.3; }
+}
+
+/* Give mobile carousel controls more room for touch without enlarging the dots. */
+@media (max-width: 680px) {
+  .colonial-slider-arrow, .mixeal-reel-arrow { width: 44px; height: 44px; }
+  .colonial-slider-dots, .mixeal-reel-dots { gap: 0; }
+  .colonial-slider-dots button, .mixeal-reel-dots button,
+  .colonial-slider-dots button.is-active, .mixeal-reel-dots button.is-active {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    background: transparent;
+  }
+  .colonial-slider-dots button::before, .mixeal-reel-dots button::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 7px; height: 7px;
+    border-radius: 999px;
+    background: rgba(255, 247, 239, .3);
+    transform: translate(-50%, -50%);
+  }
+  .colonial-slider-dots button.is-active::before, .mixeal-reel-dots button.is-active::before {
+    width: 18px;
+    background: var(--orange);
+  }
+  .colonial-slider-toggle, .mixeal-video-toggle { min-height: 44px; }
+}
+
+/* Keep enlarged portfolio images inside the padded viewer on narrow screens. */
+.lightbox { grid-template-columns: minmax(0, 1fr); }
+.lightbox img { max-width: min(100%, 1200px); justify-self: center; }
