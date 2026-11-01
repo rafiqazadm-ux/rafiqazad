@@ -1,0 +1,24 @@
+.service-feature {display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(32px,6vw,85px);padding:clamp(70px,9vw,130px) 0;scroll-margin-top:90px;}
+.service-feature-copy h2 {font-family:var(--sans);font-size:clamp(32px,4vw,58px);line-height:1.08;letter-spacing:-.04em;margin:12px 0 22px;}
+.service-feature-copy>p:not(.eyebrow) {color:var(--muted);line-height:1.7;max-width:480px;}
+.service-feature-tags {display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.service-feature-tags span {border:1px solid rgba(255,122,47,.3);border-radius:999px;color:#f4cfb6;padding:8px 13px;font-size:12px;}
+.service-slider {border:1px solid rgba(255,247,239,.18);background:linear-gradient(145deg,#312822,#1b1b1b);border-radius:16px;padding:14px;}
+.service-stage {position:relative;border-radius:9px;overflow:hidden;background:#17191e;aspect-ratio:4/3;}
+.service-slide {position:absolute;inset:0;margin:0;display:grid;place-items:center;animation:service-fade .45s ease;}
+.service-slide[hidden] {display:none;}
+.service-slide img,.service-slide video {width:100%;height:100%;object-fit:contain;}
+.service-slide figcaption {position:absolute;bottom:0;left:0;right:0;padding:24px 16px 13px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:white;font-size:12px;font-weight:600;}
+@keyframes service-fade {from{opacity:.3}to{opacity:1}}
+.service-controls {display:flex;align-items:center;gap:10px;padding-top:12px;}
+.service-controls button {min-width:44px;min-height:44px;border:1px solid rgba(255,247,239,.24);border-radius:50%;background:#23211f;color:#fff7ef;cursor:pointer;font:inherit;}
+.service-controls .service-pause {margin-left:auto;border-radius:999px;padding:0 18px;font-size:12px;}
+.service-controls button:focus-visible,.campaign-projects summary:focus-visible {outline:2px solid var(--orange-2);outline-offset:3px;}
+.service-count {font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;}
+.campaign-projects {margin-top:28px;}
+.campaign-projects>summary {display:inline-flex;align-items:center;min-height:48px;padding:12px 20px;border:1px solid rgba(255,122,47,.4);border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;list-style:none;}
+.campaign-projects>summary::-webkit-details-marker {display:none;}
+.campaign-projects>summary::after {content:' +';margin-left:10px;color:var(--orange-2);}
+.campaign-projects[open]>summary::after {content:' −';}
+@media(max-width:767px){.service-feature {grid-template-columns:1fr;gap:26px;padding:65px 0;}.service-feature-copy h2 {font-size:clamp(30px,8vw,40px);}.service-stage {aspect-ratio:1/1;}}
+@media(prefers-reduced-motion:reduce){.service-slide {animation:none;}}
