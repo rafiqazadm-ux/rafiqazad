@@ -22,3 +22,23 @@
 .campaign-projects[open]>summary::after {content:' −';}
 @media(max-width:767px){.service-feature {grid-template-columns:1fr;gap:26px;padding:65px 0;}.service-feature-copy h2 {font-size:clamp(30px,8vw,40px);}.service-stage {aspect-ratio:1/1;}}
 @media(prefers-reduced-motion:reduce){.service-slide {animation:none;}}
+/* Service-first layout: each discipline pairs its description with real work. */
+.service-overview {padding:75px 0 15px;scroll-margin-top:90px;}
+.service-overview h2 {font-family:var(--sans);font-size:clamp(32px,5vw,60px);line-height:1.1;margin:12px 0 24px;}
+.service-feature {border-top:1px solid rgba(255,247,239,.12);}
+.service-feature-reverse .service-feature-copy {grid-column:2;grid-row:1;}
+.service-feature-reverse .service-slider {grid-column:1;grid-row:1;}
+.service-feature .service-result {color:#ff9d65;font-size:13px;font-weight:700;margin-top:25px;}
+.service-slide {opacity:0;visibility:hidden;transition:opacity 800ms ease,visibility 800ms;animation:none;pointer-events:none;}
+.service-slide.is-active {opacity:1;visibility:visible;z-index:1;}
+.service-more {grid-column:1 / -1;margin-top:-5px;}
+.service-more>summary {display:inline-flex;align-items:center;min-height:48px;padding:12px 20px;border:1px solid rgba(255,122,47,.4);border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;list-style:none;}
+.service-more>summary::-webkit-details-marker {display:none;}
+.service-more>summary::after {content:' +';margin-left:10px;color:var(--orange-2);}
+.service-more[open]>summary::after {content:' −';}
+.unified-design-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px;}
+.unified-design-grid button {padding:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#242424;cursor:pointer;aspect-ratio:1;}
+.unified-design-grid img {width:100%;height:100%;object-fit:cover;}
+.service-more>section {width:100%;padding:35px 0;}
+@media(max-width:767px){.service-feature-reverse .service-feature-copy,.service-feature-reverse .service-slider {grid-column:auto;grid-row:auto;}.service-more {grid-column:auto;}.unified-design-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}}
+@media(prefers-reduced-motion:reduce){.service-slide {transition:none;}}
