@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pitch Decks | Rafiq Azad</title>
+    <meta
+      name="description"
+      content="Portfolio of Rafiq Azad, a creative strategist and creative lead specializing in campaigns, content systems, visual direction, and brand growth."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@200;300;400;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20261031-flags-aligned" />
+    <link rel="stylesheet" href="portfolio-layout.css?v=20261101" />
+  </head>
+  <body class="portfolio-redesign">
+    <svg class="ajrak-filters" aria-hidden="true" focusable="false" width="0" height="0">
+      <filter id="ajrak-wave" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.002" numOctaves="1" seed="6" result="ripples" />
+        <feOffset in="ripples" dx="0" dy="0" result="moving-ripples">
+          <animate attributeName="dx" values="-120;120;-120" dur="9s" repeatCount="indefinite" />
+        </feOffset>
+        <feDisplacementMap in="SourceGraphic" in2="moving-ripples" scale="34" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand-mark avatar-mark" href="index.html" aria-label="Rafiq Azad home">
+        <img src="media/001-my-photo.webp" alt="" aria-hidden="true" />
+      </a>
+      <nav aria-label="Primary navigation"><a href="index.html">Home</a><a href="index.html#work">Work</a><a href="about.html">About</a><a class="nav-contact" href="about.html#contact">Contact</a></nav>
+    </header>
+
+    <main>
+<section class="collection-intro"><a class="back-link" href="index.html#work">← Back to work</a><p class="eyebrow">PITCH DECKS</p><h1>Pitch decks</h1><p>Presentations for businesses, products and services.</p></section>      <section class="decks full-bleed" id="decks">
+        
+        <div class="deck-showcase reveal" data-pitch-deck>
+          <button class="deck-nav deck-prev" type="button" data-deck-prev aria-label="Previous pitch deck">‹</button>
+          <div class="deck-view">
+            <div class="deck-brand">
+              <div class="deck-logo" data-deck-logo></div>
+              <div>
+                <p class="case-index" id="deck-company">CloudRaise</p>
+                <h3 id="deck-title">Cloudraise Pitch Deck</h3>
+              </div>
+            </div>
+            <div class="deck-rail" data-deck-rail aria-label="Selected pitch deck featured slides"></div>
+            <div class="deck-strip-wrap">
+              <div class="deck-strip" data-deck-strip aria-label="Selected pitch deck slide previews"></div>
+              <div class="deck-actions">
+                <div class="deck-switcher" data-deck-tabs aria-label="Choose pitch deck"></div>
+                <button class="deck-more" type="button" data-deck-toggle>Explore more slides</button>
+              </div>
+            </div>
+          </div>
+          <button class="deck-nav deck-next" type="button" data-deck-next aria-label="Next pitch deck">›</button>
+        </div>
+      </section>
+
+    </main>
+    <div class="lightbox" id="image-lightbox" aria-hidden="true">
+      <button class="lightbox-close" type="button" aria-label="Close preview">X</button>
+      <img src="" alt="" />
+    </div>
+
+    <script src="script.js?v=20261101-categories"></script>
+  </body>
+</html>
+
