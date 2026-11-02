@@ -53,3 +53,38 @@
 .service-feature-copy,.service-slider {min-width:0;}
 .service-stage.phone-showcase {aspect-ratio:auto;height:430px;min-height:0;}
 @media(max-width:767px){.service-feature {grid-template-columns:minmax(0,1fr);}.service-stage.phone-showcase {height:420px;min-height:0;}}
+/* Continuous, unboxed work strips. Each item remains fully visible. */
+.service-feature-reverse .service-marquee {grid-column:1;grid-row:1;}
+.service-marquee {min-width:0;overflow:hidden;}
+.marquee-viewport {overflow:hidden;padding:20px 0 16px;}
+.marquee-track {display:flex;width:max-content;animation:work-marquee var(--marquee-duration,50s) linear infinite;will-change:transform;}
+.marquee-group {display:flex;flex:none;gap:14px;padding-right:14px;}
+@keyframes work-marquee {to {transform:translateX(-50%);}}
+.service-marquee:has(:focus-visible) .marquee-track,.service-marquee.is-paused .marquee-track,.service-marquee.is-offscreen .marquee-track {animation-play-state:paused;}
+@media (hover:hover) {.service-marquee:hover .marquee-track {animation-play-state:paused;}}
+.marquee-card {display:flex;flex:0 0 240px;width:240px;flex-direction:column;padding:0;border:0;border-radius:12px;background:#252321;color:#fff7ef;text-align:left;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;transform-origin:center;}
+.marquee-card:hover,.marquee-card:focus-visible {transform:scale(1.055);box-shadow:0 14px 32px rgba(0,0,0,.35);position:relative;z-index:2;}
+.marquee-card:focus-visible,.marquee-pause:focus-visible,.work-dialog-close:focus-visible {outline:3px solid #ff9a5a;outline-offset:4px;}
+.marquee-media {display:flex;width:100%;height:210px;align-items:center;justify-content:center;overflow:hidden;border-radius:12px 12px 0 0;background:#17191e;}
+.marquee-media img,.marquee-media video {display:block;width:100%;height:100%;object-fit:contain;}
+.marquee-video .marquee-media {height:295px;}
+.marquee-caption {display:flex;align-items:center;min-height:46px;padding:10px 12px;font-size:11px;line-height:1.35;}
+.marquee-pause {border:0;background:transparent;color:#d4c8be;font:inherit;font-size:11px;text-decoration:underline;text-underline-offset:3px;padding:9px 3px;cursor:pointer;}
+.service-impact {margin-top:30px;}
+.service-impact .impact-label {color:var(--orange-2);font-family:var(--sans);font-size:13px;font-weight:800;letter-spacing:.05em;margin:0 0 12px;}
+.impact-pills {display:flex;flex-wrap:wrap;gap:10px;}
+.impact-pill {display:flex;flex-direction:column;justify-content:center;gap:3px;padding:13px 18px;border-radius:18px;background:#f37022;color:#20120a;min-width:132px;max-width:235px;}
+.impact-pill strong {font-family:var(--sans);font-size:clamp(20px,2.3vw,30px);line-height:1.1;}
+.impact-pill span {font-size:11px;line-height:1.35;font-weight:600;}
+.work-dialog {width:min(860px,calc(100% - 28px));max-height:90dvh;padding:0;border:1px solid #62554c;border-radius:16px;color:#fff7ef;background:#201d1b;overflow:auto;}
+.work-dialog::backdrop {background:rgba(0,0,0,.82);}
+.work-dialog-inner {position:relative;padding:18px;}
+.work-dialog-close {position:absolute;top:26px;right:26px;z-index:2;width:44px;height:44px;border:1px solid #777;border-radius:50%;color:white;background:#181818;cursor:pointer;font-size:25px;}
+.work-dialog-media {display:grid;place-items:center;min-height:180px;background:#111;border-radius:10px;overflow:hidden;}
+.work-dialog-media img,.work-dialog-media video {display:block;max-width:100%;max-height:65dvh;object-fit:contain;}
+.work-dialog-kicker {font-size:11px;color:#ff8b49;font-weight:700;letter-spacing:.08em;margin:20px 0 6px;}
+.work-dialog h2 {font-family:var(--sans);font-size:clamp(18px,3vw,27px);margin:0 0 8px;}
+@media(max-width:767px){.service-feature-reverse .service-marquee {grid-column:auto;grid-row:auto;}.marquee-card {flex-basis:205px;width:205px;}.marquee-media {height:190px;}.marquee-video .marquee-media {height:260px;}.impact-pill {min-width:120px;flex:1 1 125px;}}
+@media(prefers-reduced-motion:reduce){.marquee-track {animation:none;}.marquee-viewport {overflow-x:auto;}.marquee-group[aria-hidden="true"] {display:none;}.marquee-card {transition:none;}}
+.work-dialog-description {color:#d2c9c2;font-size:14px;line-height:1.6;margin:0 0 8px;}
+@media(prefers-reduced-motion:reduce){.marquee-pause {display:none;}}
