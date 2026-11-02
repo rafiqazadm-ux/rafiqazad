@@ -3,79 +3,89 @@
   const dialog = document.querySelector('.work-dialog');
   const media = dialog.querySelector('.work-dialog-media');
   const title = dialog.querySelector('#work-dialog-title');
-  let opener = null, activeVideo = null;
   const strips = [...document.querySelectorAll('[data-marquee]')];
-
-  function duration(strip) {
-    const group = strip.querySelector('.marquee-group');
-    strip.querySelector('.marquee-track').style.setProperty('--marquee-duration', `${Math.max(18, group.getBoundingClientRect().width / 20)}s`);
-  }
+  let opener = null;
+  const states = [];
   strips.forEach(strip => {
-    const pause = strip.querySelector('.marquee-pause');
-    let manuallyPaused = false;
-    duration(strip);
-    if ('ResizeObserver' in window) new ResizeObserver(() => duration(strip)).observe(strip.querySelector('.marquee-group'));
-    pause.addEventListener('click', () => {
-      manuallyPaused = !manuallyPaused;
-      strip.classList.toggle('is-paused', manuallyPaused);
-      pause.textContent = manuallyPaused ? 'Resume movement' : 'Pause movement';
-      pause.setAttribute('aria-pressed', String(manuallyPaused));
+    const viewport = strip.querySelector('.marquee-viewport');
+    const track = strip.querySelector('.marquee-track');
+    const group = strip.querySelector('.marquee-group');
+    const state = { strip, viewport, track, group, offset: 0, visible: true, dragging: false, hover: false, focus: false, suppress: false };
+    states.push(state);
+    viewport.tabIndex = 0;
+    viewport.setAttribute('aria-label', `${strip.getAttribute('aria-label')}. Drag or swipe to browse; use arrow keys to move.`);
+    viewport.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') state.hover = true; });
+    viewport.addEventListener('pointerleave', () => { state.hover = false; });
+    viewport.addEventListener('focusin', () => { state.focus = true; });
+    viewport.addEventListener('focusout', e => { if (!viewport.contains(e.relatedTarget)) state.focus = false; });
+    viewport.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault(); state.offset += e.key === 'ArrowRight' ? 200 : -200; draw(state);
     });
-    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => strip.classList.toggle('is-offscreen', !e.isIntersecting), {threshold:0}).observe(strip);
-    strip.addEventListener('click', e => {
-      const card = e.target.closest('.marquee-card');
-      if (!card) return;
-      opener = card;
-      title.textContent = card.dataset.caption;
-      dialog.querySelector(".work-dialog-description").textContent = card.closest(".service-feature").querySelector(".service-feature-copy > p:not(.eyebrow)")?.textContent || "";
-      media.replaceChildren();
-      const element = document.createElement(card.dataset.kind === 'video' ? 'video' : 'img');
-      if (card.dataset.kind === 'video') {
-        element.controls = true; element.playsInline = true; element.preload = 'metadata';
-        element.poster = card.dataset.poster || '';
-      } else element.alt = card.dataset.caption;
-      element.src = card.dataset.media;
-      media.appendChild(element);
-      dialog.showModal();
+    let startX = 0, startY = 0, lastX = 0, pointer = null;
+    viewport.addEventListener('pointerdown', e => {
+      if (e.button !== 0 || pointer !== null) return;
+      pointer = e.pointerId; startX = lastX = e.clientX; startY = e.clientY; state.dragging = false; state.suppress = false;
+    });
+    viewport.addEventListener('pointermove', e => {
+      if (e.pointerId !== pointer) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      if (!state.dragging && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        state.dragging = true; state.suppress = true; viewport.classList.add('is-dragging'); viewport.setPointerCapture(e.pointerId);
+      }
+      if (state.dragging) { state.offset -= e.clientX - lastX; draw(state); e.preventDefault(); }
+      lastX = e.clientX;
+    });
+    function end(e) { if (e.pointerId !== pointer) return; pointer = null; state.dragging = false; viewport.classList.remove('is-dragging'); }
+    viewport.addEventListener('pointerup', end); viewport.addEventListener('pointercancel', end);
+    viewport.addEventListener('click', e => {
+      if (state.suppress) { e.preventDefault(); e.stopPropagation(); state.suppress = false; return; }
+      const card = e.target.closest('.marquee-card'); if (!card) return;
+      if (card.dataset.kind === 'external') { window.open(card.dataset.url, '_blank', 'noopener,noreferrer'); return; }
+      opener = card; title.textContent = card.dataset.caption;
+      dialog.querySelector('.work-dialog-description').textContent = strip.closest('.service-feature').querySelector('.service-feature-copy > p:not(.eyebrow)')?.textContent || '';
+      media.replaceChildren(); const element = document.createElement(card.dataset.kind === 'video' ? 'video' : 'img');
+      if (element.tagName === 'VIDEO') { element.controls = true; element.playsInline = true; element.preload = 'metadata'; element.poster = card.dataset.poster || ''; }
+      else element.alt = card.dataset.caption;
+      element.src = card.dataset.media; media.appendChild(element); dialog.showModal();
       if (element.tagName === 'VIDEO') element.play().catch(() => {});
-    });
+    }, true);
+    if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { state.visible = entry.isIntersecting; }, {threshold: 0}).observe(strip);
   });
+  function draw(state) {
+    const width = state.group.getBoundingClientRect().width;
+    if (!width) return;
+    state.offset = ((state.offset % width) + width) % width;
+    state.track.style.transform = `translate3d(${-state.offset}px,0,0)`;
+  }
+  let previous = 0;
+  function animate(now) {
+    const dt = previous ? Math.min((now - previous) / 1000, .05) : 0; previous = now;
+    if (!document.hidden && !motion.matches && !dialog.open) states.forEach(state => {
+      if (state.visible && !state.dragging && !state.hover && !state.focus) { state.offset += 32 * dt; draw(state); }
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
   dialog.querySelector('.work-dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-  dialog.addEventListener('close', () => { const v = media.querySelector('video'); if (v) v.pause(); media.replaceChildren(); opener?.focus(); });
-
-  function stopVideo() {
-    if (!activeVideo) return;
-    activeVideo.pause();
-    activeVideo.removeAttribute('src');
-    activeVideo.load();
-    activeVideo = null;
-  }
-  function updateVideo() {
-    if (document.hidden || dialog.open || motion.matches || navigator.connection?.saveData) { stopVideo(); return; }
-    let best = null, bestScore = Infinity;
-    strips.forEach(strip => {
-      if (strip.classList.contains('is-offscreen') || strip.classList.contains('is-paused')) return;
-      const bounds = strip.querySelector('.marquee-viewport').getBoundingClientRect();
-      if (bounds.bottom <= 0 || bounds.top >= innerHeight) return;
-      strip.querySelectorAll('.marquee-video').forEach(card => {
-        const r = card.getBoundingClientRect();
-        const overlap = Math.min(r.right,bounds.right) - Math.max(r.left,bounds.left);
-        if (overlap < r.width * .7) return;
-        const score = Math.abs((r.left+r.right)/2 - (bounds.left+bounds.right)/2) + Math.abs((r.top+r.bottom)/2 - innerHeight/2);
-        if (score < bestScore) { bestScore=score; best=card; }
+  dialog.addEventListener('close', () => { media.querySelector('video')?.pause(); media.replaceChildren(); opener?.focus(); updateVideos(); });
+  function updateVideos() {
+    states.forEach(({strip, viewport, visible}) => {
+      const bounds = viewport.getBoundingClientRect();
+      strip.querySelectorAll('.marquee-video[data-kind="video"]').forEach(card => {
+        const video = card.querySelector('video'), rect = card.getBoundingClientRect();
+        const onscreen = visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData && rect.right > bounds.left + 20 && rect.left < bounds.right - 20 && rect.bottom > 0 && rect.top < innerHeight;
+        if (onscreen) {
+          if (!video.getAttribute('src')) video.src = card.dataset.preview || card.dataset.media;
+          if (video.paused) video.play().catch(() => {});
+        } else if (video.getAttribute('src')) { video.pause(); video.removeAttribute('src'); video.load(); }
       });
     });
-    const video = best?.querySelector('video');
-    if (video === activeVideo) return;
-    stopVideo();
-    if (video) { activeVideo=video; video.src=best.dataset.media; video.play().catch(() => {}); }
   }
-  document.addEventListener('visibilitychange', updateVideo);
-  dialog.addEventListener('close', updateVideo);
-  motion.addEventListener?.('change', updateVideo);
-  setInterval(updateVideo, 1200);
-  updateVideo();
+  document.addEventListener('visibilitychange', updateVideos);
+  motion.addEventListener?.('change', updateVideos);
+  setInterval(updateVideos, 800); updateVideos();
 })();
 (() => {
   const cards = [...document.querySelectorAll('.tool-card')];

@@ -121,3 +121,18 @@
 @media (hover:hover) {.tool-card:hover .tool-tip {opacity:1;visibility:visible;transform:translate(-50%,0);}.tool-card:hover .tool-icon img {transform:translateY(-5px) scale(1.1);}}
 @media (max-width:680px) {.tool-card:nth-child(odd) .tool-tip {left:0;right:auto;transform:translate(0,-6px);}.tool-card:nth-child(even) .tool-tip {left:auto;right:0;transform:translate(0,-6px);}.tool-card.is-open .tool-tip,.tool-card:has(.tool-button:focus-visible) .tool-tip {transform:translate(0,0);}}
 @media (prefers-reduced-motion:reduce) {.marquee-caption,.tool-tip,.tool-card .tool-button .tool-icon img {transition:none;}.tool-card:hover .tool-icon img,.tool-card:has(.tool-button:focus-visible) .tool-icon img,.tool-card.is-open .tool-icon img {transform:none;}}
+
+/* Draggable work strips and light speech bubbles. */
+.marquee-track {animation:none!important;}
+.marquee-viewport {touch-action:pan-y;cursor:grab;user-select:none;}
+.marquee-viewport.is-dragging {cursor:grabbing;}
+.marquee-viewport.is-dragging .marquee-card {pointer-events:none;}
+.marquee-viewport:focus-visible {outline:2px solid #ff9a5a;outline-offset:-3px;}
+@media(prefers-reduced-motion:reduce){.marquee-viewport {overflow:hidden;}.marquee-group[aria-hidden="true"] {display:flex;}}
+.tool-tip {background:#fff;color:#24201d;border:1px solid #e5dcd5;box-shadow:0 12px 28px rgba(0,0,0,.35);border-radius:14px;}
+.tool-tip::before {content:"";position:absolute;top:-7px;left:50%;width:12px;height:12px;transform:translateX(-50%) rotate(45deg);background:#fff;border-left:1px solid #e5dcd5;border-top:1px solid #e5dcd5;}
+@media(max-width:680px){.tool-card:nth-child(odd) .tool-tip::before {left:32%;}.tool-card:nth-child(even) .tool-tip::before {left:68%;}}
+.deck-expanded {grid-column:1 / -1;min-width:0;}
+.deck-switcher-top {display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;}
+.deck-switcher-top button {background:#f37022!important;color:#211309!important;border:1px solid #f37022!important;border-radius:999px!important;padding:9px 16px!important;font-weight:700;cursor:pointer;}
+.deck-switcher-top button.is-active {background:#fff3e9!important;border-color:#fff3e9!important;}

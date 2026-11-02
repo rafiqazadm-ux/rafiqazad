@@ -431,6 +431,7 @@ if (pitchDeckSection) {
 
     deckTabs.querySelectorAll("button").forEach((button, buttonIndex) => {
       button.classList.toggle("is-active", buttonIndex === index);
+      button.setAttribute("aria-pressed", String(buttonIndex === index));
     });
 
     deckRail.innerHTML = "";
@@ -465,13 +466,7 @@ if (pitchDeckSection) {
     }, 240);
   };
 
-  const restartDeckTimer = () => {
-    window.clearInterval(deckTimer);
-    deckTimer = window.setInterval(() => {
-      deckExpanded = false;
-      showDeck(activeDeckIndex + 1);
-    }, 7200);
-  };
+  const restartDeckTimer = () => window.clearInterval(deckTimer);
 
   pitchDecks.forEach((deck, index) => {
     const button = document.createElement("button");
@@ -480,7 +475,7 @@ if (pitchDeckSection) {
     button.addEventListener("click", () => {
       deckExpanded = false;
       showDeck(index);
-      restartDeckTimer();
+      window.clearInterval(deckTimer);
     });
     deckTabs.appendChild(button);
   });
@@ -504,7 +499,7 @@ if (pitchDeckSection) {
   });
 
   pitchDeckSection.addEventListener("pointerenter", () => window.clearInterval(deckTimer));
-  pitchDeckSection.addEventListener("pointerleave", restartDeckTimer);
+  // Keep the selected deck in view until the visitor chooses another.
 
   const startDeckSwipe = (event) => {
     if (event.target.closest("button, a")) {
@@ -540,7 +535,6 @@ if (pitchDeckSection) {
   });
 
   showDeck(0, false);
-  restartDeckTimer();
 }
 
 const uiProjects = [
@@ -636,6 +630,7 @@ if (uiShowcase) {
 
     uiTabs.querySelectorAll("button").forEach((button, buttonIndex) => {
       button.classList.toggle("is-active", buttonIndex === index);
+      button.setAttribute("aria-pressed", String(buttonIndex === index));
     });
 
     uiStage.innerHTML = "";
