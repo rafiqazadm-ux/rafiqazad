@@ -50,8 +50,10 @@
       if (!horizontal) return; e.preventDefault(); state.offset += horizontal; draw(state);
     }, { passive: false });
     strip.addEventListener('deckchange', () => { state.offset = 0; draw(state); });
-    viewport.addEventListener('focusin', () => { state.focus = true; });
-    viewport.addEventListener('focusout', e => { if (!viewport.contains(e.relatedTarget)) state.focus = false; });
+    viewport.addEventListener('pointerover', e => { if (e.pointerType === 'mouse') updateVideos(); });
+    viewport.addEventListener('pointerout', () => setTimeout(updateVideos, 0));
+    viewport.addEventListener('focusin', () => { state.focus = true; updateVideos(); });
+    viewport.addEventListener('focusout', e => { if (!viewport.contains(e.relatedTarget)) state.focus = false; setTimeout(updateVideos, 0); });
     viewport.addEventListener('keydown', e => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       e.preventDefault(); state.offset += e.key === 'ArrowRight' ? 200 : -200; draw(state);
@@ -76,7 +78,14 @@
     viewport.addEventListener('click', e => {
       if (state.suppress) { e.preventDefault(); e.stopPropagation(); state.suppress = false; return; }
       const card = e.target.closest('.marquee-card'); if (!card) return;
-      if (card.dataset.kind === 'external') { window.open(card.dataset.url, '_blank', 'noopener,noreferrer'); return; }
+      if (card.dataset.kind === 'external') {
+        opener = card; title.textContent = card.dataset.caption;
+        dialog.querySelector('.work-dialog-description').textContent = 'If the player does not load, use the link below to watch on Instagram.';
+        media.replaceChildren();
+        const frame = document.createElement('iframe'); frame.src = 'https://www.instagram.com/reel/DcVdwLmAIKW/embed/'; frame.title = 'Tower Market heritage walk on Instagram'; frame.loading = 'lazy'; frame.allow = 'autoplay; encrypted-media; picture-in-picture'; frame.setAttribute('allowfullscreen', '');
+        const link = document.createElement('a'); link.href = card.dataset.url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.className = 'reel-external-link'; link.textContent = 'Watch on Instagram ↗';
+        media.append(frame, link); dialog.showModal(); return;
+      }
       opener = card; title.textContent = card.dataset.caption;
       dialog.querySelector('.work-dialog-description').textContent = strip.closest('.service-feature').querySelector('.service-feature-copy > p:not(.eyebrow)')?.textContent || '';
       media.replaceChildren(); const element = document.createElement(card.dataset.kind === 'video' ? 'video' : 'img');
@@ -111,7 +120,8 @@
       const bounds = viewport.getBoundingClientRect();
       strip.querySelectorAll('.marquee-video[data-kind="video"]').forEach(card => {
         const video = card.querySelector('video'), rect = card.getBoundingClientRect();
-        const onscreen = visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData && rect.right > bounds.left + 20 && rect.left < bounds.right - 20 && rect.bottom > 0 && rect.top < innerHeight;
+        const selected = card.matches(':hover') || card.matches(':focus-visible');
+        const onscreen = selected && visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData && rect.right > bounds.left + 20 && rect.left < bounds.right - 20 && rect.bottom > 0 && rect.top < innerHeight;
         if (onscreen) {
           if (!video.getAttribute('src')) video.src = card.dataset.preview || card.dataset.media;
           if (video.paused) video.play().catch(() => {});

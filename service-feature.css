@@ -154,3 +154,18 @@
 .deck-choices button.is-active {background:#fff3e9;border-color:#fff3e9;}
 .deck-choices button:focus-visible {outline:3px solid #fff;outline-offset:3px;}
 .marquee-media img,.marquee-media video {-webkit-user-drag:none;user-select:none;}
+
+/* Give captions room and let artwork stand on its own. */
+@media(min-width:768px){
+ .service-feature {grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);gap:clamp(52px,6vw,96px);}
+ #marketing {grid-template-columns:minmax(0,1.28fr) minmax(250px,.72fr);}
+}
+.service-feature:not(#uiux) .marquee-card:not(.marquee-video) {width:auto;flex:0 0 auto;background:transparent;box-shadow:none;}
+.service-feature:not(#uiux) .marquee-card:not(.marquee-video) .marquee-media {width:auto;background:transparent;overflow:visible;}
+.service-feature:not(#uiux) .marquee-card:not(.marquee-video) .marquee-media img {width:auto;height:auto;max-width:min(480px,75vw);max-height:100%;object-fit:contain;border-radius:8px;}
+.service-feature:not(#uiux) .marquee-group {align-items:center;gap:20px;padding-right:20px;}
+#marketing .marquee-card:not(.marquee-video) .marquee-media img {max-width:min(560px,85vw);}
+#marketing .marquee-media {height:390px;}
+.work-dialog-media iframe {display:block;width:min(100%,420px);height:min(68dvh,700px);border:0;background:white;}
+.reel-external-link {color:#ff9a5a;padding:12px;font-weight:700;}
+@media(max-width:767px){#marketing .marquee-media {height:320px;}.service-feature:not(#uiux) .marquee-card:not(.marquee-video) .marquee-media img {max-width:82vw;}}
