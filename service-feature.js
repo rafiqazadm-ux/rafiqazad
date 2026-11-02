@@ -3,6 +3,36 @@
   const dialog = document.querySelector('.work-dialog');
   const media = dialog.querySelector('.work-dialog-media');
   const title = dialog.querySelector('#work-dialog-title');
+  // Each company choice replaces the slides in this same work slider.
+  const deckSection = document.querySelector('#decks');
+  const deckChoices = deckSection?.querySelector('.deck-choices');
+  if (deckChoices && typeof pitchDecks !== 'undefined') {
+    const groups = [...deckSection.querySelectorAll('.marquee-group')];
+    function selectDeck(index) {
+      const deck = pitchDecks[index];
+      deckChoices.querySelectorAll('button').forEach((button, i) => {
+        button.classList.toggle('is-active', i === index);
+        button.setAttribute('aria-pressed', String(i === index));
+      });
+      groups.forEach((group, groupIndex) => {
+        group.replaceChildren(...deck.slides.map((src, i) => {
+          const button = document.createElement('button');
+          button.type = 'button'; button.className = 'marquee-card'; button.dataset.kind = 'image'; button.dataset.media = src;
+          button.dataset.caption = `${deck.company} · Slide ${i + 1}`;
+          button.setAttribute('aria-label', `Open ${button.dataset.caption}`);
+          if (groupIndex) button.tabIndex = -1;
+          const wrap = document.createElement('span'); wrap.className = 'marquee-media';
+          const img = document.createElement('img'); img.src = src; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.draggable = false;
+          wrap.appendChild(img);
+          const caption = document.createElement('span'); caption.className = 'marquee-caption'; caption.textContent = button.dataset.caption;
+          button.append(wrap, caption); return button;
+        }));
+      });
+      deckSection.querySelector('[data-marquee]').dispatchEvent(new Event('deckchange'));
+    }
+    pitchDecks.forEach((deck, i) => { const button = document.createElement('button'); button.type = 'button'; button.textContent = deck.company; button.addEventListener('click', () => selectDeck(i)); deckChoices.appendChild(button); });
+    selectDeck(0);
+  }
   const strips = [...document.querySelectorAll('[data-marquee]')];
   let opener = null;
   const states = [];
@@ -14,8 +44,12 @@
     states.push(state);
     viewport.tabIndex = 0;
     viewport.setAttribute('aria-label', `${strip.getAttribute('aria-label')}. Drag or swipe to browse; use arrow keys to move.`);
-    viewport.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') state.hover = true; });
-    viewport.addEventListener('pointerleave', () => { state.hover = false; });
+    viewport.addEventListener('dragstart', e => e.preventDefault());
+    viewport.addEventListener('wheel', e => {
+      const horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!horizontal) return; e.preventDefault(); state.offset += horizontal; draw(state);
+    }, { passive: false });
+    strip.addEventListener('deckchange', () => { state.offset = 0; draw(state); });
     viewport.addEventListener('focusin', () => { state.focus = true; });
     viewport.addEventListener('focusout', e => { if (!viewport.contains(e.relatedTarget)) state.focus = false; });
     viewport.addEventListener('keydown', e => {
@@ -25,6 +59,7 @@
     let startX = 0, startY = 0, lastX = 0, pointer = null;
     viewport.addEventListener('pointerdown', e => {
       if (e.button !== 0 || pointer !== null) return;
+      if (e.pointerType === 'mouse') e.preventDefault();
       pointer = e.pointerId; startX = lastX = e.clientX; startY = e.clientY; state.dragging = false; state.suppress = false;
     });
     viewport.addEventListener('pointermove', e => {
@@ -58,11 +93,12 @@
     state.offset = ((state.offset % width) + width) % width;
     state.track.style.transform = `translate3d(${-state.offset}px,0,0)`;
   }
+  function viewportHasKeyboardFocus(viewport) { return !!viewport.querySelector(':focus-visible') || viewport.matches(':focus-visible'); }
   let previous = 0;
   function animate(now) {
     const dt = previous ? Math.min((now - previous) / 1000, .05) : 0; previous = now;
     if (!document.hidden && !motion.matches && !dialog.open) states.forEach(state => {
-      if (state.visible && !state.dragging && !state.hover && !state.focus) { state.offset += 32 * dt; draw(state); }
+      if (state.visible && !state.dragging && !(state.focus && viewportHasKeyboardFocus(state.viewport))) { state.offset += 32 * dt; draw(state); }
     });
     requestAnimationFrame(animate);
   }
