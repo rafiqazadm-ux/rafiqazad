@@ -40,8 +40,12 @@
     const viewport = strip.querySelector('.marquee-viewport');
     const track = strip.querySelector('.marquee-track');
     const group = strip.querySelector('.marquee-group');
-    const state = { strip, viewport, track, group, offset: 0, visible: true, dragging: false, hover: false, focus: false, suppress: false };
+    const state = { strip, viewport, track, group, offset: 0, visible: true, dragging: false, hover: false, focus: false, suppress: false, width: 0 };
     states.push(state);
+    const measure = () => { state.width = group.getBoundingClientRect().width; };
+    if (window.ResizeObserver) new ResizeObserver(measure).observe(group);
+    else window.addEventListener("resize", measure);
+    measure();
     viewport.tabIndex = 0;
     viewport.setAttribute('aria-label', `${strip.getAttribute('aria-label')}. Drag or swipe to browse; use arrow keys to move.`);
     viewport.addEventListener('dragstart', e => e.preventDefault());
@@ -49,7 +53,7 @@
       const horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
       if (!horizontal) return; e.preventDefault(); state.offset += horizontal; draw(state);
     }, { passive: false });
-    strip.addEventListener('deckchange', () => { state.offset = 0; draw(state); });
+    strip.addEventListener('deckchange', () => { state.offset = 0; state.width = group.getBoundingClientRect().width; draw(state); });
     viewport.addEventListener('pointerover', e => { if (e.pointerType === 'mouse') updateVideos(); });
     viewport.addEventListener('pointerout', () => setTimeout(updateVideos, 0));
     viewport.addEventListener('focusin', () => { state.focus = true; updateVideos(); });
@@ -97,7 +101,7 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { state.visible = entry.isIntersecting; }, {threshold: 0}).observe(strip);
   });
   function draw(state) {
-    const width = state.group.getBoundingClientRect().width;
+    const width = state.width;
     if (!width) return;
     state.offset = ((state.offset % width) + width) % width;
     state.track.style.transform = `translate3d(${-state.offset}px,0,0)`;

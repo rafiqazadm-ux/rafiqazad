@@ -556,41 +556,7 @@ const uiProjects = [
       "media/164-match-lost.webp",
     ],
   },
-  {
-    id: "visual-ui",
-    label: "Visual UI",
-    title: "Product screen studies",
-    glow: "rgba(87, 137, 255, 0.25)",
-    screens: [
-      "media/165-home-page-1.webp",
-      "media/166-quick-match.webp",
-      "media/167-vv-ui-1.webp",
-      "media/168-vv-ui-2.webp",
-      "media/169-vv-ui-3.webp",
-      "media/170-vv-ui-4.webp",
-      "media/171-vv-ui-5.webp",
-    ],
-  },
-  {
-    id: "wireframes",
-    label: "Wireframes",
-    title: "Flow and structure",
-    glow: "rgba(92, 194, 154, 0.23)",
-    screens: [
-      "media/172-home-page.webp",
-      "media/173-game-mode.webp",
-      "media/174-quick-match.webp",
-      "media/175-match-starting-screen.webp",
-      "media/176-batting-scorecard.webp",
-      "media/177-leaderboards.webp",
-      "media/178-profile.webp",
-      "media/179-profiles.webp",
-      "media/180-practice.webp",
-      "media/181-join-beta.webp",
-      "media/182-match-completed-screen.webp",
-      "media/183-next-over-screen.webp",
-    ],
-  },
+
 ];
 
 const uiShowcase = document.querySelector("[data-ui-showcase]");

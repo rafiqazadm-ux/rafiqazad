@@ -169,3 +169,6 @@
 .work-dialog-media iframe {display:block;width:min(100%,420px);height:min(68dvh,700px);border:0;background:white;}
 .reel-external-link {color:#ff9a5a;padding:12px;font-weight:700;}
 @media(max-width:767px){#marketing .marquee-media {height:320px;}.service-feature:not(#uiux) .marquee-card:not(.marquee-video) .marquee-media img {max-width:82vw;}}
+
+/* Let the short writing card fit its content beside the thumbnail gallery. */
+.writing-thumbs .split-section {align-items:start;}
