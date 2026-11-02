@@ -77,3 +77,14 @@
   setInterval(updateVideo, 1200);
   updateVideo();
 })();
+(() => {
+  const cards = [...document.querySelectorAll('.tool-card')];
+  function closeAll(except) { cards.forEach(card => { if (card !== except) { card.classList.remove('is-open'); card.querySelector('.tool-button')?.setAttribute('aria-expanded','false'); } }); }
+  cards.forEach(card => {
+    const button = card.querySelector('.tool-button');
+    if (!button) return;
+    button.addEventListener('click', () => { const open = !card.classList.contains('is-open'); closeAll(card); card.classList.toggle('is-open', open); button.setAttribute('aria-expanded', String(open)); });
+  });
+  document.addEventListener('click', event => { if (!event.target.closest('.tool-card')) closeAll(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeAll(); });
+})();

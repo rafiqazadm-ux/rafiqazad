@@ -102,3 +102,22 @@
   .marquee-media { height: 255px; }
   .marquee-video .marquee-media { height: 355px; }
 }
+/* Larger full-frame work; labels appear on hover or keyboard focus. */
+.marquee-card {position:relative;flex-basis:400px;width:400px;overflow:visible;}
+.marquee-media {height:355px;border-radius:12px;}
+.marquee-video .marquee-media {height:600px;}
+.marquee-caption {position:absolute;left:0;right:0;bottom:0;min-height:0;padding:18px 14px 13px;border-radius:0 0 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.9));color:#fff;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s;pointer-events:none;}
+.marquee-card:hover .marquee-caption,.marquee-card:focus-visible .marquee-caption {opacity:1;visibility:visible;}
+@media (max-width:767px) {.marquee-card {flex-basis:min(340px,90vw);width:min(340px,90vw);}.marquee-media {height:320px;}.marquee-video .marquee-media {height:530px;}}
+/* Tool details work with hover, keyboard focus, and tap. */
+.tool-card {position:relative;overflow:visible;}
+.tool-card:hover,.tool-card:has(.tool-button:focus-visible),.tool-card.is-open {z-index:5;}
+.tool-button {display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;border:0;color:inherit;background:transparent;font:inherit;cursor:pointer;text-align:center;}
+.tool-button:focus-visible {outline:2px solid var(--orange-2);outline-offset:5px;border-radius:12px;}
+.tool-card .tool-button .tool-icon img {transition:transform .25s ease;}
+.tool-card:has(.tool-button:focus-visible) .tool-icon img,.tool-card.is-open .tool-icon img {transform:translateY(-5px) scale(1.1);}
+.tool-tip {position:absolute;z-index:8;left:50%;top:calc(100% + 3px);width:210px;padding:12px 14px;border:1px solid rgba(255,135,65,.55);border-radius:12px;background:#2c2724;color:#fff7ef;box-shadow:0 12px 28px rgba(0,0,0,.42);font-size:12px;font-weight:500;line-height:1.45;text-align:center;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,-6px);transition:opacity .2s ease,transform .2s ease,visibility .2s;}
+.tool-card:has(.tool-button:focus-visible) .tool-tip,.tool-card.is-open .tool-tip {opacity:1;visibility:visible;transform:translate(-50%,0);}
+@media (hover:hover) {.tool-card:hover .tool-tip {opacity:1;visibility:visible;transform:translate(-50%,0);}.tool-card:hover .tool-icon img {transform:translateY(-5px) scale(1.1);}}
+@media (max-width:680px) {.tool-card:nth-child(odd) .tool-tip {left:0;right:auto;transform:translate(0,-6px);}.tool-card:nth-child(even) .tool-tip {left:auto;right:0;transform:translate(0,-6px);}.tool-card.is-open .tool-tip,.tool-card:has(.tool-button:focus-visible) .tool-tip {transform:translate(0,0);}}
+@media (prefers-reduced-motion:reduce) {.marquee-caption,.tool-tip,.tool-card .tool-button .tool-icon img {transition:none;}.tool-card:hover .tool-icon img,.tool-card:has(.tool-button:focus-visible) .tool-icon img,.tool-card.is-open .tool-icon img {transform:none;}}
