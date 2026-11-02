@@ -88,3 +88,17 @@
 @media(prefers-reduced-motion:reduce){.marquee-track {animation:none;}.marquee-viewport {overflow-x:auto;}.marquee-group[aria-hidden="true"] {display:none;}.marquee-card {transition:none;}}
 .work-dialog-description {color:#d2c9c2;font-size:14px;line-height:1.6;margin:0 0 8px;}
 @media(prefers-reduced-motion:reduce){.marquee-pause {display:none;}}
+/* Give the work more presence and soften its entry and exit at the edges. */
+.marquee-viewport {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.marquee-card { flex-basis: 310px; width: 310px; }
+.marquee-media { height: 275px; }
+.marquee-video .marquee-media { height: 390px; }
+.marquee-caption { font-size: 12px; }
+@media (max-width:767px) {
+  .marquee-card { flex-basis: min(280px, 80vw); width: min(280px, 80vw); }
+  .marquee-media { height: 255px; }
+  .marquee-video .marquee-media { height: 355px; }
+}
