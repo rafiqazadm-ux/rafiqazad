@@ -172,3 +172,7 @@
 
 /* Let the short writing card fit its content beside the thumbnail gallery. */
 .writing-thumbs .split-section {align-items:start;}
+
+/* On touch devices, animated image previews avoid browser autoplay restrictions. */
+.marquee-video .marquee-media {position:relative;}
+.marquee-video .mobile-animated-preview {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}

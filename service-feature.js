@@ -137,10 +137,20 @@
         const video = card.querySelector('video');
         const inView = candidates.some(item => item.card === card);
         const selected = touchPreview.matches ? mobileCards.has(card) : (card.matches(':hover') || card.matches(':focus-visible'));
-        if (eligible && inView && selected) {
-          if (!video.getAttribute('src')) { video.muted = true; video.playsInline = true; video.src = card.dataset.preview || card.dataset.media; }
-          if (video.paused) video.play().catch(() => {});
-        } else if (video.getAttribute('src')) { video.pause(); video.removeAttribute('src'); video.load(); }
+        let animated = card.querySelector('.mobile-animated-preview');
+        if (touchPreview.matches) {
+          if (video.getAttribute('src')) { video.pause(); video.removeAttribute('src'); video.load(); }
+          if (eligible && inView && selected && card.dataset.animated) {
+            if (!animated) { animated = document.createElement('img'); animated.className = 'mobile-animated-preview'; animated.alt = ''; animated.setAttribute('aria-hidden', 'true'); card.querySelector('.marquee-media').appendChild(animated); }
+            if (!animated.getAttribute('src')) animated.src = card.dataset.animated;
+          } else if (animated) animated.remove();
+        } else {
+          if (animated) animated.remove();
+          if (eligible && inView && selected) {
+            if (!video.getAttribute('src')) { video.muted = true; video.playsInline = true; video.src = card.dataset.preview || card.dataset.media; }
+            if (video.paused) video.play().catch(() => {});
+          } else if (video.getAttribute('src')) { video.pause(); video.removeAttribute('src'); video.load(); }
+        }
       });
     });
   }
