@@ -119,15 +119,26 @@
   dialog.querySelector('.work-dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
   dialog.addEventListener('close', () => { media.querySelector('video')?.pause(); media.replaceChildren(); opener?.focus(); updateVideos(); });
+  const touchPreview = matchMedia('(hover: none), (pointer: coarse)');
   function updateVideos() {
     states.forEach(({strip, viewport, visible}) => {
       const bounds = viewport.getBoundingClientRect();
-      strip.querySelectorAll('.marquee-video[data-kind="video"]').forEach(card => {
-        const video = card.querySelector('video'), rect = card.getBoundingClientRect();
-        const selected = card.matches(':hover') || card.matches(':focus-visible');
-        const onscreen = selected && visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData && rect.right > bounds.left + 20 && rect.left < bounds.right - 20 && rect.bottom > 0 && rect.top < innerHeight;
-        if (onscreen) {
-          if (!video.getAttribute('src')) video.src = card.dataset.preview || card.dataset.media;
+      const cards = [...strip.querySelectorAll('.marquee-video[data-kind="video"]')];
+      const candidates = cards.map(card => {
+        const r = card.getBoundingClientRect();
+        const overlap = Math.max(0, Math.min(r.right, bounds.right, innerWidth) - Math.max(r.left, bounds.left, 0));
+        const vertical = Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0));
+        return {card, overlap, vertical, distance: Math.abs((r.left + r.right) / 2 - (Math.max(bounds.left, 0) + Math.min(bounds.right, innerWidth)) / 2)};
+      }).filter(item => item.overlap > 30 && item.vertical > 50).sort((a, b) => a.distance - b.distance);
+      const eligible = visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData;
+      // On touch screens there is no hover. Animate the two most visible clips only.
+      const mobileCards = new Set(touchPreview.matches && eligible ? candidates.slice(0, 2).map(item => item.card) : []);
+      cards.forEach(card => {
+        const video = card.querySelector('video');
+        const inView = candidates.some(item => item.card === card);
+        const selected = touchPreview.matches ? mobileCards.has(card) : (card.matches(':hover') || card.matches(':focus-visible'));
+        if (eligible && inView && selected) {
+          if (!video.getAttribute('src')) { video.muted = true; video.playsInline = true; video.src = card.dataset.preview || card.dataset.media; }
           if (video.paused) video.play().catch(() => {});
         } else if (video.getAttribute('src')) { video.pause(); video.removeAttribute('src'); video.load(); }
       });
@@ -135,6 +146,7 @@
   }
   document.addEventListener('visibilitychange', updateVideos);
   motion.addEventListener?.('change', updateVideos);
+  touchPreview.addEventListener?.('change', updateVideos);
   setInterval(updateVideos, 800); updateVideos();
 })();
 (() => {
