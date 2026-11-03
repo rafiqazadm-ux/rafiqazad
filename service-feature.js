@@ -33,6 +33,25 @@
     pitchDecks.forEach((deck, i) => { const button = document.createElement('button'); button.type = 'button'; button.textContent = deck.company; button.addEventListener('click', () => selectDeck(i)); deckChoices.appendChild(button); });
     selectDeck(0);
   }
+  // Keep descriptions tied to the work already documented in the portfolio.
+  function workDescription(card) {
+    const section = card.closest('.service-feature')?.id;
+    const file = (card.dataset.media || '').split('/').pop();
+    const label = card.dataset.caption || 'Selected work';
+    if (section === 'social-media') return `A social post for ${label.split(' · ').pop()}, shown as part of the content I worked on.`;
+    if (section === 'marketing') return file.includes('analytics')
+      ? 'An email campaign performance view from my outreach work.'
+      : 'An example of the email copy and outreach sequences I worked on.';
+    if (section === 'content-creation') {
+      if (/^21[1-3]-/.test(file)) return 'A short-form video for the Final Overs teams feature. The work included split-screen concepts, filming, editing, and publishing.';
+      if (/^21[0789]-/.test(file)) return 'Video content for Newton’s Playground, focused on explaining the game’s mechanics and creative possibilities.';
+      return 'A short-form video from Mixeal’s social content, using quick edits and relatable ideas about VR and studio life.';
+    }
+    if (section === 'social') return `${label}. A graphic created for social media or a campaign.`;
+    if (section === 'uiux') return `${label}. Part of the Final Overs game interface work.`;
+    if (section === 'decks') return `${label}. One of the presentation slides I worked on for this project.`;
+    return 'A selected example of my work.';
+  }
   const strips = [...document.querySelectorAll('[data-marquee]')];
   let opener = null;
   const states = [];
@@ -91,7 +110,7 @@
         media.append(frame, link); dialog.showModal(); return;
       }
       opener = card; title.textContent = card.dataset.caption;
-      dialog.querySelector('.work-dialog-description').textContent = strip.closest('.service-feature').querySelector('.service-feature-copy > p:not(.eyebrow)')?.textContent || '';
+      dialog.querySelector('.work-dialog-description').textContent = workDescription(card);
       media.replaceChildren(); const element = document.createElement(card.dataset.kind === 'video' ? 'video' : 'img');
       if (element.tagName === 'VIDEO') { element.controls = true; element.playsInline = true; element.preload = 'metadata'; element.poster = card.dataset.poster || ''; }
       else element.alt = card.dataset.caption;
