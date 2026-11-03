@@ -187,3 +187,36 @@
 .marquee-video .marquee-media {border-radius:20px;overflow:hidden;}
 .marquee-video .marquee-media video,
 .marquee-video .marquee-media img {border-radius:20px;}
+
+/* One consistent left-to-right service layout. */
+@media(min-width:768px){
+ .service-feature-reverse .service-feature-copy {grid-column:1;grid-row:1;}
+ .service-feature-reverse .service-marquee {grid-column:2;grid-row:1;}
+ #marketing.service-feature {grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);}
+}
+/* A project is a single link to its full case study. */
+.project-marquee-card {display:flex!important;flex-direction:column!important;width:320px!important;flex:0 0 320px!important;background:#252220!important;border:1px solid #4d4038!important;border-radius:16px!important;overflow:hidden!important;color:#faf4ef!important;text-decoration:none!important;}
+.project-art {display:block;width:100%;height:250px;background:#201d1c;overflow:hidden;}
+.project-art img {display:block;width:100%;height:100%;object-fit:contain;}
+.project-card-info {display:flex;flex-direction:column;gap:10px;padding:18px;min-height:142px;}
+.project-card-tag {color:#ff985c;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.project-card-info strong {font-size:18px;line-height:1.25;}
+.project-card-bottom {display:flex;align-items:center;justify-content:space-between;margin-top:auto;color:#ff985c;font-size:12px;font-weight:700;}
+.project-card-bottom span:last-child {font-size:24px;}
+.project-marquee-card:focus-visible {outline:3px solid #ff9a5a;outline-offset:3px;}
+/* The visible video is the frame: portrait reels and landscape trailers keep their native proportions. */
+#content-creation .marquee-card.marquee-video {width:min(340px,85vw);flex:0 0 min(340px,85vw);background:transparent;}
+#content-creation .marquee-video .marquee-media {width:100%;height:auto;aspect-ratio:9 / 16;border-radius:20px;overflow:hidden;background:transparent;}
+#content-creation .marquee-video[data-media^="media/210-"] .marquee-media {aspect-ratio:16 / 9;}
+#content-creation .marquee-video .marquee-media video,#content-creation .marquee-video .marquee-media img {width:100%;height:100%;object-fit:cover;border-radius:20px;}
+#content-creation .marquee-video[data-kind="external"] .marquee-media img {object-fit:contain;}
+/* Reels and photographs share a compact two-column section. */
+.story-pair {display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:16px;align-items:center;}
+.story-lane {min-width:0;}.story-lane h3 {font-family:var(--sans);font-size:clamp(22px,2vw,30px);margin:0 0 10px;}.story-and {color:#f4772b;font-family:var(--sans);font-size:34px;font-weight:800;}
+.story-compact .story-card {flex:0 0 180px;width:180px;background:transparent;}
+.story-compact .story-card .marquee-media {height:260px;background:transparent;border-radius:12px;}
+.story-compact .story-card .marquee-media img {object-fit:contain;border-radius:12px;}
+.story-compact .marquee-group {align-items:center;}
+.writing-thumbs .split-section {grid-template-columns:minmax(0,1fr);}
+.writing-thumbs #writing {max-width:650px;}
+@media(max-width:767px){.story-pair {grid-template-columns:minmax(0,1fr);gap:22px;}.story-and {justify-self:center;font-size:24px;}.story-compact .story-card {flex-basis:155px;width:155px;}.story-compact .story-card .marquee-media {height:230px;}.project-marquee-card {width:min(320px,82vw)!important;flex-basis:min(320px,82vw)!important;}}

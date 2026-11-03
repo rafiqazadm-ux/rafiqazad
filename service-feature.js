@@ -101,6 +101,8 @@
     viewport.addEventListener('click', e => {
       if (state.suppress) { e.preventDefault(); e.stopPropagation(); state.suppress = false; return; }
       const card = e.target.closest('.marquee-card'); if (!card) return;
+      if (card.dataset.kind === 'project') return;
+      if (card.dataset.kind === 'external-link') { window.open(card.dataset.url, '_blank', 'noopener,noreferrer'); return; }
       if (card.dataset.kind === 'external') {
         opener = card; title.textContent = card.dataset.caption;
         dialog.querySelector('.work-dialog-description').textContent = 'If the player does not load, use the link below to watch on Instagram.';
