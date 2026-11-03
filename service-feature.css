@@ -220,3 +220,14 @@
 .writing-thumbs .split-section {grid-template-columns:minmax(0,1fr);}
 .writing-thumbs #writing {max-width:650px;}
 @media(max-width:767px){.story-pair {grid-template-columns:minmax(0,1fr);gap:22px;}.story-and {justify-self:center;font-size:24px;}.story-compact .story-card {flex-basis:155px;width:155px;}.story-compact .story-card .marquee-media {height:230px;}.project-marquee-card {width:min(320px,82vw)!important;flex-basis:min(320px,82vw)!important;}}
+
+/* Floating project illustrations: no card or box around the 3D artwork. */
+.led-projects .project-marquee-card {background:transparent!important;border:0!important;border-radius:0!important;overflow:visible!important;box-shadow:none!important;}
+.led-projects .project-art {position:relative;display:grid;place-items:center;height:260px;background:transparent;overflow:visible;}
+.led-projects .project-avatar {position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:opacity .35s ease,transform .4s ease;}
+.led-projects .project-avatar-hover {opacity:0;transform:translateY(6px) scale(.97);}
+@media(hover:hover){.led-projects .project-marquee-card:hover .project-avatar-rest {opacity:0;transform:translateY(-4px) scale(1.02);}.led-projects .project-marquee-card:hover .project-avatar-hover {opacity:1;transform:translateY(0) scale(1.04);}}
+.led-projects .project-marquee-card:focus-visible .project-avatar-rest {opacity:0;}
+.led-projects .project-marquee-card:focus-visible .project-avatar-hover {opacity:1;transform:none;}
+.led-projects .project-card-info {padding:12px 6px 18px;min-height:122px;}
+@media(prefers-reduced-motion:reduce){.led-projects .project-avatar {transition:none!important;}}
