@@ -182,3 +182,8 @@
   .marquee-caption {position:static;display:block;opacity:1;visibility:visible;min-height:0;padding:10px 3px 0;background:none;color:#eee4dd;font-size:12px;line-height:1.4;}
   .marquee-card {justify-content:flex-start;}
 }
+
+/* Rounded edges on video frames and mobile animated previews. */
+.marquee-video .marquee-media {border-radius:20px;overflow:hidden;}
+.marquee-video .marquee-media video,
+.marquee-video .marquee-media img {border-radius:20px;}
