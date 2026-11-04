@@ -233,3 +233,58 @@
     opener?.focus();
   });
 })();
+
+(() => {
+  const meter = document.querySelector('.scroll-meter');
+  if (meter) {
+    const number = meter.querySelector('[data-scroll-percent]');
+    const bar = meter.querySelector('[data-scroll-fill]');
+    const track = meter.querySelector('[role="progressbar"]');
+    let scheduled = false;
+    const update = () => {
+      scheduled = false;
+      const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      const percent = max ? Math.min(100, Math.max(0, Math.round(scrollY / max * 100))) : 100;
+      number.textContent = percent + '%';
+      bar.style.width = percent + '%';
+      track.setAttribute('aria-valuenow', String(percent));
+    };
+    const schedule = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } };
+    addEventListener('scroll', schedule, {passive:true});
+    addEventListener('resize', schedule);
+    update();
+  }
+
+  const dialog = document.querySelector('.service-dialog');
+  const vault = document.querySelector('.service-content-vault');
+  if (!dialog || !vault) return;
+  const content = dialog.querySelector('.service-dialog-content');
+  const title = dialog.querySelector('#service-dialog-title');
+  const close = dialog.querySelector('.service-dialog-close');
+  let active = null;
+  let opener = null;
+  document.querySelectorAll('[data-service-id]').forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.serviceId;
+      const section = id === 'writing' ? vault.querySelector('.writing-thumbs') : vault.querySelector('#' + id);
+      if (!section) return;
+      opener = button;
+      active = section;
+      title.textContent = button.closest('.service-offer-card')?.querySelector('h3')?.textContent || 'Explore my work';
+      dialog.showModal();
+      content.appendChild(section);
+      section.querySelectorAll('.reveal').forEach(element => element.classList.add('visible'));
+      close.focus();
+      requestAnimationFrame(() => {
+        section.querySelectorAll('[data-marquee]').forEach(strip => strip.dispatchEvent(new Event('deckchange')));
+      });
+    });
+  });
+  close.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => {
+    if (active) vault.appendChild(active);
+    active = null;
+    opener?.focus();
+  });
+})();
