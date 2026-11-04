@@ -231,3 +231,31 @@
 .led-projects .project-marquee-card:focus-visible .project-avatar-hover {opacity:1;transform:none;}
 .led-projects .project-card-info {padding:12px 6px 18px;min-height:122px;}
 @media(prefers-reduced-motion:reduce){.led-projects .project-avatar {transition:none!important;}}
+
+/* Compact single-object illustrations for the led projects. */
+.led-projects .project-marquee-card{width:240px!important;flex:0 0 240px!important;}
+.led-projects .project-art{height:170px;}
+.led-projects .project-avatar{inset:auto;left:50%;top:50%;width:148px;height:148px;max-width:68%;transform:translate(-50%,-50%);filter:drop-shadow(0 8px 8px rgba(0,0,0,.12));}
+.led-projects .project-avatar-hover{opacity:0;transform:translate(-50%,-46%) scale(.96);}
+@media(hover:hover){
+  .led-projects .project-marquee-card:hover .project-avatar-rest{opacity:0;transform:translate(-50%,-53%) scale(1.02);}
+  .led-projects .project-marquee-card:hover .project-avatar-hover{opacity:1;transform:translate(-50%,-50%) scale(1);}
+}
+.led-projects .project-marquee-card:focus-visible .project-avatar-rest{opacity:0;}
+.led-projects .project-marquee-card:focus-visible .project-avatar-hover{opacity:1;transform:translate(-50%,-50%);}
+.led-projects .project-card-info{align-items:center;text-align:center;padding:7px 8px 14px;min-height:104px;gap:7px;}
+.led-projects .project-card-info strong{font-size:16px;line-height:1.25;}
+.led-projects .project-card-bottom{justify-content:center;width:100%;font-size:11px;}
+@media(max-width:767px){.led-projects .project-marquee-card{width:min(230px,72vw)!important;flex-basis:min(230px,72vw)!important;}}
+.project-dialog{padding:0;border:1px solid #755543;border-radius:18px;background:#201d1c;color:#fffaf4;width:min(1100px,calc(100vw - 24px));max-width:none;height:min(88dvh,850px);max-height:none;overflow:hidden;box-shadow:0 26px 80px rgba(0,0,0,.6);}
+.project-dialog::backdrop{background:rgba(11,9,8,.78);backdrop-filter:blur(6px);}
+.project-dialog-shell{height:100%;display:flex;flex-direction:column;}
+.project-dialog-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 16px;background:#292321;border-bottom:1px solid #604638;}
+.project-dialog-bar p{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f5b089;font-weight:700;}
+.project-dialog-close{width:38px;height:38px;border:1px solid #86543c;border-radius:50%;background:#3d2d27;color:#fff;font-size:26px;line-height:1;cursor:pointer;}
+.project-dialog-close:hover,.project-dialog-close:focus-visible{background:#b65b2d;outline:2px solid #ffb88c;outline-offset:2px;}
+.project-dialog-frame{display:block;width:100%;height:100%;flex:1;border:0;background:#201d1c;opacity:0;}
+.project-dialog.is-loaded .project-dialog-frame{opacity:1;}
+.project-dialog-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin:0;color:#e9c7b4;}
+.project-dialog.is-loaded .project-dialog-loading{display:none;}
+@media(max-width:767px){.project-dialog{width:100vw;height:100dvh;border:0;border-radius:0;}.project-dialog-bar{padding:8px 14px;}}
