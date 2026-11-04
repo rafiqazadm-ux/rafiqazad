@@ -332,3 +332,38 @@
 .scroll-meter-track span{display:block;width:0;height:100%;background:#f4772b;border-radius:inherit;transition:width .12s linear;}
 @media(max-width:600px){.scroll-meter{right:10px;bottom:10px;padding:7px 9px;min-width:112px;font-size:9px;}.scroll-meter strong{font-size:13px;}}
 @media(prefers-reduced-motion:reduce){.service-offer-card,.service-offer-art img,.scroll-meter-track span{transition:none;}}
+
+/* Shared left edge for the featured projects, service heading, and card grid. */
+.led-projects{align-items:start;}
+.led-projects .service-feature-copy{text-align:left;}
+.led-projects .project-card-info{align-items:flex-start;text-align:left;}
+.led-projects .project-card-info strong,.led-projects .project-card-summary{max-width:none;}
+.led-projects .project-card-bottom{align-self:flex-start;}
+.service-offers{width:min(1440px,calc(100% - 48px));padding:84px 0 90px;}
+.service-offers .section-heading{justify-items:start;text-align:left;}
+.service-offers .section-heading h2{max-width:18ch;}
+.service-offer-card:last-child{grid-column:auto;}
+.service-offer-card{min-height:315px;}
+.service-offer-art{height:150px;}
+.service-offer-art img{width:128px;height:128px;}
+@media(min-width:1180px){.service-offer-grid{grid-template-columns:repeat(4,minmax(0,1fr));}}
+@media(max-width:600px){.service-offers{width:calc(100% - 40px);padding:65px 0;}.service-offer-art{height:145px;}}
+
+/* Larger rounded photo frames, matching the Reel presentation. */
+#vertical .story-lane:last-child .story-card{width:220px;flex:0 0 220px;padding:0;border:0;border-radius:20px;background:transparent;box-shadow:none;overflow:hidden;}
+#vertical .story-lane:last-child .story-card .marquee-media{width:100%;height:290px;border-radius:20px;overflow:hidden;background:transparent;}
+#vertical .story-lane:last-child .story-card .marquee-media img{width:100%;height:100%;object-fit:cover;border-radius:20px;}
+#vertical .story-lane:last-child .story-card .marquee-caption{padding:10px 2px;}
+@media(max-width:600px){#vertical .story-lane:last-child .story-card{width:190px;flex-basis:190px;}#vertical .story-lane:last-child .story-card .marquee-media{height:250px;}}
+
+/* Contact copy and links follow the page's left edge. */
+.contact-simple{text-align:left;}
+.contact-simple .contact-intro{max-width:520px;margin:clamp(72px,8vw,120px) 0 0;text-align:left;}
+.contact-simple .contact-icons{justify-content:flex-start;}
+.contact-simple .contact-icons a{align-items:flex-start;text-align:left;}
+
+/* The header outline grows with the page's scroll position. */
+.site-header{--page-progress:0%;isolation:isolate;}
+.site-header::before{content:"";position:absolute;inset:-3px;padding:2px;border-radius:inherit;pointer-events:none;background:conic-gradient(from -90deg,#f4772b 0 var(--page-progress),rgba(255,247,239,.08) var(--page-progress) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;}
+.nav-progress{display:flex;align-items:center;justify-content:center;min-width:42px;padding:0 7px;color:#ffae76;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;}
+@media(max-width:600px){.nav-progress{min-width:32px;padding:0 2px;font-size:9px;}}

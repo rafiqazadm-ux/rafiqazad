@@ -235,19 +235,18 @@
 })();
 
 (() => {
-  const meter = document.querySelector('.scroll-meter');
-  if (meter) {
-    const number = meter.querySelector('[data-scroll-percent]');
-    const bar = meter.querySelector('[data-scroll-fill]');
-    const track = meter.querySelector('[role="progressbar"]');
+  const header = document.querySelector('.site-header');
+  const progress = document.querySelector('.nav-progress');
+  if (header && progress) {
+    const number = progress.querySelector('[data-scroll-percent]');
     let scheduled = false;
     const update = () => {
       scheduled = false;
       const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
       const percent = max ? Math.min(100, Math.max(0, Math.round(scrollY / max * 100))) : 100;
       number.textContent = percent + '%';
-      bar.style.width = percent + '%';
-      track.setAttribute('aria-valuenow', String(percent));
+      header.style.setProperty('--page-progress', percent + '%');
+      progress.setAttribute('aria-valuenow', String(percent));
     };
     const schedule = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } };
     addEventListener('scroll', schedule, {passive:true});
