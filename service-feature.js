@@ -131,7 +131,7 @@
   let previous = 0;
   function animate(now) {
     const dt = previous ? Math.min((now - previous) / 1000, .05) : 0; previous = now;
-    if (!document.hidden && !motion.matches && !dialog.open) states.forEach(state => {
+    if (!document.hidden && !motion.matches && !dialog.open && !document.querySelector('.project-dialog')?.open) states.forEach(state => {
       if (state.visible && !state.dragging && !(state.focus && viewportHasKeyboardFocus(state.viewport))) { state.offset += 32 * dt; draw(state); }
     });
     requestAnimationFrame(animate);
@@ -151,7 +151,7 @@
         const vertical = Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0));
         return {card, overlap, vertical, distance: Math.abs((r.left + r.right) / 2 - (Math.max(bounds.left, 0) + Math.min(bounds.right, innerWidth)) / 2)};
       }).filter(item => item.overlap > 30 && item.vertical > 50).sort((a, b) => a.distance - b.distance);
-      const eligible = visible && !document.hidden && !dialog.open && !motion.matches && !navigator.connection?.saveData;
+      const eligible = visible && !document.hidden && !dialog.open && !document.querySelector('.project-dialog')?.open && !motion.matches && !navigator.connection?.saveData;
       // On touch screens there is no hover. Animate the two most visible clips only.
       const mobileCards = new Set(touchPreview.matches && eligible ? candidates.slice(0, 2).map(item => item.card) : []);
       cards.forEach(card => {
@@ -190,4 +190,46 @@
   });
   document.addEventListener('click', event => { if (!event.target.closest('.tool-card')) closeAll(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeAll(); });
+})();
+
+(() => {
+  const dialog = document.querySelector('.project-dialog');
+  if (!dialog) return;
+  const frame = dialog.querySelector('.project-dialog-frame');
+  const heading = dialog.querySelector('#project-dialog-title');
+  const close = dialog.querySelector('.project-dialog-close');
+  let opener = null;
+
+  document.addEventListener('click', event => {
+    const card = event.target.closest('.led-projects .project-marquee-card');
+    if (!card) return;
+    const url = new URL(card.getAttribute('href'), location.href);
+    if (url.origin !== location.origin) return;
+    event.preventDefault();
+    opener = card;
+    heading.textContent = card.querySelector('strong')?.textContent || 'Project details';
+    frame.title = heading.textContent;
+    dialog.classList.remove('is-loaded');
+    frame.src = url.href;
+    dialog.showModal();
+    close.focus();
+  });
+
+  frame.addEventListener('load', () => {
+    const doc = frame.contentDocument;
+    if (!doc || doc.location.href === 'about:blank') return;
+    doc.querySelector('.site-header')?.remove();
+    doc.querySelector('.back-link')?.remove();
+    const style = doc.createElement('style');
+    style.textContent = 'body{min-width:0!important}body main{padding-top:10px!important}.collection-intro{padding-top:28px!important}.noise,.cursor-glow{display:none!important}';
+    doc.head.append(style);
+    dialog.classList.add('is-loaded');
+  });
+  close.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => {
+    frame.src = 'about:blank';
+    dialog.classList.remove('is-loaded');
+    opener?.focus();
+  });
 })();
