@@ -238,13 +238,11 @@
   const header = document.querySelector('.site-header');
   const progress = document.querySelector('.nav-progress');
   if (header && progress) {
-    const number = progress.querySelector('[data-scroll-percent]');
     let scheduled = false;
     const update = () => {
       scheduled = false;
       const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
       const percent = max ? Math.min(100, Math.max(0, Math.round(scrollY / max * 100))) : 100;
-      number.textContent = percent + '%';
       header.style.setProperty('--page-progress', percent + '%');
       progress.setAttribute('aria-valuenow', String(percent));
     };
