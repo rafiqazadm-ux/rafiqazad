@@ -367,3 +367,15 @@
 .site-header::before{content:"";position:absolute;inset:-3px;padding:2px;border-radius:inherit;pointer-events:none;background:conic-gradient(from -90deg,#f4772b 0 var(--page-progress),rgba(255,247,239,.08) var(--page-progress) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;}
 .nav-progress{display:flex;align-items:center;justify-content:center;min-width:42px;padding:0 7px;color:#ffae76;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;}
 @media(max-width:600px){.nav-progress{min-width:32px;padding:0 2px;font-size:9px;}}
+
+
+/* Three evenly spaced service columns, with a quieter visual hierarchy. */
+@media (min-width:901px){.service-offer-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}}
+.service-offer-art img{width:108px;height:108px;}
+.service-offer-card{height:100%;}
+/* A simple editorial frame keeps the recommendation in focus. */
+.testimonial-rotator{max-width:900px;min-height:0;margin:48px auto 0;padding:0;text-align:left;}
+.testimonial-quote-mark{left:32px;top:16px;transform:none;font-size:92px;line-height:1;opacity:.8;}
+.testimonial-rotator blockquote{width:100%;min-height:0;padding:80px clamp(26px,5vw,64px) 42px;border:1px solid rgba(255,247,239,.14);border-radius:22px;background:linear-gradient(135deg,rgba(244,119,43,.10),rgba(255,255,255,.025) 55%);box-shadow:none;}
+.testimonial-rotator blockquote p{max-width:700px;min-height:0;margin:0 0 30px;font-size:clamp(18px,2vw,25px);font-weight:300;line-height:1.55;}
+.testimonial-rotator cite{justify-items:start;border-top:1px solid rgba(255,247,239,.14);padding-top:20px;}

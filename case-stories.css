@@ -1,0 +1,7 @@
+/* Readable project narratives that complement the existing work showcases. */
+.case-story{width:min(1200px,calc(100% - 48px));margin:40px auto 110px;padding:clamp(28px,5vw,64px);border:1px solid rgba(255,247,239,.13);border-radius:24px;background:linear-gradient(135deg,rgba(244,119,43,.08),rgba(255,255,255,.025) 55%);color:#f8f0e9;}
+.case-story-heading{max-width:720px;margin-bottom:34px;}.case-story-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;color:#ffad77;}.case-story-heading h2{font-size:clamp(28px,4vw,48px);line-height:1.12;margin:12px 0;}.case-story-heading>p:last-child{color:#cfc1b8;}
+.case-story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px;}.case-story-item{padding:24px 0;border-top:1px solid rgba(255,247,239,.13);}.case-story-item h3{color:#ffad77;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;}.case-story-item p{margin:0;color:#e2d7cf;line-height:1.75;font-size:15px;}
+@media(max-width:650px){.case-story{width:calc(100% - 32px);margin:30px auto 70px;padding:28px 22px;}.case-story-grid{grid-template-columns:1fr;}}
+
+.case-tool{display:flex;align-items:center;gap:14px}.case-tool img{width:52px;height:52px;object-fit:contain;flex:none}
