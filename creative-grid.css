@@ -174,3 +174,5 @@
 
 /* Keep complete thumbnails and UI screens visible within the frame. */
 .project-browser .showcase-visual img {object-fit:contain;}
+
+.project-browser .showcase-visual.has-video img {object-fit:cover;}

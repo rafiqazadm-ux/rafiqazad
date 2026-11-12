@@ -405,3 +405,17 @@
 .tool-card .tool-icon img{width:100%;height:100%;object-fit:contain;border-radius:10%;filter:none;}
 .stack-letter,.stack-meta{font:700 38px/1 var(--sans);color:#fff}.stack-meta{font-size:48px;color:#328aff}
 html[data-theme="light"] .tool-card .tool-icon{box-shadow:inset 0 1px 1px rgba(255,255,255,.2),0 8px 16px rgba(65,45,35,.18)}
+
+/* Individually rendered icons from the coordinated dimensional artwork. */
+.tools-grid .tool-card .tool-icon,.tools-grid .tool-card:hover .tool-icon{padding:0;border:0;border-radius:22%;box-shadow:none;background-image:url("media/tool-icons/stack-dimension-v2.png");background-repeat:no-repeat;background-size:500% 200%;overflow:hidden;}
+.tools-grid .tool-icon img,.tools-grid .tool-icon .stack-letter,.tools-grid .tool-icon .stack-meta{display:none}
+.tools-grid .tool-card:nth-child(1) .tool-icon{background-position:0% 0%}
+.tools-grid .tool-card:nth-child(2) .tool-icon{background-position:25% 0%}
+.tools-grid .tool-card:nth-child(3) .tool-icon{background-position:50% 0%}
+.tools-grid .tool-card:nth-child(4) .tool-icon{background-position:75% 0%}
+.tools-grid .tool-card:nth-child(5) .tool-icon{background-position:100% 0%}
+.tools-grid .tool-card:nth-child(6) .tool-icon{background-position:0% 100%}
+.tools-grid .tool-card:nth-child(7) .tool-icon{background-position:25% 100%}
+.tools-grid .tool-card:nth-child(8) .tool-icon{background-position:50% 100%}
+.tools-grid .tool-card:nth-child(9) .tool-icon{background-position:75% 100%}
+.tools-grid .tool-card:nth-child(10) .tool-icon{background-position:100% 100%}
