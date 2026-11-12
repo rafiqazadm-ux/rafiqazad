@@ -25,3 +25,9 @@
  html[data-theme="light"] .theme-toggle.corner-theme span::before{mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.6 8.6 0 1 0 20.5 14.2Z'/%3E%3Cpath d='M16.5 4v2M15.5 5h2'/%3E%3C/svg%3E")}
 }
 @media(max-width:760px){.corner-progress{left:16px;bottom:16px}.theme-toggle.corner-theme{right:16px;bottom:16px}}
+
+.corner-hint{position:fixed;bottom:120px;z-index:89;pointer-events:none;color:var(--text);background:var(--bg);border:1px solid rgba(153,142,132,.35);border-radius:20px;padding:6px 10px;font:600 10px var(--sans);opacity:0;animation:hint-appear 14s ease-in-out infinite;}
+.progress-hint{left:28px}.theme-hint{right:28px;animation-delay:3s}
+@keyframes hint-appear{0%,10%,38%,100%{opacity:0}16%,30%{opacity:.85}}
+@media(max-width:760px){.corner-hint{bottom:78px;font-size:9px}.progress-hint{left:16px}.theme-hint{right:16px}}
+@media(prefers-reduced-motion:reduce){.corner-hint{animation:none;display:none}}
