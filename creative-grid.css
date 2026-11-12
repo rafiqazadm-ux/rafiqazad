@@ -176,3 +176,6 @@
 .project-browser .showcase-visual img {object-fit:contain;}
 
 .project-browser .showcase-visual.has-video img {object-fit:cover;}
+
+/* Fill the featured frame for every project. */
+.project-browser .showcase-visual img{object-fit:cover;object-position:center;}
