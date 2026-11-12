@@ -1,0 +1,41 @@
+
+/* A single uninterrupted connector, with a distinct marker for the present role. */
+.experience .timeline {gap:0;}
+.experience .timeline::before {display:none;}
+.experience .timeline-item {align-items:stretch;position:relative;}
+.experience .timeline-item:not(:last-child) {padding-bottom:36px;}
+.experience .timeline-item .timeline-dot,
+html[data-theme="light"] .experience .timeline-item .timeline-dot {
+  position:relative;align-self:stretch;width:24px;height:auto;min-height:24px;
+  margin:3px auto 0;border:0;border-radius:0;background:transparent;box-shadow:none;
+}
+.experience .timeline-item .timeline-dot::before,
+html[data-theme="light"] .experience .timeline-item .timeline-dot::before {
+  content:"";display:block;position:absolute;z-index:0;left:50%;top:12px;bottom:-3px;
+  width:2px;height:auto;border:0;transform:translateX(-50%);
+  background:rgba(224,212,202,.35);
+}
+.experience .timeline-item:last-child .timeline-dot::before {display:none;}
+.experience .timeline-item .timeline-dot::after,
+html[data-theme="light"] .experience .timeline-item .timeline-dot::after {
+  content:"";position:absolute;z-index:1;top:0;left:50%;transform:translateX(-50%);
+  width:18px;height:18px;border-radius:50%;box-sizing:border-box;
+  background:#e9e5e0;border:3px solid #505050;box-shadow:0 0 0 2px #242321;
+}
+.experience .timeline-item .timeline-dot.active::after {
+  background:#f4772b;border-color:#aa491d;
+}
+html[data-theme="light"] .experience .timeline-item .timeline-dot::before {background:#b9a08d;}
+html[data-theme="light"] .experience .timeline-item .timeline-dot::after {
+  background:#fffaf4;border-color:#866a58;box-shadow:0 0 0 2px #fffaf4;
+}
+html[data-theme="light"] .experience .timeline-item .timeline-dot.active::after {
+  background:#e86a27;border-color:#a44618;
+}
+@media(max-width:680px){
+  .experience .timeline-item:not(:last-child){padding-bottom:30px;}
+  .experience .timeline-item .timeline-dot,
+  html[data-theme="light"] .experience .timeline-item .timeline-dot{grid-column:1;grid-row:1 / span 2;width:24px;}
+}
+
+html[data-theme="light"] .experience .timeline-item:last-child .timeline-dot::before{display:none;}
