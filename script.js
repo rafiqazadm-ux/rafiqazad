@@ -193,7 +193,7 @@ if (recommendationRotator) {
     window.clearInterval(recommendationTimer);
     recommendationTimer = window.setInterval(() => {
       showRecommendation(recommendationIndex + 1);
-    }, 7000);
+    }, 5500);
   };
 
   restartRecommendationTimer();
