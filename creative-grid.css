@@ -182,3 +182,10 @@
 
 /* Preserve the entire UI screenshot, including the top and bottom. */
 .project-browser .showcase-visual.is-ui-project img{object-fit:contain;}
+
+/* Keep the prior project image hidden until the newly selected one has loaded. */
+.project-browser .showcase-visual.is-loading img{visibility:hidden}
+.project-browser .showcase-visual.is-loading::after{display:none}
+.project-browser .showcase-visual.is-loading{pointer-events:none;cursor:default}
+.showcase-loading{position:absolute;inset:0;display:grid;place-items:center;color:#eee5dd;font-size:.85rem;font-weight:600;pointer-events:none}
+.showcase-loading:empty{display:none}
