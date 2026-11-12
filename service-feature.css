@@ -391,3 +391,11 @@
 #vertical .story-lane:first-child .story-card .marquee-media { position:relative; }
 #vertical .story-lane:first-child .story-card .marquee-media::after { content:"▶"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:48px; height:48px; padding-left:3px; border-radius:50%; color:white; background:rgba(0,0,0,.68); pointer-events:none; }
 .corner-progress-number { visibility:hidden; }
+
+.testimonial-rotator blockquote p {font-size:clamp(15px,1.2vw,17px);}
+.testimonial-quote-mark {transition:opacity .52s ease, transform .52s ease;}
+.testimonial-rotator.is-changing .testimonial-quote-mark {opacity:0;transform:translateY(8px);}
+.contact-simple .contact-icons svg {display:block;width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.contact-simple .contact-icons a {width:90px;gap:10px;}
+.contact-simple .contact-icons a:focus-visible svg {outline:2px solid #ffb17c;outline-offset:5px;border-radius:8px;}
+@media(prefers-reduced-motion:reduce){.testimonial-quote-mark{transition:none}}
