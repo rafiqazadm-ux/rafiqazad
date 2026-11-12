@@ -62,3 +62,7 @@ html[data-theme="light"] .service-dialog .marquee-caption{color:#fff}
 @media(hover:none){html[data-theme="light"] .service-dialog .marquee-caption{color:#49392e}}
 html[data-theme="light"] .corner-hint{border-color:rgba(103,68,43,.32);color:#49392e;background:#fffaf4;box-shadow:0 4px 14px rgba(71,46,27,.1)}
 html[data-theme="light"] .corner-hint::after{background:#fffaf4;border-color:rgba(103,68,43,.32)}
+
+/* Gallery captions sit on the page surface, so they need dark text in light mode. */
+html[data-theme="light"] #vertical .story-lane:first-child .story-card .marquee-caption{color:#4f3e32;}
+@media(hover:none){html[data-theme="light"] #vertical .story-card .marquee-caption{color:#4f3e32;}}
