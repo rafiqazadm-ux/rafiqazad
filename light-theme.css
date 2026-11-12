@@ -1,0 +1,64 @@
+
+/* Light theme: warm contrasting surfaces and restrained burnt-orange accents. */
+html[data-theme="light"]{
+  --bg:#f4ece2; --bg-2:#eae0d4; --panel:#fffaf4;
+  --text:#29221d; --muted:#594d43; --soft:#6c5c50;
+  --line:rgba(95,61,40,.24); --orange-2:#a43d0b;
+}
+html[data-theme="light"] body{
+  background:radial-gradient(circle at 82% 8%,rgba(206,113,53,.09),transparent 32%),linear-gradient(#f2e6d9,#f4ede4 40%,#eee4d8);
+}
+html[data-theme="light"] .hero{
+  border:1px solid rgba(101,68,45,.2);
+  box-shadow:0 18px 50px rgba(75,48,30,.14),0 3px 10px rgba(75,48,30,.07);
+}
+html[data-theme="light"] .site-header,
+html[data-theme="light"] .site-header.is-glass,
+html[data-theme="light"] .site-header.is-glass:not(:hover):not(:focus-within){
+  background:rgba(255,250,244,.96);border-color:rgba(94,60,37,.27);
+  box-shadow:0 8px 26px rgba(69,42,24,.16);opacity:1;
+}
+html[data-theme="light"] .site-header nav a{color:#49392e}
+html[data-theme="light"] .site-header nav a.is-current:not(.nav-contact){color:#79300c;background:#f5dfcf}
+html[data-theme="light"] .site-header nav a.nav-contact{color:#fffaf4;background:#39291f}
+html[data-theme="light"] .tools-group,
+html[data-theme="light"] .about-card,
+html[data-theme="light"] .work-panel,
+html[data-theme="light"] .testimonial-rotator blockquote,
+html[data-theme="light"] .rotating-showcase,
+html[data-theme="light"] .project-case-reveal{
+  background:#fffaf4;border:1px solid rgba(103,68,43,.25);
+  box-shadow:0 14px 34px rgba(71,46,27,.09),0 2px 6px rgba(71,46,27,.05);
+}
+html[data-theme="light"] .service-offer-card,
+html[data-theme="light"] .spotlight-project-choice{
+  background:#fffaf4;border-color:rgba(103,68,43,.25);
+  box-shadow:0 8px 24px rgba(71,46,27,.07);
+}
+html[data-theme="light"] .service-offer-card:hover,
+html[data-theme="light"] .service-offer-card:focus-within,
+html[data-theme="light"] .spotlight-project-choice.is-active{
+  border-color:#ad4616;box-shadow:0 10px 28px rgba(109,60,27,.14);
+}
+html[data-theme="light"] .timeline-dot{
+  border-color:#795746;background:#fffaf4;box-shadow:0 0 0 1px rgba(95,61,40,.16);
+}
+html[data-theme="light"] .timeline-dot.active{background:#d85a18;border-color:#8a3c17}
+html[data-theme="light"] .timeline-dot::before{border-left-color:rgba(125,82,54,.58)}
+html[data-theme="light"] .timeline::before{border-color:rgba(125,82,54,.58);background-color:rgba(125,82,54,.48)}
+html[data-theme="light"] .timeline-role h3,
+html[data-theme="light"] .eyebrow,
+html[data-theme="light"] .showcase-category,
+html[data-theme="light"] .spotlight-projects-heading,
+html[data-theme="light"] .case-kicker{color:#a43d0b}
+html[data-theme="light"] .logo-track img{filter:brightness(0) saturate(100%);opacity:.73}
+html[data-theme="light"] .contact-simple .contact-intro{color:#594d43}
+html[data-theme="light"] .contact-simple .contact-icons a{color:#503827}
+html[data-theme="light"] .contact-simple .contact-icons a:hover,
+html[data-theme="light"] .contact-simple .contact-icons a:focus-visible{color:#a43d0b}
+html[data-theme="light"] .service-dialog .service-feature-tags span{color:#713617;border-color:rgba(142,65,22,.38);background:#f9eee3}
+html[data-theme="light"] .service-dialog .service-feature{border-top-color:rgba(103,68,43,.25)}
+html[data-theme="light"] .service-dialog .marquee-caption{color:#fff}
+@media(hover:none){html[data-theme="light"] .service-dialog .marquee-caption{color:#49392e}}
+html[data-theme="light"] .corner-hint{border-color:rgba(103,68,43,.32);color:#49392e;background:#fffaf4;box-shadow:0 4px 14px rgba(71,46,27,.1)}
+html[data-theme="light"] .corner-hint::after{background:#fffaf4;border-color:rgba(103,68,43,.32)}
