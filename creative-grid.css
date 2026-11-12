@@ -171,3 +171,6 @@
 .showcase-visual.has-video { cursor:pointer; position:relative; }
 .showcase-visual.has-video::after { content:"▶"; position:absolute; inset:50% auto auto 50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:64px; height:64px; padding-left:4px; border-radius:50%; color:#fff; background:rgba(0,0,0,.72); font-size:24px; pointer-events:none; }
 .showcase-visual.has-video:focus-visible { outline:3px solid #ffad77; outline-offset:4px; }
+
+/* Keep complete thumbnails and UI screens visible within the frame. */
+.project-browser .showcase-visual img {object-fit:contain;}
