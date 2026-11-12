@@ -179,3 +179,6 @@
 
 /* Fill the featured frame for every project. */
 .project-browser .showcase-visual img{object-fit:cover;object-position:center;}
+
+/* Preserve the entire UI screenshot, including the top and bottom. */
+.project-browser .showcase-visual.is-ui-project img{object-fit:contain;}
