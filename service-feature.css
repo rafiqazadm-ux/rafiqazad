@@ -379,3 +379,15 @@
 .testimonial-rotator blockquote{width:100%;min-height:0;padding:80px clamp(26px,5vw,64px) 42px;border:1px solid rgba(255,247,239,.14);border-radius:22px;background:linear-gradient(135deg,rgba(244,119,43,.10),rgba(255,255,255,.025) 55%);box-shadow:none;}
 .testimonial-rotator blockquote p{max-width:700px;min-height:0;margin:0 0 30px;font-size:clamp(18px,2vw,25px);font-weight:300;line-height:1.55;}
 .testimonial-rotator cite{justify-items:start;border-top:1px solid rgba(255,247,239,.14);padding-top:20px;}
+
+/* Portfolio refinement */
+.tool-card .tool-icon, .tool-card:hover .tool-icon { width: clamp(66px, 7vw, 90px); height: clamp(66px, 7vw, 90px); }
+@media(max-width:680px){.tool-card .tool-icon,.tool-card:hover .tool-icon{width:70px;height:70px;}}
+.testimonial-heading .section-description { margin-top: 20px; }
+.testimonial-rotator { margin-top: 64px; }
+.testimonial-rotator blockquote p { font-size: clamp(16px, 1.35vw, 19px); line-height: 1.6; }
+#vertical .story-lane:first-child .story-card { overflow: visible; }
+#vertical .story-lane:first-child .story-card .marquee-caption { position: static; display:block; opacity:1; visibility:visible; padding:10px 2px 0; background:none; color:inherit; text-align:left; }
+#vertical .story-lane:first-child .story-card .marquee-media { position:relative; }
+#vertical .story-lane:first-child .story-card .marquee-media::after { content:"▶"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:48px; height:48px; padding-left:3px; border-radius:50%; color:white; background:rgba(0,0,0,.68); pointer-events:none; }
+.corner-progress-number { visibility:hidden; }
