@@ -39,3 +39,6 @@ html[data-theme="light"] .experience .timeline-item .timeline-dot.active::after 
 }
 
 html[data-theme="light"] .experience .timeline-item:last-child .timeline-dot::before{display:none;}
+
+.experience .timeline-item:not(:last-child) .timeline-dot::before,html[data-theme="light"] .experience .timeline-item:not(:last-child) .timeline-dot::before{bottom:-39px;}
+@media(max-width:680px){.experience .timeline-item:not(:last-child) .timeline-dot::before,html[data-theme="light"] .experience .timeline-item:not(:last-child) .timeline-dot::before{bottom:-33px;}}
