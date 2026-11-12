@@ -31,3 +31,10 @@
 @keyframes hint-appear{0%,10%,38%,100%{opacity:0}16%,30%{opacity:.85}}
 @media(max-width:760px){.corner-hint{bottom:78px;font-size:9px}.progress-hint{left:16px}.theme-hint{right:16px}}
 @media(prefers-reduced-motion:reduce){.corner-hint{animation:none;display:none}}
+
+/* Align each pointer with the centre of its control. */
+.corner-hint{bottom:88px;overflow:visible}
+.progress-hint{left:28px}.theme-hint{right:28px}
+.corner-hint::after{content:"";position:absolute;bottom:-5px;width:8px;height:8px;background:var(--bg);border-right:1px solid rgba(153,142,132,.35);border-bottom:1px solid rgba(153,142,132,.35);transform:rotate(45deg)}
+.progress-hint::after{left:20px}.theme-hint::after{right:20px}
+@media(max-width:760px){.corner-hint{bottom:76px}.progress-hint{left:16px}.theme-hint{right:16px}}
